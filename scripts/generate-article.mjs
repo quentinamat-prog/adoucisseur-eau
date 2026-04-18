@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const TOPICS_FILE = path.join(__dirname, 'topics.md');
+const TOPICS_FILE = path.join(__dirname, 'topics.json');
 
 function slugify(str) {
   return str
@@ -21,42 +21,16 @@ function todayISO() {
 }
 
 function parseTopics() {
-  const content = fs.readFileSync(TOPICS_FILE, 'utf8');
-  const lines = content.split('\n');
-
-  let inTodo = false;
-  let inDone = false;
-  const todo = [];
-  const done = [];
-
-  for (const line of lines) {
-    if (line.startsWith('## À écrire')) { inTodo = true; inDone = false; continue; }
-    if (line.startsWith('## ✅ Publiés')) { inDone = true; inTodo = false; continue; }
-    if (line.startsWith('## ')) { inTodo = false; inDone = false; continue; }
-
-    const match = line.match(/^-\s+(.+)/);
-    if (!match) continue;
-
-    if (inTodo) todo.push(match[1].trim());
-    if (inDone) done.push(match[1].split('—')[0].trim());
-  }
-
-  return { todo, done };
+  const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  const todo = topics.filter(t => !t.publishedAt).map(t => t.title);
+  return { todo };
 }
 
 function markAsDone(title, date) {
-  let content = fs.readFileSync(TOPICS_FILE, 'utf8');
-
-  // Retire le titre de "À écrire"
-  content = content.replace(`- ${title}\n`, '');
-
-  // Ajoute dans "✅ Publiés"
-  content = content.replace(
-    '## ✅ Publiés\n',
-    `## ✅ Publiés\n- ${title} — ${date}\n`
-  );
-
-  fs.writeFileSync(TOPICS_FILE, content, 'utf8');
+  const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  const idx = topics.findIndex(t => t.title === title);
+  if (idx !== -1) topics[idx].publishedAt = date;
+  fs.writeFileSync(TOPICS_FILE, JSON.stringify(topics, null, 2), 'utf8');
 }
 
 async function generateArticle() {
@@ -64,6 +38,7 @@ async function generateArticle() {
   const { todo } = parseTopics();
 
   if (todo.length === 0) {
+
     console.log('Tous les sujets ont été traités. Ajoutez de nouveaux sujets dans topics.md.');
     process.exit(0);
   }
