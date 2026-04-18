@@ -21,7 +21,8 @@ const toc = headings.filter((h) => h.depth === 2);
             <a
               href={`#${h.slug}`}
               data-toc-link={h.slug}
-              class="toc-link block font-body text-sm text-dark/70 hover:text-terracotta transition-colors leading-snug py-1.5 border-l-2 border-transparent pl-3"
+              class="toc-link block font-body text-sm text-dark/70 hover:text-terracotta transition-colors leading-snug py-1.5 border-l-2 border-transparent pl-3 truncate"
+              title={h.text}
             >
               {h.text}
             </a>
