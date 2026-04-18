@@ -72,17 +72,20 @@ Plus vous transmettez d'informations en amont, plus le chef peut **personnaliser
 
 <details>
 <summary>Peut-on demander une cuisine du monde très spécifique, comme la cuisine éthiopienne ou géorgienne ?</summary>
-Oui, Gustichef référence des chefs spécialisés dans des gastronomies rares et moins connues. Il suffit de préciser vos souhaits lors de votre demande, et notre équipe identifie le chef le plus adapté à votre projet culinaire.
+<p>Oui, Gustichef référence des chefs spécialisés dans des gastronomies rares et moins connues. Il suffit de préciser vos souhaits lors de votre demande, et notre équipe identifie le chef le plus adapté à votre projet culinaire.
+</p>
 </details>
 
 <details>
 <summary>Le chef apporte-t-il sa propre vaisselle et ses ustensiles spécifiques ?</summary>
-Dans la plupart des cas, le chef travaille avec les équipements disponibles chez vous, mais peut apporter certains ustensiles spécifiques - comme un wok, une pierre à tagine ou un couteau japonais - si la cuisine l'exige. Ce point est toujours clarifié lors de l'échange préparatoire.
+<p>Dans la plupart des cas, le chef travaille avec les équipements disponibles chez vous, mais peut apporter certains ustensiles spécifiques - comme un wok, une pierre à tagine ou un couteau japonais - si la cuisine l'exige. Ce point est toujours clarifié lors de l'échange préparatoire.
+</p>
 </details>
 
 <details>
 <summary>Est-il possible de combiner plusieurs cuisines du monde lors d'un même repas ?</summary>
-Oui, certains chefs proposent des menus fusion ou des voyages culinaires en plusieurs escales. Cette formule est particulièrement appréciée pour les anniversaires et les soirées à thème, et se construit sur mesure avec le chef lors de la phase de personnalisation.
+<p>Oui, certains chefs proposent des menus fusion ou des voyages culinaires en plusieurs escales. Cette formule est particulièrement appréciée pour les anniversaires et les soirées à thème, et se construit sur mesure avec le chef lors de la phase de personnalisation.
+</p>
 </details>
 
 ---

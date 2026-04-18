@@ -135,7 +135,7 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 3. **Section FAQ** - titre H2 "Questions fréquentes", puis 3 accordéons HTML avec ce format EXACT (pas de markdown, HTML pur) :
 <details>
 <summary>La question ici ?</summary>
-La réponse complète ici en une ou deux phrases.
+<p>La réponse complète ici en une ou deux phrases.</p>
 </details>
 4. **Conclusion + CTA** (80-100 mots) - synthèse et invitation à télécharger Gustichef
 

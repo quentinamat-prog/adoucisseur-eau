@@ -91,17 +91,20 @@ Consultez également [notre guide complet pour choisir son chef privé](/blog/co
 
 <details>
 <summary>Un chef privé est-il vraiment plus cher qu'un traiteur ?</summary>
-Pas nécessairement sur le coût global : un chef privé inclut généralement les courses, la préparation, le service et le nettoyage dans son tarif, tandis qu'un traiteur facture souvent ces prestations séparément. Pour un petit groupe, l'écart réel est souvent moins important qu'il n'y paraît.
+<p>Pas nécessairement sur le coût global : un chef privé inclut généralement les courses, la préparation, le service et le nettoyage dans son tarif, tandis qu'un traiteur facture souvent ces prestations séparément. Pour un petit groupe, l'écart réel est souvent moins important qu'il n'y paraît.
+</p>
 </details>
 
 <details>
 <summary>Peut-on faire appel à un chef privé pour un grand événement de 30 personnes ?</summary>
-Oui, tout à fait. De nombreux chefs référencés sur Gustichef sont équipés pour gérer des tablées de 20 à 35 personnes, notamment pour des dîners assis. Au-delà, un binôme chef-commis peut être proposé pour maintenir la qualité de service.
+<p>Oui, tout à fait. De nombreux chefs référencés sur Gustichef sont équipés pour gérer des tablées de 20 à 35 personnes, notamment pour des dîners assis. Au-delà, un binôme chef-commis peut être proposé pour maintenir la qualité de service.
+</p>
 </details>
 
 <details>
 <summary>Comment s'assurer de la qualité d'un chef privé réservé en ligne ?</summary>
-Sur Gustichef, chaque chef est vérifié, noté et évalué par les utilisateurs après chaque prestation. Vous pouvez consulter les avis, le parcours professionnel et les spécialités culinaires avant toute réservation, ce qui garantit une totale transparence.
+<p>Sur Gustichef, chaque chef est vérifié, noté et évalué par les utilisateurs après chaque prestation. Vous pouvez consulter les avis, le parcours professionnel et les spécialités culinaires avant toute réservation, ce qui garantit une totale transparence.
+</p>
 </details>
 
 ---

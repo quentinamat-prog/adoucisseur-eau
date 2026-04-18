@@ -82,17 +82,20 @@ Un four qui tombe en panne, un plat qui brûle, un invité en retard - **l'impr�
 
 <details>
 <summary>Combien de temps à l'avance faut-il réserver un chef privé pour un repas de fête ?</summary>
-Nous recommandons de réserver votre chef au minimum deux à trois semaines avant l'événement, surtout pour les périodes festives comme Noël ou le Nouvel An, où la demande est très élevée. Sur Gustichef, vous pouvez consulter les disponibilités en temps réel et effectuer votre réservation en quelques clics.
+<p>Nous recommandons de réserver votre chef au minimum deux à trois semaines avant l'événement, surtout pour les périodes festives comme Noël ou le Nouvel An, où la demande est très élevée. Sur Gustichef, vous pouvez consulter les disponibilités en temps réel et effectuer votre réservation en quelques clics.
+</p>
 </details>
 
 <details>
 <summary>Un chef privé peut-il s'adapter à des régimes alimentaires spécifiques ?</summary>
-Oui, c'est même l'un des grands avantages d'un chef à domicile : le menu est entièrement personnalisé selon vos contraintes et préférences. Que vos invités soient véganes, intolérants au gluten ou adeptes d'une cuisine sans allergènes, votre chef adapte chaque préparation avec rigueur et créativité.
+<p>Oui, c'est même l'un des grands avantages d'un chef à domicile : le menu est entièrement personnalisé selon vos contraintes et préférences. Que vos invités soient véganes, intolérants au gluten ou adeptes d'une cuisine sans allergènes, votre chef adapte chaque préparation avec rigueur et créativité.
+</p>
 </details>
 
 <details>
 <summary>Que se passe-t-il si je dois annuler ma réservation au dernier moment ?</summary>
-Sur Gustichef, chaque chef dispose de ses propres conditions d'annulation, clairement affichées avant la confirmation de la réservation. En règle générale, une annulation effectuée plus de 72 heures avant la prestation permet un remboursement intégral. Notre service client est disponible pour vous accompagner dans toute situation imprévue.
+<p>Sur Gustichef, chaque chef dispose de ses propres conditions d'annulation, clairement affichées avant la confirmation de la réservation. En règle générale, une annulation effectuée plus de 72 heures avant la prestation permet un remboursement intégral. Notre service client est disponible pour vous accompagner dans toute situation imprévue.
+</p>
 </details>
 
 ---
