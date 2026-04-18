@@ -50,15 +50,31 @@ jobs:
 
       - name: Deploy via lftp
         if: steps.check.outputs.created == 'true'
+        env:
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -e "
-            set net:timeout 15;
-            set net:max-retries 5;
-            set net:reconnect-interval-base 5;
-            set ssl:verify-certificate no;
-            set ftp:ssl-allow yes;
-            open ftp://${{ secrets.FTP_SERVER }};
-            user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
-            mirror --reverse --delete --verbose --exclude=.git dist/ /public_html/;
-            quit
-          "
+          python3 - <<'EOF'
+          import os, subprocess, tempfile
+
+          script = "\n".join([
+            "set net:timeout 20",
+            "set net:max-retries 5",
+            "set net:reconnect-interval-base 5",
+            "set ssl:verify-certificate no",
+            "set ftp:ssl-allow yes",
+            f"open ftp://{os.environ['FTP_HOST']}",
+            f"user {os.environ['FTP_USER']} {os.environ['FTP_PASS']}",
+            "mirror --reverse --delete --verbose dist/ /public_html/",
+            "quit",
+          ])
+
+          with tempfile.NamedTemporaryFile(mode='w', suffix='.lftp', delete=False) as f:
+            f.write(script)
+            tmp = f.name
+
+          result = subprocess.run(["lftp", "-f", tmp], capture_output=False)
+          os.unlink(tmp)
+          exit(result.returncode)
+          EOF
