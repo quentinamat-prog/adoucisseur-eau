@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate:
+  generate-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -26,10 +26,31 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/generate-article.mjs
 
-      - name: Commit & push new article
+      - name: Check if article was created
+        id: check
+        run: |
+          git add src/content/blog/
+          git diff --staged --quiet && echo "created=false" >> $GITHUB_OUTPUT || echo "created=true" >> $GITHUB_OUTPUT
+
+      - name: Commit new article
+        if: steps.check.outputs.created == 'true'
         run: |
           git config user.name "Gustichef Bot"
           git config user.email "bot@gustichef.com"
-          git add src/content/blog/
-          git diff --staged --quiet || git commit -m "chore: auto-generate weekly article"
+          git commit -m "chore: auto-generate weekly article"
           git push
+
+      - name: Build
+        if: steps.check.outputs.created == 'true'
+        run: npm run build
+
+      - name: Deploy via FTP
+        if: steps.check.outputs.created == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: false
