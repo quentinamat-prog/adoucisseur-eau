@@ -4,8 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const TOPICS_FILE = path.join(__dirname, 'topics.json');
-const DONE_FILE = path.join(__dirname, 'topics-done.json');
+const TOPICS_FILE = path.join(__dirname, 'topics.md');
 
 function slugify(str) {
   return str
@@ -21,41 +20,68 @@ function todayISO() {
   return new Date().toISOString().split('T')[0];
 }
 
-function pickNextTopic() {
-  const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
-  const done = JSON.parse(fs.readFileSync(DONE_FILE, 'utf8'));
-  const doneTitles = done.map(d => d.title.toLowerCase().trim());
+function parseTopics() {
+  const content = fs.readFileSync(TOPICS_FILE, 'utf8');
+  const lines = content.split('\n');
 
-  const next = topics.find(t => !doneTitles.includes(t.toLowerCase().trim()));
-  if (!next) {
-    console.log('Tous les sujets ont déjà été traités. Ajoutez de nouveaux sujets dans topics.json.');
-    process.exit(0);
+  let inTodo = false;
+  let inDone = false;
+  const todo = [];
+  const done = [];
+
+  for (const line of lines) {
+    if (line.startsWith('## À écrire')) { inTodo = true; inDone = false; continue; }
+    if (line.startsWith('## ✅ Publiés')) { inDone = true; inTodo = false; continue; }
+    if (line.startsWith('## ')) { inTodo = false; inDone = false; continue; }
+
+    const match = line.match(/^-\s+(.+)/);
+    if (!match) continue;
+
+    if (inTodo) todo.push(match[1].trim());
+    if (inDone) done.push(match[1].split('—')[0].trim());
   }
-  return next;
+
+  return { todo, done };
 }
 
 function markAsDone(title, date) {
-  const done = JSON.parse(fs.readFileSync(DONE_FILE, 'utf8'));
-  done.push({ title, publishedAt: date });
-  fs.writeFileSync(DONE_FILE, JSON.stringify(done, null, 2), 'utf8');
+  let content = fs.readFileSync(TOPICS_FILE, 'utf8');
+
+  // Retire le titre de "À écrire"
+  content = content.replace(`- ${title}\n`, '');
+
+  // Ajoute dans "✅ Publiés"
+  content = content.replace(
+    '## ✅ Publiés\n',
+    `## ✅ Publiés\n- ${title} — ${date}\n`
+  );
+
+  fs.writeFileSync(TOPICS_FILE, content, 'utf8');
 }
 
 async function generateArticle() {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const title = pickNextTopic();
+  const { todo } = parseTopics();
+
+  if (todo.length === 0) {
+    console.log('Tous les sujets ont été traités. Ajoutez de nouveaux sujets dans topics.md.');
+    process.exit(0);
+  }
+
+  const title = todo[0];
   const today = todayISO();
   const slug = slugify(title);
 
   const filePath = path.join(__dirname, '..', 'src', 'content', 'blog', `${slug}.md`);
   if (fs.existsSync(filePath)) {
-    console.log(`Fichier déjà existant: ${slug}.md — marqué comme fait et on passe.`);
+    console.log(`Fichier déjà existant: ${slug}.md — marqué comme fait.`);
     markAsDone(title, today);
     process.exit(0);
   }
 
-  console.log(`Génération de l'article : "${title}"`);
+  console.log(`Génération : "${title}"`);
 
-  // Demander à Claude de définir catégorie, tags et mot-clé
+  // Claude définit catégorie, tags et mot-clé
   const metaMsg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 200,
@@ -77,21 +103,15 @@ Réponds en JSON uniquement, sans markdown :
   try {
     meta = JSON.parse(metaMsg.content[0].text.trim());
   } catch {
-    console.warn('Impossible de parser les métadonnées, utilisation des valeurs par défaut.');
+    console.warn('Métadonnées par défaut utilisées.');
   }
 
-  // Liens internes existants
-  const internalLinksRaw = [
-    { url: '/', label: 'Gustichef', desc: "page d'accueil de l'application" },
-    { url: '/blog/', label: 'notre blog culinaire', desc: 'tous nos articles' },
-    { url: '/blog/comment-choisir-chef-prive/', label: 'comment choisir son chef privé', desc: 'guide complet' },
-    { url: '/blog/avantages-cuisine-domicile/', label: 'les avantages de la cuisine à domicile', desc: 'pourquoi opter pour un chef' },
-    { url: `/blog/${slug}/`, label: null, desc: null },
-  ];
-  const internalLinks = internalLinksRaw
-    .filter(l => !l.url.includes(slug) && l.label)
-    .map(l => `- [${l.label}](${l.url}) — ${l.desc}`)
-    .join('\n');
+  const internalLinks = [
+    `- [Gustichef](/) — page d'accueil de l'application`,
+    `- [notre blog culinaire](/blog/) — tous nos articles`,
+    `- [comment choisir son chef privé](/blog/comment-choisir-chef-prive/) — guide complet`,
+    `- [les avantages de la cuisine à domicile](/blog/avantages-cuisine-domicile/) — pourquoi opter pour un chef`,
+  ].filter(l => !l.includes(slug)).join('\n');
 
   const prompt = `Tu es un rédacteur SEO expert spécialisé en gastronomie et en expériences culinaires à domicile. Tu travailles pour **Gustichef**, une application française qui connecte des chefs privés avec des particuliers pour des expériences culinaires sur mesure.
 
@@ -135,7 +155,6 @@ ${internalLinks}
 
   const content = articleMsg.content[0].text;
 
-  // Meta description optimisée
   const descMsg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 200,
