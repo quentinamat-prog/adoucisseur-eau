@@ -209,7 +209,7 @@ ${faqYaml}---
   markAsDone(title, today);
 
   console.log(`Article sauvegardé : ${filePath}`);
-  console.log(`Mots : ~${content.split(/\s+/).length}`);
+  console.log(`Mots : ~${rawContent.split(/\s+/).length}`);
 }
 
 generateArticle().catch(err => {
