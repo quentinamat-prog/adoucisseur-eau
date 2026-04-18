@@ -24,12 +24,13 @@ jobs:
       - name: Generate article
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: node scripts/generate-article.mjs
 
       - name: Check if article was created
         id: check
         run: |
-          git add src/content/blog/ scripts/topics.json
+          git add src/content/blog/ scripts/topics.json public/images/blog/
           git diff --staged --quiet && echo "created=false" >> $GITHUB_OUTPUT || echo "created=true" >> $GITHUB_OUTPUT
 
       - name: Commit new article

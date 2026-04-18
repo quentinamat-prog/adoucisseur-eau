@@ -38,6 +38,40 @@ function markAsDone(title, date) {
   fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
 }
 
+async function fetchUnsplashImage(keyword, slug) {
+  const accessKey = process.env.UNSPLASH_ACCESS_KEY;
+  if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY absent, image ignorée.'); return null; }
+
+  const query = encodeURIComponent(keyword + ' cuisine');
+  const searchRes = await fetch(
+    `https://api.unsplash.com/search/photos?query=${query}&per_page=1&orientation=landscape&content_filter=high`,
+    { headers: { Authorization: `Client-ID ${accessKey}` } }
+  );
+  if (!searchRes.ok) { console.warn(`Unsplash search error: ${searchRes.status}`); return null; }
+
+  const data = await searchRes.json();
+  const photo = data.results?.[0];
+  if (!photo) { console.warn('Aucune photo Unsplash trouvée.'); return null; }
+
+  // Télécharger l'image
+  const imgRes = await fetch(photo.urls.regular);
+  if (!imgRes.ok) return null;
+  const buffer = Buffer.from(await imgRes.arrayBuffer());
+
+  const imgDir = path.join(__dirname, '..', 'public', 'images', 'blog');
+  fs.mkdirSync(imgDir, { recursive: true });
+  fs.writeFileSync(path.join(imgDir, `${slug}.jpg`), buffer);
+
+  // Notifier Unsplash du téléchargement (obligatoire selon leurs CGU)
+  await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } });
+
+  console.log(`Image Unsplash : ${photo.user.name} — ${photo.urls.regular}`);
+  return {
+    path: `/images/blog/${slug}.jpg`,
+    alt: `Photo de ${photo.user.name} sur Unsplash`,
+  };
+}
+
 async function generateArticle() {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   let { todo } = parseTopics();
@@ -177,6 +211,8 @@ ${internalLinks}
     });
   }
 
+  const unsplashImg = await fetchUnsplashImage(meta.kw, slug);
+
   const descMsg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
     max_tokens: 200,
@@ -193,6 +229,10 @@ Titre : ${title}`
     ? `faq:\n${faqItems.map(f => `  - q: "${f.q.replace(/"/g, "'")}"\n    a: "${f.a.replace(/"/g, "'")}"`).join('\n')}\n`
     : '';
 
+  const imageFrontmatter = unsplashImg
+    ? `image: "${unsplashImg.path}"\nimageAlt: "${unsplashImg.alt}"\n`
+    : '';
+
   const frontmatter = `---
 title: "${title}"
 description: "${description}"
@@ -201,7 +241,7 @@ author: "Équipe Gustichef"
 category: ${meta.category}
 tags: [${meta.tags.map(t => `"${t}"`).join(', ')}]
 featured: false
-${faqYaml}---
+${imageFrontmatter}${faqYaml}---
 
 `;
 
