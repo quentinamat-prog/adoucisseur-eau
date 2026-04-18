@@ -1,0 +1,178 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import BlogSidebar from '../components/BlogSidebar.astro';
+import Footer from '../components/Footer.astro';
+import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: MarkdownHeading[];
+}
+
+const { post, headings } = Astro.props;
+const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt } = post.data;
+
+const formattedDate = new Intl.DateTimeFormat('fr-FR', {
+  year: 'numeric', month: 'long', day: 'numeric',
+}).format(pubDate);
+
+const formattedUpdated = updatedDate
+  ? new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(updatedDate)
+  : null;
+
+const SITE_URL = 'https://gustichef.com';
+const articleUrl = `${SITE_URL}/blog/${post.slug}/`;
+const imageUrl = image ? new URL(image, SITE_URL).toString() : `${SITE_URL}/og-image.jpg`;
+
+// Article schema (schema.org/Article)
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  image: [imageUrl],
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  author: {
+    '@type': 'Organization',
+    name: author,
+    url: SITE_URL,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Gustichef',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/favicon.svg`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': articleUrl,
+  },
+  articleSection: category,
+  keywords: tags.join(', '),
+  inLanguage: 'fr-FR',
+};
+
+// Breadcrumb schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+    { '@type': 'ListItem', position: 3, name: title, item: articleUrl },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${title} | Blog Gustichef`}
+  description={description}
+  type="article"
+  image={image ?? '/og-image.jpg'}
+  jsonLd={[articleSchema, breadcrumbSchema]}
+>
+  <!-- Nav -->
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-display text-xl text-teal">Gusti<span class="text-terracotta">chef</span></a>
+      <nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium text-dark/70">
+        <a href="/" class="hover:text-teal transition-colors">Accueil</a>
+        <a href="/blog" class="hover:text-teal transition-colors">Blog</a>
+        <a href="/#download" class="btn-primary text-xs px-4 py-2">Télécharger</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-12">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 font-body text-sm text-dark/50 mb-6 md:mb-8 overflow-x-auto whitespace-nowrap pb-1">
+      <a href="/" class="hover:text-teal transition-colors shrink-0">Accueil</a>
+      <span class="shrink-0">/</span>
+      <a href="/blog" class="hover:text-teal transition-colors shrink-0">Blog</a>
+      <span class="shrink-0">/</span>
+      <span class="text-dark/70 truncate">{title}</span>
+    </nav>
+
+    <!-- 2-col layout — single column on mobile, 2 cols on desktop -->
+    <div class="grid lg:grid-cols-[1fr_320px] lg:gap-12">
+      <!-- Article -->
+      <div class="min-w-0">
+        <!-- Category tag -->
+        <span class="tag tag-beige mb-4">{category}</span>
+
+        <!-- Title -->
+        <h1 class="font-display text-3xl md:text-4xl lg:text-5xl text-dark mt-4 mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <!-- Description/lede -->
+        <p class="font-body text-lg text-dark/70 leading-relaxed mb-6">
+          {description}
+        </p>
+
+        <!-- Meta -->
+        <div class="flex flex-wrap items-center gap-4 font-body text-sm text-dark/50 mb-8 pb-8 border-b border-beige">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-teal flex items-center justify-center text-xs font-bold text-cream">
+              {author.charAt(0)}
+            </div>
+            <span>Par <strong class="text-dark/70">{author}</strong></span>
+          </div>
+          <span>·</span>
+          <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+          {formattedUpdated && (
+            <>
+              <span>·</span>
+              <span>Mis à jour le {formattedUpdated}</span>
+            </>
+          )}
+        </div>
+
+        <!-- Cover image -->
+        {image && (
+          <figure class="rounded-2xl overflow-hidden mb-10 aspect-video bg-beige">
+            <img src={image} alt={imageAlt ?? title} class="w-full h-full object-cover" loading="lazy" />
+          </figure>
+        )}
+
+        <!-- Content -->
+        <article class="prose prose-lg max-w-none
+          prose-headings:font-display prose-headings:text-dark prose-headings:scroll-mt-24
+          prose-h2:text-2xl prose-h2:mt-12 prose-h3:text-xl
+          prose-p:font-body prose-p:text-dark/80 prose-p:leading-relaxed
+          prose-a:text-terracotta prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-dark prose-strong:font-semibold
+          prose-ul:font-body prose-ol:font-body prose-li:text-dark/80
+          prose-blockquote:border-terracotta prose-blockquote:bg-beige/50 prose-blockquote:rounded-r-xl prose-blockquote:py-2 prose-blockquote:not-italic
+          prose-hr:border-beige">
+          <slot />
+        </article>
+
+        <!-- Tags -->
+        {tags.length > 0 && (
+          <div class="flex flex-wrap gap-2 mt-12 pt-8 border-t border-beige">
+            {tags.map(tag => (
+              <span class="inline-block font-body text-xs px-3 py-1 rounded-full bg-beige/80 text-dark/60">#{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <!-- Back to blog -->
+        <div class="mt-12">
+          <a href="/blog" class="inline-flex items-center gap-2 font-body text-sm font-semibold text-teal hover:text-terracotta transition-colors">
+            ← Retour au blog
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <BlogSidebar headings={headings} />
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

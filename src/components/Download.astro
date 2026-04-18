@@ -1,0 +1,123 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section id="download" class="py-16 md:py-24 bg-terracotta overflow-hidden relative">
+  <!-- Background decoration — organic fluid curves echoing the brand identity -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+
+    <!-- Soft ambient glows -->
+    <div class="absolute -top-32 -left-32 w-[36rem] h-[36rem] rounded-full bg-cream/8 blur-[100px]"></div>
+    <div class="absolute -bottom-40 -right-32 w-[40rem] h-[40rem] rounded-full bg-dark/25 blur-[120px]"></div>
+
+    <!-- Organic contour curves (SVG, full-bleed) -->
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 560"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Large flowing arc — top left -->
+      <path
+        d="M-120 80 C 180 -60, 520 240, 780 160 S 1100 -40, 1440 120"
+        stroke="#FDF8F5" stroke-width="1.5" stroke-opacity="0.12"
+      />
+      <path
+        d="M-120 140 C 180 0, 520 300, 780 220 S 1100 20, 1440 180"
+        stroke="#FDF8F5" stroke-width="1" stroke-opacity="0.08"
+      />
+      <path
+        d="M-120 200 C 180 60, 520 360, 780 280 S 1100 80, 1440 240"
+        stroke="#FDF8F5" stroke-width="0.75" stroke-opacity="0.06"
+      />
+
+      <!-- Counter-curve — bottom right -->
+      <path
+        d="M1560 480 C 1260 620, 900 320, 640 400 S 320 600, -20 440"
+        stroke="#FDF8F5" stroke-width="1.5" stroke-opacity="0.10"
+      />
+      <path
+        d="M1560 540 C 1260 680, 900 380, 640 460 S 320 660, -20 500"
+        stroke="#FDF8F5" stroke-width="1" stroke-opacity="0.07"
+      />
+
+      <!-- Central swirl arc (echoes the brand S-shape) -->
+      <path
+        d="M 360 560 C 460 420, 320 280, 520 200 C 720 120, 900 280, 840 400 C 780 520, 980 540, 1100 440"
+        stroke="#FDF8F5" stroke-width="1.25" stroke-opacity="0.09"
+      />
+
+      <!-- Small accent ring — left -->
+      <circle cx="160" cy="280" r="90" stroke="#FDF8F5" stroke-width="1" stroke-opacity="0.07" />
+      <circle cx="160" cy="280" r="140" stroke="#FDF8F5" stroke-width="0.75" stroke-opacity="0.05" />
+
+      <!-- Small accent ring — right -->
+      <circle cx="1300" cy="300" r="110" stroke="#FDF8F5" stroke-width="1" stroke-opacity="0.07" />
+      <circle cx="1300" cy="300" r="170" stroke="#FDF8F5" stroke-width="0.75" stroke-opacity="0.05" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+    <span class="tag tag-light mb-6">Téléchargement gratuit</span>
+
+    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-cream mt-4 mb-6 leading-tight">
+      Prêt pour une expérience<br />
+      <span class="font-script text-beige text-5xl md:text-6xl lg:text-7xl">culinaire inoubliable ?</span>
+    </h2>
+
+    <p class="font-body text-cream/80 text-lg mb-12 max-w-2xl mx-auto">
+      Rejoignez des milliers de gourmets et de chefs talentueux. Téléchargez Gustichef gratuitement et commencez votre aventure culinaire dès aujourd'hui.
+    </p>
+
+    <!-- Store buttons -->
+    <div class="flex flex-wrap justify-center gap-5 mb-12">
+      <a
+        href="#"
+        class="inline-flex items-center gap-3 bg-dark text-cream px-6 py-4 rounded-2xl font-body transition-all hover:bg-dark/80 hover:scale-105 shadow-lg"
+        aria-label="Télécharger sur l'App Store"
+      >
+        <svg class="w-8 h-8 fill-cream" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        <div class="text-left">
+          <div class="text-xs text-cream/70">Télécharger sur</div>
+          <div class="text-base font-semibold">App Store</div>
+        </div>
+      </a>
+
+      <a
+        href="#"
+        class="inline-flex items-center gap-3 bg-dark text-cream px-6 py-4 rounded-2xl font-body transition-all hover:bg-dark/80 hover:scale-105 shadow-lg"
+        aria-label="Télécharger sur Google Play"
+      >
+        <svg class="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#00C4FF" d="M3.5 1.8L13.5 12 3.5 22.2C3.2 22 3 21.6 3 21.2V2.8c0-.4.2-.8.5-1z"/>
+          <path fill="#FFBC00" d="M17.5 8.5l2.3 1.3L17.5 12l2.3 2.2-2.3 1.3-4-3.5z"/>
+          <path fill="#F44336" d="M13.5 12l4 3.5-10.3 5.9c-.3.2-.7.2-1 0L13.5 12z"/>
+          <path fill="#4CAF50" d="M13.5 12L6.2 2.6c.3-.2.7-.2 1 0l10.3 5.9-4 3.5z"/>
+        </svg>
+        <div class="text-left">
+          <div class="text-xs text-cream/70">Télécharger sur</div>
+          <div class="text-base font-semibold">Google Play</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Trust indicators -->
+    <div class="flex flex-wrap justify-center gap-8 font-body text-cream/90 text-sm">
+      <div class="flex items-center gap-2">
+        <Icon name="lock" size={20} strokeWidth={1.75} />
+        <span>Paiements sécurisés</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <Icon name="shield-check" size={20} strokeWidth={1.75} />
+        <span>Chefs vérifiés</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <Icon name="star" size={20} strokeWidth={1.5} fill />
+        <span>4.9/5 de satisfaction</span>
+      </div>
+    </div>
+  </div>
+</section>

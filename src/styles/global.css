@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Ciguatera';
+  src: local('Ciguatera');
+  font-display: swap;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-cream text-dark font-body antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-terracotta text-cream px-6 py-3 rounded-full font-body font-semibold text-sm tracking-wide transition-all duration-200 hover:bg-opacity-90 hover:scale-105;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-cream text-cream px-6 py-3 rounded-full font-body font-semibold text-sm tracking-wide transition-all duration-200 hover:bg-cream hover:text-teal;
+  }
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl text-dark leading-tight;
+  }
+  .section-subtitle {
+    @apply font-body text-lg text-dark/70 leading-relaxed;
+  }
+  .tag {
+    @apply inline-flex items-center gap-2 font-body text-[11px] font-bold uppercase tracking-[0.15em] px-3.5 py-1.5 rounded-full;
+  }
+  .tag::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-current opacity-80;
+  }
+  /* Strong, readable variants */
+  .tag-light {
+    @apply bg-cream text-terracotta shadow-sm;
+  }
+  .tag-beige {
+    @apply bg-beige text-terracotta;
+  }
+  .tag-terracotta {
+    @apply bg-terracotta text-cream;
+  }
+  .tag-teal {
+    @apply bg-teal text-cream;
+  }
+  .tag-sage {
+    @apply bg-sage/90 text-dark;
+  }
+  .tag-outline-light {
+    @apply bg-white/10 text-cream backdrop-blur-sm border border-white/20;
+  }
+}

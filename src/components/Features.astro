@@ -1,0 +1,120 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+interface Feature {
+  icon: IconName;
+  title: string;
+  description: string;
+  color: string;
+  textColor: string;
+  iconBg: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: "chef-hat",
+    title: "Annuaire des chefs",
+    description: "Explorez des centaines de profils de chefs avec filtres par spécialité, localisation et disponibilité.",
+    color: "bg-teal",
+    textColor: "text-cream",
+    iconBg: "bg-cream/10 text-beige",
+  },
+  {
+    icon: "calendar",
+    title: "Réservation en quelques clics",
+    description: "Consultez les disponibilités, personnalisez votre menu et confirmez en quelques étapes simples.",
+    color: "bg-beige",
+    textColor: "text-dark",
+    iconBg: "bg-terracotta/10 text-terracotta",
+  },
+  {
+    icon: "chat",
+    title: "Chat & devis intégrés",
+    description: "Échangez directement avec les chefs, affinez les détails et recevez un devis personnalisé dans la messagerie.",
+    color: "bg-terracotta",
+    textColor: "text-cream",
+    iconBg: "bg-cream/15 text-beige",
+  },
+  {
+    icon: "heart",
+    title: "Liste de favoris",
+    description: "Sauvegardez vos chefs préférés pour les retrouver facilement et être alerté de leurs nouvelles publications.",
+    color: "bg-sage",
+    textColor: "text-dark",
+    iconBg: "bg-teal/15 text-teal",
+  },
+  {
+    icon: "star",
+    title: "Avis & évaluations",
+    description: "Des notes vérifiées et des commentaires authentiques pour choisir en toute confiance.",
+    color: "bg-dark",
+    textColor: "text-cream",
+    iconBg: "bg-terracotta/20 text-terracotta",
+  },
+  {
+    icon: "leaf",
+    title: "Suivi nutritionnel",
+    description: "Collaborez avec des nutritionnistes partenaires pour un accompagnement culinaire adapté à vos objectifs.",
+    color: "bg-beige",
+    textColor: "text-dark",
+    iconBg: "bg-sage/30 text-teal",
+  },
+];
+---
+
+<section id="features" class="py-16 md:py-24 bg-cream relative overflow-hidden">
+  <!-- Subtle background decoration -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-20 -right-20 w-[30rem] h-[30rem] rounded-full bg-beige/60 blur-[80px]"></div>
+    <div class="absolute -bottom-20 -left-20 w-[28rem] h-[28rem] rounded-full bg-sage/15 blur-[80px]"></div>
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 600"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M -100 80 C 220 -60, 580 220, 820 120 C 1060 20, 1220 200, 1560 100"
+        stroke="#934215" stroke-width="1.25" stroke-opacity="0.06" />
+      <path d="M -100 140 C 220 0, 580 280, 820 180 C 1060 80, 1220 260, 1560 160"
+        stroke="#934215" stroke-width="0.75" stroke-opacity="0.04" />
+      <path d="M 1560 520 C 1240 660, 860 360, 600 440 C 340 520, 180 700, -100 540"
+        stroke="#114550" stroke-width="1.25" stroke-opacity="0.06" />
+      <path d="M 1560 580 C 1240 720, 860 420, 600 500 C 340 580, 180 760, -100 600"
+        stroke="#114550" stroke-width="0.75" stroke-opacity="0.04" />
+      <!-- S-curve centrale subtile -->
+      <path d="M 680 0 C 720 140, 560 260, 720 360 C 880 460, 980 320, 900 180 C 820 40, 1020 -40, 1160 80"
+        stroke="#A9B199" stroke-width="1" stroke-opacity="0.07" />
+      <circle cx="80"   cy="300" r="100" stroke="#934215" stroke-width="0.75" stroke-opacity="0.05" />
+      <circle cx="1380" cy="320" r="110" stroke="#114550" stroke-width="0.75" stroke-opacity="0.05" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="tag tag-beige mb-4">Fonctionnalités</span>
+      <h2 class="section-title mt-4 mb-4">
+        Tout ce dont vous avez besoin,<br />
+        <span class="text-terracotta">en un seul endroit</span>
+      </h2>
+      <p class="section-subtitle max-w-2xl mx-auto">
+        Gustichef réunit dans une seule app toutes les étapes d'une expérience culinaire réussie.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((f) => (
+        <div class={`${f.color} rounded-3xl p-8 transition-transform hover:-translate-y-1 duration-200`}>
+          <div class={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 ${f.iconBg}`}>
+            <Icon name={f.icon} size={28} strokeWidth={1.75} />
+          </div>
+          <h3 class={`font-display text-xl mb-3 ${f.textColor}`}>{f.title}</h3>
+          <p class={`font-body text-sm leading-relaxed ${f.textColor} opacity-80`}>{f.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

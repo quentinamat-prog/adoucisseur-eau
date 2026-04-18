@@ -1,0 +1,102 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+const { transparent = false } = Astro.props;
+---
+
+<header
+  id="site-header"
+  data-transparent={transparent ? "true" : "false"}
+  class:list={[
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+    transparent ? "bg-transparent" : "bg-cream/90 backdrop-blur-sm border-b border-beige shadow-sm",
+  ]}
+>
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="logo font-display text-2xl" aria-label="Gustichef – accueil">
+      <span class="logo-primary">Gusti</span><span class="text-terracotta">chef</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-8 font-body text-sm font-medium">
+      <a href="/#features" class="nav-link transition-colors">Fonctionnalités</a>
+      <a href="/#chefs" class="nav-link transition-colors">Pour les chefs</a>
+      <a href="/#particuliers" class="nav-link transition-colors">Pour les particuliers</a>
+      <a href="/blog" class="nav-link transition-colors">Blog</a>
+      <a href="/#download" class="btn-primary">Télécharger l'app</a>
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button
+      id="menu-btn"
+      class="md:hidden p-2 rounded-lg menu-icon"
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <nav
+    id="mobile-nav"
+    class="hidden md:hidden bg-cream border-t border-beige px-6 py-4 flex-col gap-4 font-body text-sm font-medium"
+  >
+    <a href="/#features" class="block py-2 text-dark/70 hover:text-teal transition-colors">Fonctionnalités</a>
+    <a href="/#chefs" class="block py-2 text-dark/70 hover:text-teal transition-colors">Pour les chefs</a>
+    <a href="/#particuliers" class="block py-2 text-dark/70 hover:text-teal transition-colors">Pour les particuliers</a>
+    <a href="/blog" class="block py-2 text-dark/70 hover:text-teal transition-colors">Blog</a>
+    <a href="/#download" class="btn-primary mt-2 justify-center">Télécharger l'app</a>
+  </nav>
+</header>
+
+<style>
+  /* Default (solid) state: dark text on cream */
+  #site-header .logo-primary { color: #114550; }
+  #site-header .nav-link { color: rgba(6, 30, 35, 0.7); }
+  #site-header .nav-link:hover { color: #114550; }
+  #site-header .menu-icon { color: #061E23; }
+
+  /* Transparent state: light text on dark hero */
+  #site-header[data-transparent="true"]:not(.scrolled) .logo-primary { color: #FDF8F5; }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-link { color: rgba(253, 248, 245, 0.85); }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-link:hover { color: #FDF8F5; }
+  #site-header[data-transparent="true"]:not(.scrolled) .menu-icon { color: #FDF8F5; }
+</style>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const nav = document.getElementById('mobile-nav');
+  const iconMenu = document.getElementById('icon-menu');
+  const iconClose = document.getElementById('icon-close');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !nav?.classList.contains('hidden');
+    nav?.classList.toggle('hidden', isOpen);
+    nav?.classList.toggle('flex', !isOpen);
+    iconMenu?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Scroll effect: swap transparent -> opaque
+  const header = document.getElementById('site-header');
+  const updateHeader = () => {
+    if (!header) return;
+    if (window.scrollY > 60) {
+      header.classList.add('scrolled', 'bg-cream/90', 'backdrop-blur-sm', 'border-b', 'border-beige', 'shadow-sm');
+      header.classList.remove('bg-transparent');
+    } else if (header.dataset.transparent === 'true') {
+      header.classList.remove('scrolled', 'bg-cream/90', 'backdrop-blur-sm', 'border-b', 'border-beige', 'shadow-sm');
+      header.classList.add('bg-transparent');
+    }
+  };
+  window.addEventListener('scroll', updateHeader);
+  updateHeader();
+</script>

@@ -1,0 +1,35 @@
+name: Generate Weekly Article
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 8am UTC
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate article
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-article.mjs
+
+      - name: Commit & push new article
+        run: |
+          git config user.name "Gustichef Bot"
+          git config user.email "bot@gustichef.com"
+          git add src/content/blog/
+          git diff --staged --quiet || git commit -m "chore: auto-generate weekly article"
+          git push

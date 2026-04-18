@@ -1,0 +1,138 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+const steps = [
+  {
+    number: "01",
+    title: "Publiez votre besoin",
+    description: "Décrivez votre occasion, votre budget et votre date. Les chefs disponibles vous répondent.",
+  },
+  {
+    number: "02",
+    title: "Choisissez votre chef",
+    description: "Parcourez les profils, consultez le portfolio et les avis, puis engagez la conversation.",
+  },
+  {
+    number: "03",
+    title: "Savourez l'expérience",
+    description: "Le chef s'occupe de tout : courses, préparation, service. Vous n'avez plus qu'à profiter.",
+  },
+];
+---
+
+<section id="particuliers" class="py-16 md:py-24 bg-beige overflow-hidden relative">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <!-- Soft glows -->
+    <div class="absolute -top-24 -right-24 w-[32rem] h-[32rem] rounded-full bg-terracotta/8 blur-[90px]"></div>
+    <div class="absolute -bottom-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-sage/20 blur-[80px]"></div>
+
+    <!-- Organic curves (terracotta tones, lighter touch on beige) -->
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 600"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Top-right arcs -->
+      <path d="M 1560 -20 C 1300 100, 1060 -40, 840 120 C 620 280, 760 420, 560 400"
+        stroke="#934215" stroke-width="1.5" stroke-opacity="0.09" />
+      <path d="M 1560 50 C 1300 170, 1060 30, 840 190 C 620 350, 760 490, 560 470"
+        stroke="#934215" stroke-width="1"   stroke-opacity="0.06" />
+      <path d="M 1560 120 C 1300 240, 1060 100, 840 260 C 620 420, 760 560, 560 540"
+        stroke="#934215" stroke-width="0.75" stroke-opacity="0.04" />
+
+      <!-- Bottom-left counter arcs (sage) -->
+      <path d="M -120 620 C 120 480, 340 600, 580 480 C 820 360, 680 200, 920 220"
+        stroke="#A9B199" stroke-width="1.5" stroke-opacity="0.12" />
+      <path d="M -120 680 C 120 540, 340 660, 580 540 C 820 420, 680 260, 920 280"
+        stroke="#A9B199" stroke-width="1"   stroke-opacity="0.08" />
+
+      <!-- Central S-curve (teal) -->
+      <path d="M 280 0 C 340 160, 180 300, 380 380 C 580 460, 700 300, 640 160 C 580 20, 780 -40, 940 80"
+        stroke="#114550" stroke-width="1" stroke-opacity="0.08" />
+
+      <!-- Accent rings -->
+      <circle cx="1340" cy="100" r="75"  stroke="#934215" stroke-width="1"    stroke-opacity="0.07" />
+      <circle cx="1340" cy="100" r="130" stroke="#934215" stroke-width="0.75" stroke-opacity="0.05" />
+      <circle cx="120"  cy="500" r="70"  stroke="#A9B199" stroke-width="1"    stroke-opacity="0.09" />
+      <circle cx="120"  cy="500" r="120" stroke="#A9B199" stroke-width="0.75" stroke-opacity="0.06" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <!-- Text -->
+    <div class="text-center lg:text-left">
+      <span class="tag tag-terracotta mb-4">Pour les particuliers</span>
+      <h2 class="section-title mt-4 mb-6">
+        Un chef privé pour chaque<br />
+        <span class="text-terracotta">occasion spéciale</span>
+      </h2>
+      <p class="section-subtitle mb-10">
+        Anniversaire, dîner romantique, repas de famille, soirée entre amis... Gustichef vous met en relation avec le chef idéal pour chaque moment.
+      </p>
+
+      <div class="space-y-8 text-left">
+        {steps.map((step) => (
+          <div class="flex gap-5">
+            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal flex items-center justify-center">
+              <span class="font-display text-cream text-sm font-bold">{step.number}</span>
+            </div>
+            <div>
+              <h3 class="font-display text-lg text-dark mb-1">{step.title}</h3>
+              <p class="font-body text-sm text-dark/70 leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <a href="#download" class="btn-primary mt-10 inline-flex mx-auto lg:mx-0">
+        Trouver un chef →
+      </a>
+    </div>
+
+    <!-- Visual -->
+    <div class="relative flex justify-center">
+      <div class="relative bg-teal rounded-3xl w-full max-w-sm mx-auto p-6 shadow-xl">
+        <div class="flex items-center gap-1.5 font-body text-cream/70 text-xs mb-4">
+          <Icon name="location" size={14} strokeWidth={2} />
+          <span>Recherche près de vous</span>
+        </div>
+
+        <!-- Chef cards -->
+        <div class="space-y-3">
+          {([
+            { name: "Chef Marco D.", cuisine: "Italienne", price: "À partir de 80€/pers.", rating: "4.9", icon: "bowl", tint: "bg-terracotta/10 text-terracotta" },
+            { name: "Chef Amara K.", cuisine: "Africaine", price: "À partir de 65€/pers.", rating: "4.8", icon: "pot", tint: "bg-sage/30 text-teal" },
+            { name: "Chef Sophie R.", cuisine: "Française", price: "À partir de 95€/pers.", rating: "5.0", icon: "croissant", tint: "bg-beige text-terracotta" },
+          ] as const).map((chef) => (
+            <div class="bg-cream rounded-2xl p-3 flex items-center gap-3">
+              <div class={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${chef.tint}`}>
+                <Icon name={chef.icon as IconName} size={24} strokeWidth={1.75} />
+              </div>
+              <div class="min-w-0">
+                <div class="font-body text-xs font-bold text-dark truncate">{chef.name}</div>
+                <div class="font-body text-xs text-dark/60">{chef.cuisine}</div>
+                <div class="font-body text-xs text-terracotta font-semibold">{chef.price}</div>
+              </div>
+              <div class="ml-auto flex-shrink-0 text-right flex items-center gap-1 text-teal">
+                <Icon name="star" size={11} strokeWidth={1.5} fill />
+                <span class="font-body text-xs font-bold">{chef.rating}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button class="mt-4 w-full bg-terracotta text-cream rounded-xl py-2 font-body text-sm font-semibold">
+          Voir tous les chefs
+        </button>
+      </div>
+
+      <!-- Decorative element -->
+      <div class="absolute -bottom-6 -left-6 w-32 h-32 rounded-full bg-sage/40 -z-10"></div>
+      <div class="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-terracotta/20 -z-10"></div>
+    </div>
+  </div>
+</section>

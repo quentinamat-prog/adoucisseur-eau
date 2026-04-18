@@ -1,0 +1,180 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+interface Benefit {
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
+const benefits: Benefit[] = [
+  {
+    icon: "sparkle",
+    title: "Votre portfolio visuel",
+    description: "Publiez photos et vidéos de vos créations. Votre profil devient votre vitrine, comme sur Instagram.",
+  },
+  {
+    icon: "bell",
+    title: "Publiez vos offres",
+    description: "Mettez en avant vos menus, vos spécialités et vos disponibilités pour attirer les bons clients.",
+  },
+  {
+    icon: "chat",
+    title: "Recevez des demandes",
+    description: "Les particuliers publient leurs besoins : répondez directement et décrochez de nouvelles missions.",
+  },
+  {
+    icon: "calendar",
+    title: "Gérez votre activité",
+    description: "Calendrier de disponibilités, devis en chat, avis clients : tout votre back-office dans l'app.",
+  },
+];
+
+const portfolioItems: { icon: IconName; tint: string }[] = [
+  { icon: 'bowl', tint: 'bg-terracotta/10 text-terracotta' },
+  { icon: 'steak', tint: 'bg-beige text-terracotta' },
+  { icon: 'cake', tint: 'bg-sage/30 text-teal' },
+  { icon: 'leaf', tint: 'bg-beige text-teal' },
+  { icon: 'shrimp', tint: 'bg-terracotta/10 text-terracotta' },
+  { icon: 'wine', tint: 'bg-sage/30 text-teal' },
+];
+---
+
+<section id="chefs" class="py-16 md:py-24 bg-dark overflow-hidden relative">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <!-- Glows -->
+    <div class="absolute -top-20 -left-20 w-[36rem] h-[36rem] rounded-full bg-teal/30 blur-[110px]"></div>
+    <div class="absolute -bottom-20 -right-20 w-[32rem] h-[32rem] rounded-full bg-terracotta/20 blur-[100px]"></div>
+
+    <!-- Organic curves -->
+    <svg
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 1440 600"
+      preserveAspectRatio="xMidYMid slice"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Top flowing arcs (cream tones) -->
+      <path d="M -100 60 C 200 -80, 540 200, 800 100 C 1060 0, 1200 180, 1560 80"
+        stroke="#FDF8F5" stroke-width="1.5" stroke-opacity="0.08" />
+      <path d="M -100 120 C 200 -20, 540 260, 800 160 C 1060 60, 1200 240, 1560 140"
+        stroke="#FDF8F5" stroke-width="1"   stroke-opacity="0.05" />
+
+      <!-- Bottom counter arcs (sage/teal accent) -->
+      <path d="M 1560 540 C 1260 680, 880 380, 620 460 C 360 540, 200 720, -100 560"
+        stroke="#A9B199" stroke-width="1.5" stroke-opacity="0.10" />
+      <path d="M 1560 600 C 1260 740, 880 440, 620 520 C 360 600, 200 780, -100 620"
+        stroke="#A9B199" stroke-width="1"   stroke-opacity="0.07" />
+
+      <!-- Central S-curve (terracotta) -->
+      <path d="M 1200 600 C 1100 440, 940 320, 1060 200 C 1180 80, 1000 -20, 800 80 C 600 180, 660 360, 480 320"
+        stroke="#934215" stroke-width="1.25" stroke-opacity="0.14" />
+      <path d="M 1260 600 C 1160 440, 1000 320, 1120 200 C 1240 80, 1060 -20, 860 80 C 660 180, 720 360, 540 320"
+        stroke="#934215" stroke-width="0.75" stroke-opacity="0.08" />
+
+      <!-- Accent rings -->
+      <circle cx="1380" cy="120" r="90"  stroke="#FDF8F5" stroke-width="1"    stroke-opacity="0.06" />
+      <circle cx="1380" cy="120" r="150" stroke="#FDF8F5" stroke-width="0.75" stroke-opacity="0.04" />
+      <circle cx="80"   cy="480" r="80"  stroke="#A9B199" stroke-width="1"    stroke-opacity="0.08" />
+      <circle cx="80"   cy="480" r="130" stroke="#A9B199" stroke-width="0.75" stroke-opacity="0.05" />
+    </svg>
+  </div>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <!-- Visual left -->
+    <div class="relative flex justify-center order-2 lg:order-1">
+      <!-- Profile card mockup -->
+      <div class="bg-cream rounded-3xl w-full max-w-xs mx-auto overflow-hidden shadow-2xl">
+        <!-- Profile header -->
+        <div class="bg-teal h-24 relative">
+          <div class="absolute -bottom-8 left-5 w-16 h-16 rounded-full bg-beige border-4 border-cream flex items-center justify-center text-teal">
+            <Icon name="chef-hat" size={30} strokeWidth={1.75} />
+          </div>
+        </div>
+
+        <div class="pt-12 px-5 pb-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h3 class="font-display text-base text-dark">Chef Marco D.</h3>
+              <p class="font-body text-xs text-dark/60">Cuisine italienne & fusion</p>
+            </div>
+            <div class="text-right">
+              <div class="flex items-center gap-1 justify-end text-terracotta">
+                <Icon name="star" size={14} strokeWidth={1.5} fill />
+                <span class="font-display text-lg">4.9</span>
+              </div>
+              <div class="font-body text-xs text-dark/50">48 avis</div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-1 mb-4">
+            {["Pâtes fraîches", "Risotto", "Sushis", "Paris"].map(tag => (
+              <span class="bg-beige font-body text-xs px-2 py-0.5 rounded-full text-dark/70">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <!-- Photo grid -->
+          <div class="grid grid-cols-3 gap-1 mb-4">
+            {portfolioItems.map(item => (
+              <div class={`aspect-square rounded-lg flex items-center justify-center ${item.tint}`}>
+                <Icon name={item.icon} size={24} strokeWidth={1.5} />
+              </div>
+            ))}
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-beige pt-4">
+            <div>
+              <div class="font-display text-base text-dark">142</div>
+              <div class="font-body text-xs text-dark/50">Prestations</div>
+            </div>
+            <div>
+              <div class="font-display text-base text-dark">3 ans</div>
+              <div class="font-body text-xs text-dark/50">D'expérience</div>
+            </div>
+            <div>
+              <div class="font-display text-base text-teal">Dispo</div>
+              <div class="font-body text-xs text-dark/50">Ce week-end</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative -->
+      <div class="absolute top-0 left-0 w-24 h-24 rounded-full bg-terracotta/20 -z-10 -translate-x-8 -translate-y-8"></div>
+      <div class="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-teal/30 -z-10 translate-x-8 translate-y-8"></div>
+    </div>
+
+    <!-- Text right -->
+    <div class="order-1 lg:order-2 text-center lg:text-left">
+      <span class="tag tag-terracotta mb-4">Pour les chefs</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-cream leading-tight mt-4 mb-6">
+        Développez votre<br />
+        <span class="font-script text-beige text-4xl md:text-5xl">clientèle privée</span>
+      </h2>
+      <p class="font-body text-cream/70 text-lg leading-relaxed mb-10">
+        Créez votre profil, publiez vos créations et connectez-vous à des clients qui cherchent exactement votre talent. Gustichef, c'est votre agence digitale.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-5">
+        {benefits.map((b) => (
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <div class="w-10 h-10 rounded-xl bg-terracotta/20 text-beige flex items-center justify-center mb-3">
+              <Icon name={b.icon} size={22} strokeWidth={1.75} />
+            </div>
+            <h3 class="font-display text-sm text-cream mb-1">{b.title}</h3>
+            <p class="font-body text-xs text-cream/60 leading-relaxed">{b.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <a href="#download" class="btn-outline mt-10 inline-flex mx-auto lg:mx-0">
+        Rejoindre en tant que chef →
+      </a>
+    </div>
+  </div>
+</section>
