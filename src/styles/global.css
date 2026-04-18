@@ -62,6 +62,17 @@
     @apply bg-white/10 text-cream backdrop-blur-sm border border-white/20;
   }
 
+  /* Images de contenu */
+  .prose figure {
+    @apply my-8 rounded-2xl overflow-hidden;
+  }
+  .prose figure img {
+    @apply w-full h-64 md:h-80 object-cover;
+  }
+  .prose figure figcaption {
+    @apply text-center text-xs text-dark/40 font-body py-2 px-4 bg-beige/40;
+  }
+
   /* FAQ accordion — details/summary */
   .prose details {
     @apply mb-3 rounded-2xl overflow-hidden border border-beige/80 bg-white shadow-sm;

@@ -38,39 +38,67 @@ function markAsDone(title, date) {
   fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
 }
 
-async function fetchUnsplashImage(keyword, slug) {
+async function fetchUnsplashImage(query, filename) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
-  if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY absent, image ignorée.'); return null; }
+  if (!accessKey) return null;
 
-  const query = encodeURIComponent(keyword + ' cuisine');
   const searchRes = await fetch(
-    `https://api.unsplash.com/search/photos?query=${query}&per_page=1&orientation=landscape&content_filter=high`,
+    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' cuisine')}&per_page=3&orientation=landscape&content_filter=high`,
     { headers: { Authorization: `Client-ID ${accessKey}` } }
   );
-  if (!searchRes.ok) { console.warn(`Unsplash search error: ${searchRes.status}`); return null; }
+  if (!searchRes.ok) { console.warn(`Unsplash error: ${searchRes.status}`); return null; }
 
   const data = await searchRes.json();
   const photo = data.results?.[0];
-  if (!photo) { console.warn('Aucune photo Unsplash trouvée.'); return null; }
+  if (!photo) { console.warn(`Aucune photo pour "${query}"`); return null; }
 
-  // Télécharger l'image
   const imgRes = await fetch(photo.urls.regular);
   if (!imgRes.ok) return null;
   const buffer = Buffer.from(await imgRes.arrayBuffer());
 
   const imgDir = path.join(__dirname, '..', 'public', 'images', 'blog');
   fs.mkdirSync(imgDir, { recursive: true });
-  fs.writeFileSync(path.join(imgDir, `${slug}.jpg`), buffer);
+  fs.writeFileSync(path.join(imgDir, filename), buffer);
 
-  // Notifier Unsplash du téléchargement (obligatoire selon leurs CGU)
+  // Obligatoire selon les CGU Unsplash
   await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } });
 
-  console.log(`Image Unsplash : ${photo.user.name} — ${photo.urls.regular}`);
-  return {
-    path: `/images/blog/${slug}.jpg`,
-    alt: `Photo de ${photo.user.name} sur Unsplash`,
-  };
+  console.log(`Image téléchargée : ${filename} (${photo.user.name})`);
+  return { filename, photographer: photo.user.name, photographerUrl: photo.user.links.html };
 }
+
+async function generateImageSeo(title, kw, context, client) {
+  const msg = await client.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 150,
+    messages: [{
+      role: 'user',
+      content: `Pour une image illustrant un article de blog intitulé "${title}" (mot-clé : "${kw}"), dans la section "${context}", génère en JSON sans markdown :
+{"alt": "texte alt SEO, 10-15 mots, inclut le mot-clé naturellement", "title": "attribut title HTML, 8-12 mots, complémentaire à l'alt"}`
+    }]
+  });
+  try { return JSON.parse(msg.content[0].text.trim()); }
+  catch { return { alt: `${kw} - ${context}`, title: title }; }
+}
+
+function extractH2Headings(content) {
+  return [...content.matchAll(/^## (.+)$/gm)].map(m => m[1]);
+}
+
+function injectAfterSection(content, sectionIndex, imageHtml) {
+  // Split on H2 headings, inject at end of target section
+  const parts = content.split(/(?=\n## )/);
+  if (sectionIndex >= parts.length) return content;
+  // Inject before the next section (append to end of this section)
+  parts[sectionIndex] = parts[sectionIndex].trimEnd() + '\n\n' + imageHtml + '\n';
+  return parts.join('');
+}
+
+function buildImageHtml(webPath, alt, title, photographer, photographerUrl) {
+  return `<figure>
+<img src="${webPath}" alt="${alt}" title="${title}" loading="lazy" />
+<figcaption>Photo de <a href="${photographerUrl}?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">${photographer}</a> sur <a href="https://unsplash.com?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">Unsplash</a></figcaption>
+</figure>`;
 
 async function generateArticle() {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -211,7 +239,35 @@ ${internalLinks}
     });
   }
 
-  const unsplashImg = await fetchUnsplashImage(meta.kw, slug);
+  // --- Images Unsplash ---
+  const headings = extractH2Headings(rawContent);
+
+  // Image de couverture
+  const coverData = await fetchUnsplashImage(meta.kw, `${slug}.jpg`);
+  let coverSeo = null;
+  if (coverData) {
+    coverSeo = await generateImageSeo(title, meta.kw, 'couverture', client);
+  }
+
+  // Image contenu 1 — après la 1ère section H2
+  const img1Query = headings[0] ?? meta.kw;
+  const img1Data = await fetchUnsplashImage(img1Query, `${slug}-1.jpg`);
+  let img1Seo = null;
+  if (img1Data) {
+    img1Seo = await generateImageSeo(title, meta.kw, headings[0] ?? 'section 1', client);
+    const img1Html = buildImageHtml(`/images/blog/${slug}-1.jpg`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl);
+    rawContent = injectAfterSection(rawContent, 1, img1Html);
+  }
+
+  // Image contenu 2 — après la 3ème section H2 (ou 2ème si moins)
+  const img2Heading = headings[2] ?? headings[1] ?? meta.kw;
+  const img2Data = await fetchUnsplashImage(img2Heading, `${slug}-2.jpg`);
+  let img2Seo = null;
+  if (img2Data) {
+    img2Seo = await generateImageSeo(title, meta.kw, img2Heading, client);
+    const img2Html = buildImageHtml(`/images/blog/${slug}-2.jpg`, img2Seo.alt, img2Seo.title, img2Data.photographer, img2Data.photographerUrl);
+    rawContent = injectAfterSection(rawContent, 3, img2Html);
+  }
 
   const descMsg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -229,8 +285,8 @@ Titre : ${title}`
     ? `faq:\n${faqItems.map(f => `  - q: "${f.q.replace(/"/g, "'")}"\n    a: "${f.a.replace(/"/g, "'")}"`).join('\n')}\n`
     : '';
 
-  const imageFrontmatter = unsplashImg
-    ? `image: "${unsplashImg.path}"\nimageAlt: "${unsplashImg.alt}"\n`
+  const imageFrontmatter = coverData && coverSeo
+    ? `image: "/images/blog/${slug}.jpg"\nimageAlt: "${coverSeo.alt}"\nimageTitle: "${coverSeo.title}"\n`
     : '';
 
   const frontmatter = `---

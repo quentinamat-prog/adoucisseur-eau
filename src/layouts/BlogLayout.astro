@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { post, headings } = Astro.props;
-const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, faq } = post.data;
+const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, imageTitle, faq } = post.data;
 
 const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   year: 'numeric', month: 'long', day: 'numeric',
@@ -149,7 +149,7 @@ const breadcrumbSchema = {
         <!-- Cover image -->
         {image && (
           <figure class="rounded-2xl overflow-hidden mb-10 aspect-video bg-beige">
-            <img src={image} alt={imageAlt ?? title} class="w-full h-full object-cover" loading="lazy" />
+            <img src={image} alt={imageAlt ?? title} title={imageTitle ?? title} class="w-full h-full object-cover" loading="lazy" />
           </figure>
         )}
 
