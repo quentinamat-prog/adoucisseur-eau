@@ -99,6 +99,7 @@ function buildImageHtml(webPath, alt, title, photographer, photographerUrl) {
 <img src="${webPath}" alt="${alt}" title="${title}" loading="lazy" />
 <figcaption>Photo de <a href="${photographerUrl}?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">${photographer}</a> sur <a href="https://unsplash.com?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">Unsplash</a></figcaption>
 </figure>`;
+}
 
 async function generateArticle() {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
