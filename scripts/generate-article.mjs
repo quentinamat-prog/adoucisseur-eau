@@ -40,30 +40,39 @@ function markAsDone(title, date) {
 
 async function fetchUnsplashImage(query, filename) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
-  if (!accessKey) return null;
+  if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY manquant.'); return null; }
 
-  const searchRes = await fetch(
-    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' cuisine')}&per_page=3&orientation=landscape&content_filter=high`,
-    { headers: { Authorization: `Client-ID ${accessKey}` } }
-  );
-  if (!searchRes.ok) { console.warn(`Unsplash error: ${searchRes.status}`); return null; }
+  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' cuisine')}&per_page=3&orientation=landscape&content_filter=high`;
+  console.log(`Unsplash search: "${query + ' cuisine'}"`);
+
+  let searchRes;
+  try { searchRes = await fetch(url, { headers: { Authorization: `Client-ID ${accessKey}` } }); }
+  catch (e) { console.warn(`Unsplash fetch error: ${e.message}`); return null; }
+
+  if (!searchRes.ok) {
+    const body = await searchRes.text();
+    console.warn(`Unsplash API ${searchRes.status}: ${body}`);
+    return null;
+  }
 
   const data = await searchRes.json();
   const photo = data.results?.[0];
-  if (!photo) { console.warn(`Aucune photo pour "${query}"`); return null; }
+  if (!photo) { console.warn(`Aucune photo Unsplash pour "${query}"`); return null; }
 
-  const imgRes = await fetch(photo.urls.regular);
-  if (!imgRes.ok) return null;
+  let imgRes;
+  try { imgRes = await fetch(photo.urls.regular); }
+  catch (e) { console.warn(`Download error: ${e.message}`); return null; }
+  if (!imgRes.ok) { console.warn(`Image download ${imgRes.status}`); return null; }
+
   const buffer = Buffer.from(await imgRes.arrayBuffer());
-
   const imgDir = path.join(__dirname, '..', 'public', 'images', 'blog');
   fs.mkdirSync(imgDir, { recursive: true });
   fs.writeFileSync(path.join(imgDir, filename), buffer);
 
   // Obligatoire selon les CGU Unsplash
-  await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } });
+  await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } }).catch(() => {});
 
-  console.log(`Image téléchargée : ${filename} (${photo.user.name})`);
+  console.log(`✓ Image téléchargée : ${filename} (${photo.user.name})`);
   return { filename, photographer: photo.user.name, photographerUrl: photo.user.links.html };
 }
 
@@ -170,7 +179,8 @@ Réponds en JSON uniquement, sans markdown :
 
   let meta = { category: 'Conseils', tags: ['chef privé', 'domicile'], kw: title };
   try {
-    meta = JSON.parse(metaMsg.content[0].text.trim());
+    const raw = metaMsg.content[0].text.replace(/```json\n?|\n?```/g, '').trim();
+    meta = JSON.parse(raw);
   } catch {
     console.warn('Métadonnées par défaut utilisées.');
   }
