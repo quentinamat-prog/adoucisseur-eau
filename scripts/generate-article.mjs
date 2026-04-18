@@ -40,12 +40,38 @@ function markAsDone(title, date) {
 
 async function generateArticle() {
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const { todo } = parseTopics();
+  let { todo } = parseTopics();
 
   if (todo.length === 0) {
+    console.log('Liste vide — génération automatique d\'un nouveau sujet...');
 
-    console.log('Tous les sujets ont été traités. Ajoutez de nouveaux sujets dans topics.md.');
-    process.exit(0);
+    const raw = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+    const doneTitles = raw
+      .filter(t => typeof t === 'object' && t.publishedAt)
+      .map(t => `"${t.title}"`)
+      .join(', ');
+
+    const topicMsg = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 200,
+      messages: [{
+        role: 'user',
+        content: `Tu es expert SEO pour Gustichef, une app qui connecte des chefs privés avec des particuliers en France.
+
+Propose UN nouveau sujet d'article de blog original, en français, optimisé SEO, en lien avec la cuisine à domicile, les chefs privés, la gastronomie ou les événements culinaires.
+
+Sujets déjà traités : ${doneTitles}
+
+Retourne UNIQUEMENT le titre du sujet, sans guillemets ni ponctuation finale.`
+      }]
+    });
+
+    const newTitle = topicMsg.content[0].text.trim();
+    console.log(`Nouveau sujet généré : "${newTitle}"`);
+
+    const updated = raw.concat([newTitle]);
+    fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
+    todo = [newTitle];
   }
 
   const title = todo[0];
