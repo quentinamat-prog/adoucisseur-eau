@@ -22,14 +22,19 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: /public_html/
-          dangerous-clean-slate: false
-          protocol: ftps
-          timeout: 60000
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via lftp
+        run: |
+          lftp -e "
+            set net:timeout 15;
+            set net:max-retries 5;
+            set net:reconnect-interval-base 5;
+            set ssl:verify-certificate no;
+            set ftp:ssl-allow yes;
+            open ftp://${{ secrets.FTP_SERVER }};
+            user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
+            mirror --reverse --delete --verbose --exclude=.git dist/ /public_html/;
+            quit
+          "
