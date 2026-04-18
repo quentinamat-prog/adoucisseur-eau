@@ -61,4 +61,26 @@
   .tag-outline-light {
     @apply bg-white/10 text-cream backdrop-blur-sm border border-white/20;
   }
+
+  /* FAQ accordion — details/summary */
+  .prose details {
+    @apply border border-beige rounded-2xl overflow-hidden mb-3;
+  }
+  .prose details summary {
+    @apply flex items-center justify-between gap-4 px-5 py-4 font-display text-base text-dark cursor-pointer select-none list-none bg-beige/50 hover:bg-beige transition-colors duration-150;
+  }
+  .prose details summary::-webkit-details-marker { display: none; }
+  .prose details summary::after {
+    content: '+';
+    @apply text-terracotta text-xl font-bold flex-shrink-0 transition-transform duration-200;
+  }
+  .prose details[open] summary::after {
+    content: '−';
+  }
+  .prose details[open] summary {
+    @apply bg-beige border-b border-beige;
+  }
+  .prose details > *:not(summary) {
+    @apply px-5 py-4 font-body text-dark/75 leading-relaxed text-sm;
+  }
 }

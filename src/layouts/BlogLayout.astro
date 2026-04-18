@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { post, headings } = Astro.props;
-const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt } = post.data;
+const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, faq } = post.data;
 
 const formattedDate = new Intl.DateTimeFormat('fr-FR', {
   year: 'numeric', month: 'long', day: 'numeric',
@@ -56,6 +56,20 @@ const articleSchema = {
   inLanguage: 'fr-FR',
 };
 
+// FAQ schema
+const faqSchema = faq && faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+} : null;
+
 // Breadcrumb schema
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -73,7 +87,7 @@ const breadcrumbSchema = {
   description={description}
   type="article"
   image={image ?? '/og-image.jpg'}
-  jsonLd={[articleSchema, breadcrumbSchema]}
+  jsonLd={[articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])]}
 >
   <!-- Nav -->
   <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">

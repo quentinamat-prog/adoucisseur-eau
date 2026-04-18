@@ -130,10 +130,14 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 - **Catégorie** : ${meta.category}
 
 ## STRUCTURE OBLIGATOIRE (dans cet ordre)
-1. **Introduction** (150-180 mots) — accroche avec un constat ou une question, inclure le mot-clé principal dans les 100 premiers mots
-2. **3 à 4 sections H2** — chaque section avec 150-200 mots, sous-titres H3 si pertinent
-3. **Section FAQ** — titre H2 "Questions fréquentes", 3 questions/réponses en format ### Question / réponse courte
-4. **Conclusion + CTA** (80-100 mots) — synthèse et invitation à télécharger Gustichef
+1. **Introduction** (150-180 mots) - accroche avec un constat ou une question, inclure le mot-clé principal dans les 100 premiers mots
+2. **3 à 4 sections H2** - chaque section avec 150-200 mots, sous-titres H3 si pertinent
+3. **Section FAQ** - titre H2 "Questions fréquentes", puis 3 accordéons HTML avec ce format EXACT (pas de markdown, HTML pur) :
+<details>
+<summary>La question ici ?</summary>
+La réponse complète ici en une ou deux phrases.
+</details>
+4. **Conclusion + CTA** (80-100 mots) - synthèse et invitation à télécharger Gustichef
 
 ## RÈGLES E-E-A-T
 - **Expertise** : chiffres concrets, vocabulaire professionnel culinaire
@@ -146,6 +150,7 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 - *Italique* : termes techniques ou étrangers
 - Listes : quand 3+ éléments énumérés
 - > Citations : pour un conseil fort ou une stat marquante
+- Interdiction absolue d'utiliser le caractère "—" (tiret cadratin), utilise "-" à la place
 
 ## MAILLAGE INTERNE (2 à 3 liens obligatoires, intégrés naturellement)
 ${internalLinks}
@@ -159,7 +164,18 @@ ${internalLinks}
     messages: [{ role: 'user', content: prompt }],
   });
 
-  const content = articleMsg.content[0].text;
+  const rawContent = articleMsg.content[0].text.replace(/—/g, '-');
+
+  // Extraire les Q&A pour le schema FAQ
+  const faqItems = [];
+  const detailsRegex = /<details>\s*<summary>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g;
+  let match;
+  while ((match = detailsRegex.exec(rawContent)) !== null) {
+    faqItems.push({
+      q: match[1].trim(),
+      a: match[2].trim().replace(/<[^>]+>/g, '').trim(),
+    });
+  }
 
   const descMsg = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -173,6 +189,10 @@ Titre : ${title}`
 
   const description = descMsg.content[0].text.trim().replace(/"/g, "'").slice(0, 155);
 
+  const faqYaml = faqItems.length > 0
+    ? `faq:\n${faqItems.map(f => `  - q: "${f.q.replace(/"/g, "'")}"\n    a: "${f.a.replace(/"/g, "'")}"`).join('\n')}\n`
+    : '';
+
   const frontmatter = `---
 title: "${title}"
 description: "${description}"
@@ -181,11 +201,11 @@ author: "Équipe Gustichef"
 category: ${meta.category}
 tags: [${meta.tags.map(t => `"${t}"`).join(', ')}]
 featured: false
----
+${faqYaml}---
 
 `;
 
-  fs.writeFileSync(filePath, frontmatter + content, 'utf8');
+  fs.writeFileSync(filePath, frontmatter + rawContent, 'utf8');
   markAsDone(title, today);
 
   console.log(`Article sauvegardé : ${filePath}`);
