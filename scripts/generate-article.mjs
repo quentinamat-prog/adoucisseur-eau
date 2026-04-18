@@ -226,7 +226,7 @@ ${internalLinks}
     messages: [{ role: 'user', content: prompt }],
   });
 
-  const rawContent = articleMsg.content[0].text.replace(/—/g, '-');
+  let rawContent = articleMsg.content[0].text.replace(/—/g, '-');
 
   // Extraire les Q&A pour le schema FAQ
   const faqItems = [];
