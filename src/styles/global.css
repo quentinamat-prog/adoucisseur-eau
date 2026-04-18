@@ -96,7 +96,8 @@
     transform: rotate(180deg);
   }
   .prose details[open] summary {
-    @apply text-terracotta border-b border-terracotta/15 bg-terracotta/4;
+    @apply text-terracotta border-b border-terracotta/20;
+    background-color: rgba(147, 66, 21, 0.06);
   }
   .prose details > p,
   .prose details > div {
