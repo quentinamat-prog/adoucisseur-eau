@@ -21,16 +21,21 @@ function todayISO() {
 }
 
 function parseTopics() {
-  const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  const raw = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  // Accepte "titre simple" ou { title, publishedAt }
+  const topics = raw.map(t => typeof t === 'string' ? { title: t } : t);
   const todo = topics.filter(t => !t.publishedAt).map(t => t.title);
   return { todo };
 }
 
 function markAsDone(title, date) {
-  const topics = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
-  const idx = topics.findIndex(t => t.title === title);
-  if (idx !== -1) topics[idx].publishedAt = date;
-  fs.writeFileSync(TOPICS_FILE, JSON.stringify(topics, null, 2), 'utf8');
+  const raw = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
+  const updated = raw.map(t => {
+    const currentTitle = typeof t === 'string' ? t : t.title;
+    if (currentTitle === title) return { title, publishedAt: date };
+    return t;
+  });
+  fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
 }
 
 async function generateArticle() {
