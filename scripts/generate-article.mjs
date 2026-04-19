@@ -273,7 +273,7 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 - > Citations : pour un conseil fort ou une stat marquante
 - Interdiction absolue d'utiliser le caractère "—" (tiret cadratin), utilise "-" à la place
 
-## MAILLAGE INTERNE (2 à 3 liens obligatoires, intégrés naturellement)
+## MAILLAGE INTERNE (minimum 3 liens OBLIGATOIRES, tous doivent apparaître dans le texte)
 ${internalLinks}
 
 ## LONGUEUR
