@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TOPICS_FILE = path.join(__dirname, 'topics.json');
@@ -64,16 +65,17 @@ async function fetchUnsplashImage(query, filename) {
   catch (e) { console.warn(`Download error: ${e.message}`); return null; }
   if (!imgRes.ok) { console.warn(`Image download ${imgRes.status}`); return null; }
 
-  const buffer = Buffer.from(await imgRes.arrayBuffer());
+  const jpgBuffer = Buffer.from(await imgRes.arrayBuffer());
+  const webpFilename = filename.replace(/\.jpg$/, '.webp');
   const imgDir = path.join(__dirname, '..', 'public', 'images', 'blog');
   fs.mkdirSync(imgDir, { recursive: true });
-  fs.writeFileSync(path.join(imgDir, filename), buffer);
+  await sharp(jpgBuffer).webp({ quality: 82 }).toFile(path.join(imgDir, webpFilename));
 
   // Obligatoire selon les CGU Unsplash
   await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } }).catch(() => {});
 
-  console.log(`✓ Image téléchargée : ${filename} (${photo.user.name})`);
-  return { filename, photographer: photo.user.name, photographerUrl: photo.user.links.html };
+  console.log(`✓ Image téléchargée : ${webpFilename} (${photo.user.name})`);
+  return { filename: webpFilename, photographer: photo.user.name, photographerUrl: photo.user.links.html };
 }
 
 async function generateImageSeo(title, kw, context, client) {
