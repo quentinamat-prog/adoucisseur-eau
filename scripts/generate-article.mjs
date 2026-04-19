@@ -38,7 +38,7 @@ function markAsDone(title, date) {
   fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
 }
 
-async function fetchUnsplashImage(query, filename) {
+async function fetchUnsplashImage(query, filename, width = 1200) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY manquant.'); return null; }
 
@@ -71,8 +71,8 @@ async function fetchUnsplashImage(query, filename) {
     if (!photo) { console.warn(`Aucune photo Unsplash même en fallback pour "${query}"`); return null; }
   }
 
-  // Demande directement le WebP à Unsplash (fm=webp, w=1200)
-  const webpUrl = `${photo.urls.raw}&w=1200&fm=webp&q=82`;
+  // Demande directement le WebP à Unsplash
+  const webpUrl = `${photo.urls.raw}&w=${width}&fm=webp&q=82`;
   let imgRes;
   try { imgRes = await fetch(webpUrl); }
   catch (e) { console.warn(`Download error: ${e.message}`); return null; }
@@ -86,8 +86,8 @@ async function fetchUnsplashImage(query, filename) {
   // Obligatoire selon les CGU Unsplash
   await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } }).catch(() => {});
 
-  console.log(`✓ Image téléchargée : ${webpFilename} (${photo.user.name})`);
-  return { filename: webpFilename, photographer: photo.user.name, photographerUrl: photo.user.links.html };
+  console.log(`✓ Image téléchargée : ${webpFilename} (${photo.user.name}) [${width}px]`);
+  return { filename: webpFilename, photographer: photo.user.name, photographerUrl: photo.user.links.html, width };
 }
 
 async function generateImageSeo(title, kw, context, client) {
@@ -117,9 +117,10 @@ function injectAfterSection(content, sectionIndex, imageHtml) {
   return parts.join('');
 }
 
-function buildImageHtml(webPath, alt, title, photographer, photographerUrl) {
+function buildImageHtml(webPath, alt, title, photographer, photographerUrl, width = 1200) {
+  const height = Math.round(width * 2 / 3); // ratio 3:2 landscape
   return `<figure>
-<img src="${webPath}" alt="${alt}" title="${title}" loading="lazy" />
+<img src="${webPath}" alt="${alt}" title="${title}" width="${width}" height="${height}" loading="lazy" />
 <figcaption>Photo de <a href="${photographerUrl}?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">${photographer}</a> sur <a href="https://unsplash.com?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">Unsplash</a></figcaption>
 </figure>`;
 }
@@ -312,23 +313,23 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
     coverSeo = await generateImageSeo(title, meta.kw, 'couverture', client);
   }
 
-  // Image contenu 1 — après la 1ère section H2
+  // Image contenu 1 — après la 1ère section H2 (900px)
   const img1Query = headings[0] ?? meta.kw;
-  const img1Data = await fetchUnsplashImage(img1Query, `${slug}-1.jpg`);
+  const img1Data = await fetchUnsplashImage(img1Query, `${slug}-1.jpg`, 900);
   let img1Seo = null;
   if (img1Data) {
     img1Seo = await generateImageSeo(title, meta.kw, headings[0] ?? 'section 1', client);
-    const img1Html = buildImageHtml(`/images/blog/${img1Data.filename}`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl);
+    const img1Html = buildImageHtml(`/images/blog/${img1Data.filename}`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl, 900);
     rawContent = injectAfterSection(rawContent, 1, img1Html);
   }
 
-  // Image contenu 2 — après la 3ème section H2 (ou 2ème si moins)
+  // Image contenu 2 — après la 3ème section H2 (900px)
   const img2Heading = headings[2] ?? headings[1] ?? meta.kw;
-  const img2Data = await fetchUnsplashImage(img2Heading, `${slug}-2.jpg`);
+  const img2Data = await fetchUnsplashImage(img2Heading, `${slug}-2.jpg`, 900);
   let img2Seo = null;
   if (img2Data) {
     img2Seo = await generateImageSeo(title, meta.kw, img2Heading, client);
-    const img2Html = buildImageHtml(`/images/blog/${img2Data.filename}`, img2Seo.alt, img2Seo.title, img2Data.photographer, img2Data.photographerUrl);
+    const img2Html = buildImageHtml(`/images/blog/${img2Data.filename}`, img2Seo.alt, img2Seo.title, img2Data.photographer, img2Data.photographerUrl, 900);
     rawContent = injectAfterSection(rawContent, 3, img2Html);
   }
 
