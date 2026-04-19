@@ -2,7 +2,6 @@ import Anthropic from '@anthropic-ai/sdk';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TOPICS_FILE = path.join(__dirname, 'topics.json');
@@ -60,16 +59,17 @@ async function fetchUnsplashImage(query, filename) {
   const photo = data.results?.[0];
   if (!photo) { console.warn(`Aucune photo Unsplash pour "${query}"`); return null; }
 
+  // Demande directement le WebP à Unsplash (fm=webp, w=1200)
+  const webpUrl = `${photo.urls.raw}&w=1200&fm=webp&q=82`;
   let imgRes;
-  try { imgRes = await fetch(photo.urls.regular); }
+  try { imgRes = await fetch(webpUrl); }
   catch (e) { console.warn(`Download error: ${e.message}`); return null; }
   if (!imgRes.ok) { console.warn(`Image download ${imgRes.status}`); return null; }
 
-  const jpgBuffer = Buffer.from(await imgRes.arrayBuffer());
   const webpFilename = filename.replace(/\.jpg$/, '.webp');
   const imgDir = path.join(__dirname, '..', 'public', 'images', 'blog');
   fs.mkdirSync(imgDir, { recursive: true });
-  await sharp(jpgBuffer).webp({ quality: 82 }).toFile(path.join(imgDir, webpFilename));
+  fs.writeFileSync(path.join(imgDir, webpFilename), Buffer.from(await imgRes.arrayBuffer()));
 
   // Obligatoire selon les CGU Unsplash
   await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } }).catch(() => {});
