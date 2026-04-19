@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Footer from '../../../components/Footer.astro';
+import Icon from '../../../components/Icon.astro';
+
+export function catToSlug(cat: string) {
+  return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
+}
+
+const CATEGORIES = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'] as const;
+
+export async function getStaticPaths() {
+  const CATS = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'] as const;
+  const all = await getCollection('blog');
+  return CATS.map(cat => ({
+    params: { category: catToSlug(cat) },
+    props: {
+      cat,
+      posts: all
+        .filter(p => p.data.category === cat)
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { cat, posts } = Astro.props;
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+
+const SITE_URL = 'https://gustichef.com';
+const catSlug = catToSlug(cat);
+---
+
+<BaseLayout
+  title={`${cat} — Blog Gustichef`}
+  description={`Tous les articles Gustichef dans la catégorie ${cat} : conseils, inspirations et guides pratiques.`}
+>
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="/" class="font-display text-xl text-teal">Gusti<span class="text-terracotta">chef</span></a>
+      <nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium text-dark/70">
+        <a href="/" class="hover:text-teal transition-colors">Accueil</a>
+        <a href="/blog" class="hover:text-teal transition-colors">Blog</a>
+        <a href="/#download" class="btn-primary text-xs px-4 py-2">Télécharger</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 font-body text-sm text-dark/50 mb-8">
+      <a href="/" class="hover:text-teal transition-colors">Accueil</a>
+      <span>/</span>
+      <a href="/blog" class="hover:text-teal transition-colors">Blog</a>
+      <span>/</span>
+      <span class="text-dark/70">{cat}</span>
+    </nav>
+
+    <div class="mb-12">
+      <span class="tag tag-beige mb-4">{posts.length} article{posts.length > 1 ? 's' : ''}</span>
+      <h1 class="section-title mt-4 mb-3">{cat}</h1>
+      <p class="section-subtitle">Tous nos articles dans la catégorie <strong>{cat}</strong>.</p>
+    </div>
+
+    <!-- Filtres catégories -->
+    <div class="flex flex-wrap gap-2 mb-10">
+      <a href="/blog" class="font-body text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full bg-beige text-dark/70 hover:bg-teal hover:text-cream transition-all">
+        Tous
+      </a>
+      {CATEGORIES.map(c => (
+        <a
+          href={`/blog/categorie/${catToSlug(c)}`}
+          class={`font-body text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full transition-all ${c === cat ? 'bg-teal text-cream shadow-md' : 'bg-beige text-dark/70 hover:bg-teal hover:text-cream'}`}
+        >
+          {c}
+        </a>
+      ))}
+    </div>
+
+    {posts.length > 0 ? (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map(post => (
+          <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
+            <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
+              {post.data.image
+                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
+              }
+              <div class="absolute top-3 left-3">
+                <span class="tag tag-teal">{post.data.category}</span>
+              </div>
+            </div>
+            <div class="p-6">
+              <time datetime={post.data.pubDate.toISOString()} class="font-body text-xs text-dark/50 mb-3 block">
+                {formatDate(post.data.pubDate)}
+              </time>
+              <h2 class="font-display text-lg text-dark mb-2 leading-snug group-hover:text-teal transition-colors">
+                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <p class="font-body text-sm text-dark/60 leading-relaxed line-clamp-3">{post.data.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20">
+        <p class="font-body text-dark/50">Aucun article dans cette catégorie pour l'instant.</p>
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>

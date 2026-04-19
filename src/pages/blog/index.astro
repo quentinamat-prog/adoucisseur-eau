@@ -9,7 +9,10 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 const featured = posts.find(p => p.data.featured);
 const rest = posts.filter(p => !p.data.featured || p.slug !== featured?.slug);
 
-const categories = ['Tous', 'Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'];
+const categories = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'];
+function catToSlug(cat: string) {
+  return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
+}
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
@@ -104,10 +107,16 @@ const breadcrumbSchema = {
 
     <!-- Category filters -->
     <div class="flex flex-wrap gap-2 mb-10">
+      <a href="/blog" class="font-body text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full bg-teal text-cream shadow-md transition-all">
+        Tous
+      </a>
       {categories.map(cat => (
-        <button class={`font-body text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full transition-all cursor-pointer ${cat === 'Tous' ? 'bg-teal text-cream shadow-md' : 'bg-beige text-dark/70 hover:bg-teal hover:text-cream'}`}>
+        <a
+          href={`/blog/categorie/${catToSlug(cat)}`}
+          class="font-body text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full bg-beige text-dark/70 hover:bg-teal hover:text-cream transition-all"
+        >
           {cat}
-        </button>
+        </a>
       ))}
     </div>
 
