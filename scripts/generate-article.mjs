@@ -268,7 +268,7 @@ ${internalLinks}
   let img1Seo = null;
   if (img1Data) {
     img1Seo = await generateImageSeo(title, meta.kw, headings[0] ?? 'section 1', client);
-    const img1Html = buildImageHtml(`/images/blog/${slug}-1.jpg`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl);
+    const img1Html = buildImageHtml(`/images/blog/${img1Data.filename}`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl);
     rawContent = injectAfterSection(rawContent, 1, img1Html);
   }
 
@@ -278,7 +278,7 @@ ${internalLinks}
   let img2Seo = null;
   if (img2Data) {
     img2Seo = await generateImageSeo(title, meta.kw, img2Heading, client);
-    const img2Html = buildImageHtml(`/images/blog/${slug}-2.jpg`, img2Seo.alt, img2Seo.title, img2Data.photographer, img2Data.photographerUrl);
+    const img2Html = buildImageHtml(`/images/blog/${img2Data.filename}`, img2Seo.alt, img2Seo.title, img2Data.photographer, img2Data.photographerUrl);
     rawContent = injectAfterSection(rawContent, 3, img2Html);
   }
 
@@ -299,7 +299,7 @@ Titre : ${title}`
     : '';
 
   const imageFrontmatter = coverData && coverSeo
-    ? `image: "/images/blog/${slug}.jpg"\nimageAlt: "${coverSeo.alt}"\nimageTitle: "${coverSeo.title}"\n`
+    ? `image: "/images/blog/${coverData.filename}"\nimageAlt: "${coverSeo.alt}"\nimageTitle: "${coverSeo.title}"\n`
     : '';
 
   const frontmatter = `---
