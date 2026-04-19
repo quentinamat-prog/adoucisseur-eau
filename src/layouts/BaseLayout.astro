@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import siteConfig from '../../site.config.mjs';
 
 interface Props {
   title: string;
@@ -11,10 +12,9 @@ interface Props {
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const SITE_NAME = 'Gustichef';
-const SITE_URL = 'https://gustichef.com';
-const DEFAULT_DESCRIPTION =
-  "Gustichef – La plateforme qui connecte chefs privés et particuliers pour des expériences culinaires uniques à domicile.";
+const SITE_NAME = siteConfig.name;
+const SITE_URL = siteConfig.url;
+const DEFAULT_DESCRIPTION = siteConfig.description;
 
 const {
   title,
@@ -35,10 +35,7 @@ const organizationSchema = {
   name: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/favicon.svg`,
-  sameAs: [
-    'https://www.instagram.com/gustichef',
-    'https://www.tiktok.com/@gustichef',
-  ],
+  sameAs: Object.values(siteConfig.socials).filter(Boolean),
 };
 
 const websiteSchema = {

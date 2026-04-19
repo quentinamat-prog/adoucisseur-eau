@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Footer from '../../../components/Footer.astro';
 import Icon from '../../../components/Icon.astro';
+import siteConfig from '../../../../site.config.mjs';
 
 export function catToSlug(cat: string) {
   return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
@@ -11,7 +12,7 @@ export function catToSlug(cat: string) {
 const CATEGORIES = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'] as const;
 
 export async function getStaticPaths() {
-  const CATS = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'] as const;
+  const CATS = siteConfig.categories as unknown as string[];
   const all = await getCollection('blog');
   return CATS.map(cat => ({
     params: { category: catToSlug(cat) },
@@ -29,7 +30,7 @@ const { cat, posts } = Astro.props;
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
 
-const SITE_URL = 'https://gustichef.com';
+const SITE_URL = siteConfig.url;
 const catSlug = catToSlug(cat);
 ---
 

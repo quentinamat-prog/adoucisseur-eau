@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import siteConfig from '../site.config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TOPICS_FILE = path.join(__dirname, 'topics.json');
@@ -143,9 +144,9 @@ async function generateArticle() {
       max_tokens: 200,
       messages: [{
         role: 'user',
-        content: `Tu es expert SEO pour Gustichef, une app qui connecte des chefs privés avec des particuliers en France.
+        content: `Tu es expert SEO pour ${siteConfig.name}, ${siteConfig.article.context}.
 
-Propose UN nouveau sujet d'article de blog original, en français, optimisé SEO, en lien avec la cuisine à domicile, les chefs privés, la gastronomie ou les événements culinaires.
+Propose UN nouveau sujet d'article de blog original, en français, optimisé SEO, en lien avec ${siteConfig.article.theme}.
 
 Sujets déjà traités : ${doneTitles}
 
@@ -180,12 +181,12 @@ Retourne UNIQUEMENT le titre du sujet, sans guillemets ni ponctuation finale.`
     max_tokens: 200,
     messages: [{
       role: 'user',
-      content: `Pour cet article de blog sur Gustichef (app de chefs privés à domicile en France) :
+      content: `Pour cet article de blog sur ${siteConfig.name} (${siteConfig.article.context}) :
 Titre : "${title}"
 
 Réponds en JSON uniquement, sans markdown :
 {
-  "category": "une valeur parmi : Conseils, Chefs, Recettes, Nutrition, Événements",
+  "category": "une valeur parmi : ${siteConfig.categories.join(', ')}",
   "tags": ["tag1", "tag2", "tag3"],
   "kw": "mot-clé principal SEO (3-5 mots)"
 }`
@@ -242,7 +243,7 @@ Réponds en JSON sans markdown : [{"title": "...", "path": "/blog/slug/", "ancho
     }
   }
 
-  const prompt = `Tu es un rédacteur SEO expert spécialisé en gastronomie et en expériences culinaires à domicile. Tu travailles pour **Gustichef**, une application française qui connecte des chefs privés avec des particuliers pour des expériences culinaires sur mesure.
+  const prompt = `Tu es un rédacteur SEO expert spécialisé dans la thématique suivante : ${siteConfig.article.theme}. Tu travailles pour **${siteConfig.name}**, ${siteConfig.article.context}.
 
 ## MISSION
 Rédige un article de blog long-format, de haute qualité éditoriale, optimisé pour le référencement Google selon les critères **E-E-A-T** (Experience, Expertise, Authoritativeness, Trustworthiness).
@@ -260,7 +261,7 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 <summary>La question ici ?</summary>
 <p>La réponse complète ici en une ou deux phrases.</p>
 </details>
-4. **Conclusion + CTA** (80-100 mots) - synthèse et invitation à télécharger Gustichef
+4. **Conclusion + CTA** (80-100 mots) - synthèse et invitation à ${siteConfig.article.cta}
 
 ## RÈGLES E-E-A-T
 - **Expertise** : chiffres concrets, vocabulaire professionnel culinaire
@@ -357,7 +358,7 @@ Titre : ${title}`
 title: "${title}"
 description: "${description}"
 pubDate: ${today}
-author: "Équipe Gustichef"
+author: "${siteConfig.article.author}"
 category: ${meta.category}
 tags: [${meta.tags.map(t => `"${t}"`).join(', ')}]
 featured: false

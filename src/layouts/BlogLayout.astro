@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import BlogSidebar from '../components/BlogSidebar.astro';
 import Footer from '../components/Footer.astro';
 import type { CollectionEntry } from 'astro:content';
+import siteConfig from '../../site.config.mjs';
 import type { MarkdownHeading } from 'astro';
 
 interface Props {
@@ -28,7 +29,7 @@ const formattedUpdated = updatedDate
   ? new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(updatedDate)
   : null;
 
-const SITE_URL = 'https://gustichef.com';
+const SITE_URL = siteConfig.url;
 const articleUrl = `${SITE_URL}/blog/${post.slug}/`;
 const imageUrl = image ? new URL(image, SITE_URL).toString() : `${SITE_URL}/og-image.jpg`;
 

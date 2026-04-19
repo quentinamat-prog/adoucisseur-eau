@@ -3,13 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
+import siteConfig from '../../../site.config.mjs';
 
 const allPosts = await getCollection('blog');
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const featured = posts.find(p => p.data.featured);
 const rest = posts.filter(p => !p.data.featured || p.slug !== featured?.slug);
 
-const categories = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'];
+const categories = siteConfig.categories;
 function catToSlug(cat: string) {
   return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
 }
@@ -17,7 +18,7 @@ function catToSlug(cat: string) {
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
 
-const SITE_URL = 'https://gustichef.com';
+const SITE_URL = siteConfig.url;
 const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
