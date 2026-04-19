@@ -199,12 +199,46 @@ Réponds en JSON uniquement, sans markdown :
     console.warn('Métadonnées par défaut utilisées.');
   }
 
-  const internalLinks = [
-    `- [Gustichef](/) — page d'accueil de l'application`,
-    `- [notre blog culinaire](/blog/) — tous nos articles`,
-    `- [comment choisir son chef privé](/blog/comment-choisir-chef-prive/) — guide complet`,
-    `- [les avantages de la cuisine à domicile](/blog/avantages-cuisine-domicile/) — pourquoi opter pour un chef`,
-  ].filter(l => !l.includes(slug)).join('\n');
+  // Maillage interne dynamique — liste des articles existants
+  const blogDir = path.join(__dirname, '..', 'src', 'content', 'blog');
+  const existingArticles = fs.readdirSync(blogDir)
+    .filter(f => f.endsWith('.md') && !f.includes(slug))
+    .map(f => {
+      const content = fs.readFileSync(path.join(blogDir, f), 'utf8');
+      const titleMatch = content.match(/^title:\s*"(.+)"/m);
+      const articleSlug = f.replace('.md', '');
+      return titleMatch ? { title: titleMatch[1], slug: articleSlug } : null;
+    })
+    .filter(Boolean);
+
+  let internalLinks = `- [Gustichef](/) — page d'accueil de l'application\n- [notre blog culinaire](/blog/) — tous nos articles`;
+
+  if (existingArticles.length > 0) {
+    const articleList = existingArticles.map(a => `"${a.title}" -> /blog/${a.slug}/`).join('\n');
+    const linkMsg = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 200,
+      messages: [{
+        role: 'user',
+        content: `Nouvel article : "${title}" (mot-clé : "${meta.kw}")
+
+Articles existants :
+${articleList}
+
+Choisis les 2 articles les plus pertinents à lier naturellement depuis le nouvel article.
+Réponds en JSON sans markdown : [{"title": "...", "path": "/blog/slug/", "anchor": "texte du lien naturel 3-5 mots"}]`
+      }]
+    });
+
+    try {
+      const raw = linkMsg.content[0].text.replace(/```json\n?|\n?```/g, '').trim();
+      const picks = JSON.parse(raw);
+      const dynamicLinks = picks.map(p => `- [${p.anchor}](${p.path}) — ${p.title}`).join('\n');
+      internalLinks += '\n' + dynamicLinks;
+    } catch {
+      console.warn('Maillage dynamique : fallback liens fixes.');
+    }
+  }
 
   const prompt = `Tu es un rédacteur SEO expert spécialisé en gastronomie et en expériences culinaires à domicile. Tu travailles pour **Gustichef**, une application française qui connecte des chefs privés avec des particuliers pour des expériences culinaires sur mesure.
 
