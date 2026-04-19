@@ -56,8 +56,20 @@ async function fetchUnsplashImage(query, filename) {
   }
 
   const data = await searchRes.json();
-  const photo = data.results?.[0];
-  if (!photo) { console.warn(`Aucune photo Unsplash pour "${query}"`); return null; }
+  let photo = data.results?.[0];
+
+  // Fallback : réessaie avec les 2 premiers mots si aucun résultat
+  if (!photo) {
+    console.warn(`Aucun résultat pour "${query}", tentative avec requête simplifiée...`);
+    const fallbackQuery = encodeURIComponent(query.split(' ').slice(0, 2).join(' ') + ' cuisine');
+    const fallbackRes = await fetch(
+      `https://api.unsplash.com/search/photos?query=${fallbackQuery}&per_page=3&orientation=landscape&content_filter=high`,
+      { headers: { Authorization: `Client-ID ${accessKey}` } }
+    ).catch(() => null);
+    const fallbackData = fallbackRes?.ok ? await fallbackRes.json() : null;
+    photo = fallbackData?.results?.[0];
+    if (!photo) { console.warn(`Aucune photo Unsplash même en fallback pour "${query}"`); return null; }
+  }
 
   // Demande directement le WebP à Unsplash (fm=webp, w=1200)
   const webpUrl = `${photo.urls.raw}&w=1200&fm=webp&q=82`;
