@@ -225,7 +225,7 @@ Réponds en JSON uniquement, sans markdown :
 Articles existants :
 ${articleList}
 
-Choisis les 2 articles les plus pertinents à lier naturellement depuis le nouvel article.
+Choisis les 3 articles les plus pertinents à lier naturellement depuis le nouvel article.
 Réponds en JSON sans markdown : [{"title": "...", "path": "/blog/slug/", "anchor": "texte du lien naturel 3-5 mots"}]`
       }]
     });
