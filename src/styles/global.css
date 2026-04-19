@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap');
+@import '@fontsource/dosis/300.css';
+@import '@fontsource/dosis/400.css';
+@import '@fontsource/dosis/500.css';
+@import '@fontsource/dosis/600.css';
+@import '@fontsource/dosis/700.css';
+@import '@fontsource/dancing-script/400.css';
+@import '@fontsource/dancing-script/700.css';
 
 @tailwind base;
 @tailwind components;
