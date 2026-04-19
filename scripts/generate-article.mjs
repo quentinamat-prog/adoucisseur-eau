@@ -43,8 +43,8 @@ async function fetchUnsplashImage(query, filename, width = 1200) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY manquant.'); return null; }
 
-  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' cuisine')}&per_page=3&orientation=landscape&content_filter=high`;
-  console.log(`Unsplash search: "${query + ' cuisine'}"`);
+  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' ' + siteConfig.article.unsplashContext)}&per_page=3&orientation=landscape&content_filter=high`;
+  console.log(`Unsplash search: "${query + ' ' + siteConfig.article.unsplashContext}"`);
 
   let searchRes;
   try { searchRes = await fetch(url, { headers: { Authorization: `Client-ID ${accessKey}` } }); }
@@ -62,7 +62,7 @@ async function fetchUnsplashImage(query, filename, width = 1200) {
   // Fallback : réessaie avec les 2 premiers mots si aucun résultat
   if (!photo) {
     console.warn(`Aucun résultat pour "${query}", tentative avec requête simplifiée...`);
-    const fallbackQuery = encodeURIComponent(query.split(' ').slice(0, 2).join(' ') + ' cuisine');
+    const fallbackQuery = encodeURIComponent(query.split(' ').slice(0, 2).join(' ') + ' ' + siteConfig.article.unsplashContext);
     const fallbackRes = await fetch(
       `https://api.unsplash.com/search/photos?query=${fallbackQuery}&per_page=3&orientation=landscape&content_filter=high`,
       { headers: { Authorization: `Client-ID ${accessKey}` } }

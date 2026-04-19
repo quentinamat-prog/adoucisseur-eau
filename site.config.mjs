@@ -28,6 +28,8 @@ const config = {
     cta: "Téléchargez l'application Gustichef",
     // Auteur affiché dans le frontmatter
     author: "Équipe Gustichef",
+    // Mot-clé ajouté aux recherches Unsplash pour cadrer les images
+    unsplashContext: "cuisine gastronomie",
   },
 };
 
