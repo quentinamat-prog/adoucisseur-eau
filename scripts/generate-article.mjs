@@ -217,7 +217,7 @@ Réponds en JSON uniquement, sans markdown :
     const articleList = existingArticles.map(a => `"${a.title}" -> /blog/${a.slug}/`).join('\n');
     const linkMsg = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 200,
+      max_tokens: 400,
       messages: [{
         role: 'user',
         content: `Nouvel article : "${title}" (mot-clé : "${meta.kw}")
@@ -235,8 +235,9 @@ Réponds en JSON sans markdown : [{"title": "...", "path": "/blog/slug/", "ancho
       const picks = JSON.parse(raw);
       const dynamicLinks = picks.map(p => `- [${p.anchor}](${p.path}) — ${p.title}`).join('\n');
       internalLinks += '\n' + dynamicLinks;
-    } catch {
-      console.warn('Maillage dynamique : fallback liens fixes.');
+      console.log(`Liens internes construits :\n${internalLinks}`);
+    } catch (e) {
+      console.warn(`Maillage dynamique échoué (${e.message}), réponse : ${linkMsg.content[0].text.slice(0, 200)}`);
     }
   }
 
@@ -266,15 +267,18 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 - **Autorité** : structure claire, contenu actionnable et non générique
 - **Confiance** : ton honnête, nuances quand pertinent
 
+## MAILLAGE INTERNE — RÈGLE ABSOLUE
+Tu DOIS intégrer CHACUN de ces liens dans le corps du texte (pas en liste, de manière naturelle dans une phrase) :
+${internalLinks}
+
+Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le texte rédigé.
+
 ## BALISAGE MARKDOWN
 - **Gras** : termes clés, chiffres importants, conseils actionnables (3-5 fois par section)
 - *Italique* : termes techniques ou étrangers
 - Listes : quand 3+ éléments énumérés
 - > Citations : pour un conseil fort ou une stat marquante
 - Interdiction absolue d'utiliser le caractère "—" (tiret cadratin), utilise "-" à la place
-
-## MAILLAGE INTERNE (minimum 3 liens OBLIGATOIRES, tous doivent apparaître dans le texte)
-${internalLinks}
 
 ## LONGUEUR
 800 à 1000 mots. Pas de titre H1. Commencer directement par l'introduction.`;
