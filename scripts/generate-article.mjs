@@ -39,12 +39,15 @@ function markAsDone(title, date) {
   fs.writeFileSync(TOPICS_FILE, JSON.stringify(updated, null, 2), 'utf8');
 }
 
-async function fetchUnsplashImage(query, filename, width = 1200) {
+async function fetchUnsplashImage(query, filename, width = 1200, excludeIds = []) {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   if (!accessKey) { console.warn('UNSPLASH_ACCESS_KEY manquant.'); return null; }
 
-  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' ' + siteConfig.article.unsplashContext)}&per_page=3&orientation=landscape&content_filter=high`;
-  console.log(`Unsplash search: "${query + ' ' + siteConfig.article.unsplashContext}"`);
+  const ctx = siteConfig.article.unsplashContext;
+  const pickPhoto = (results) => (results ?? []).find(p => !excludeIds.includes(p.id));
+
+  const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query + ' ' + ctx)}&per_page=10&orientation=landscape&content_filter=high`;
+  console.log(`Unsplash search: "${query + ' ' + ctx}"${excludeIds.length ? ` (exclude ${excludeIds.length})` : ''}`);
 
   let searchRes;
   try { searchRes = await fetch(url, { headers: { Authorization: `Client-ID ${accessKey}` } }); }
@@ -57,18 +60,18 @@ async function fetchUnsplashImage(query, filename, width = 1200) {
   }
 
   const data = await searchRes.json();
-  let photo = data.results?.[0];
+  let photo = pickPhoto(data.results);
 
-  // Fallback : réessaie avec les 2 premiers mots si aucun résultat
+  // Fallback : réessaie avec les 2 premiers mots si aucun résultat (non-exclus)
   if (!photo) {
     console.warn(`Aucun résultat pour "${query}", tentative avec requête simplifiée...`);
-    const fallbackQuery = encodeURIComponent(query.split(' ').slice(0, 2).join(' ') + ' ' + siteConfig.article.unsplashContext);
+    const fallbackQuery = encodeURIComponent(query.split(' ').slice(0, 2).join(' ') + ' ' + ctx);
     const fallbackRes = await fetch(
-      `https://api.unsplash.com/search/photos?query=${fallbackQuery}&per_page=3&orientation=landscape&content_filter=high`,
+      `https://api.unsplash.com/search/photos?query=${fallbackQuery}&per_page=10&orientation=landscape&content_filter=high`,
       { headers: { Authorization: `Client-ID ${accessKey}` } }
     ).catch(() => null);
     const fallbackData = fallbackRes?.ok ? await fallbackRes.json() : null;
-    photo = fallbackData?.results?.[0];
+    photo = pickPhoto(fallbackData?.results);
     if (!photo) { console.warn(`Aucune photo Unsplash même en fallback pour "${query}"`); return null; }
   }
 
@@ -88,7 +91,7 @@ async function fetchUnsplashImage(query, filename, width = 1200) {
   await fetch(photo.links.download_location, { headers: { Authorization: `Client-ID ${accessKey}` } }).catch(() => {});
 
   console.log(`✓ Image téléchargée : ${webpFilename} (${photo.user.name}) [${width}px]`);
-  return { filename: webpFilename, photographer: photo.user.name, photographerUrl: photo.user.links.html, width };
+  return { id: photo.id, filename: webpFilename, photographer: photo.user.name, photographerUrl: photo.user.links.html, width };
 }
 
 async function generateImageSeo(title, kw, context, client) {
@@ -317,7 +320,7 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
 
   // Image contenu 1 — après la 1ère section H2 (900px)
   const img1Query = headings[0] ?? meta.kw;
-  const img1Data = await fetchUnsplashImage(img1Query, `${slug}-1.jpg`, 900);
+  const img1Data = await fetchUnsplashImage(img1Query, `${slug}-1.jpg`, 900, coverData ? [coverData.id] : []);
   let img1Seo = null;
   if (img1Data) {
     img1Seo = await generateImageSeo(title, meta.kw, headings[0] ?? 'section 1', client);
@@ -327,7 +330,8 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
 
   // Image contenu 2 — après la 3ème section H2 (900px)
   const img2Heading = headings[2] ?? headings[1] ?? meta.kw;
-  const img2Data = await fetchUnsplashImage(img2Heading, `${slug}-2.jpg`, 900);
+  const usedIds = [coverData?.id, img1Data?.id].filter(Boolean);
+  const img2Data = await fetchUnsplashImage(img2Heading, `${slug}-2.jpg`, 900, usedIds);
   let img2Seo = null;
   if (img2Data) {
     img2Seo = await generateImageSeo(title, meta.kw, img2Heading, client);
