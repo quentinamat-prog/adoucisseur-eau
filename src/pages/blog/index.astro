@@ -81,7 +81,7 @@ const breadcrumbSchema = {
         <div class="grid md:grid-cols-5">
           <div class="md:col-span-3 aspect-video bg-teal/80 flex items-center justify-center">
             {featured.data.image
-              ? <img src={featured.data.image} alt={featured.data.imageAlt ?? featured.data.title} class="w-full h-full object-cover" loading="lazy" />
+              ? <img src={featured.data.image} alt={featured.data.imageAlt ?? featured.data.title} class="w-full h-full object-cover" width="1200" height="676" fetchpriority="high" decoding="async" />
               : <div class="text-cream/20"><Icon name="fork-knife" size={96} strokeWidth={1.25} /></div>
             }
           </div>
@@ -128,7 +128,7 @@ const breadcrumbSchema = {
           <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
             <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
               {post.data.image
-                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="800" height="450" loading="lazy" sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px" />
                 : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
               }
               <div class="absolute top-3 left-3">

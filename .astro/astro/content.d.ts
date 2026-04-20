@@ -1,0 +1,313 @@
+declare module 'astro:content' {
+	interface Render {
+		'.mdx': Promise<{
+			Content: import('astro').MarkdownInstance<{}>['Content'];
+			headings: import('astro').MarkdownHeading[];
+			remarkPluginFrontmatter: Record<string, any>;
+			components: import('astro').MDXInstance<{}>['components'];
+		}>;
+	}
+}
+
+declare module 'astro:content' {
+	interface RenderResult {
+		Content: import('astro/runtime/server/index.js').AstroComponentFactory;
+		headings: import('astro').MarkdownHeading[];
+		remarkPluginFrontmatter: Record<string, any>;
+	}
+	interface Render {
+		'.md': Promise<RenderResult>;
+	}
+
+	export interface RenderedContent {
+		html: string;
+		metadata?: {
+			imagePaths: Array<string>;
+			[key: string]: unknown;
+		};
+	}
+}
+
+declare module 'astro:content' {
+	type Flatten<T> = T extends { [K: string]: infer U } ? U : never;
+
+	export type CollectionKey = keyof AnyEntryMap;
+	export type CollectionEntry<C extends CollectionKey> = Flatten<AnyEntryMap[C]>;
+
+	export type ContentCollectionKey = keyof ContentEntryMap;
+	export type DataCollectionKey = keyof DataEntryMap;
+
+	type AllValuesOf<T> = T extends any ? T[keyof T] : never;
+	type ValidContentEntrySlug<C extends keyof ContentEntryMap> = AllValuesOf<
+		ContentEntryMap[C]
+	>['slug'];
+
+	/** @deprecated Use `getEntry` instead. */
+	export function getEntryBySlug<
+		C extends keyof ContentEntryMap,
+		E extends ValidContentEntrySlug<C> | (string & {}),
+	>(
+		collection: C,
+		// Note that this has to accept a regular string too, for SSR
+		entrySlug: E,
+	): E extends ValidContentEntrySlug<C>
+		? Promise<CollectionEntry<C>>
+		: Promise<CollectionEntry<C> | undefined>;
+
+	/** @deprecated Use `getEntry` instead. */
+	export function getDataEntryById<C extends keyof DataEntryMap, E extends keyof DataEntryMap[C]>(
+		collection: C,
+		entryId: E,
+	): Promise<CollectionEntry<C>>;
+
+	export function getCollection<C extends keyof AnyEntryMap, E extends CollectionEntry<C>>(
+		collection: C,
+		filter?: (entry: CollectionEntry<C>) => entry is E,
+	): Promise<E[]>;
+	export function getCollection<C extends keyof AnyEntryMap>(
+		collection: C,
+		filter?: (entry: CollectionEntry<C>) => unknown,
+	): Promise<CollectionEntry<C>[]>;
+
+	export function getEntry<
+		C extends keyof ContentEntryMap,
+		E extends ValidContentEntrySlug<C> | (string & {}),
+	>(entry: {
+		collection: C;
+		slug: E;
+	}): E extends ValidContentEntrySlug<C>
+		? Promise<CollectionEntry<C>>
+		: Promise<CollectionEntry<C> | undefined>;
+	export function getEntry<
+		C extends keyof DataEntryMap,
+		E extends keyof DataEntryMap[C] | (string & {}),
+	>(entry: {
+		collection: C;
+		id: E;
+	}): E extends keyof DataEntryMap[C]
+		? Promise<DataEntryMap[C][E]>
+		: Promise<CollectionEntry<C> | undefined>;
+	export function getEntry<
+		C extends keyof ContentEntryMap,
+		E extends ValidContentEntrySlug<C> | (string & {}),
+	>(
+		collection: C,
+		slug: E,
+	): E extends ValidContentEntrySlug<C>
+		? Promise<CollectionEntry<C>>
+		: Promise<CollectionEntry<C> | undefined>;
+	export function getEntry<
+		C extends keyof DataEntryMap,
+		E extends keyof DataEntryMap[C] | (string & {}),
+	>(
+		collection: C,
+		id: E,
+	): E extends keyof DataEntryMap[C]
+		? Promise<DataEntryMap[C][E]>
+		: Promise<CollectionEntry<C> | undefined>;
+
+	/** Resolve an array of entry references from the same collection */
+	export function getEntries<C extends keyof ContentEntryMap>(
+		entries: {
+			collection: C;
+			slug: ValidContentEntrySlug<C>;
+		}[],
+	): Promise<CollectionEntry<C>[]>;
+	export function getEntries<C extends keyof DataEntryMap>(
+		entries: {
+			collection: C;
+			id: keyof DataEntryMap[C];
+		}[],
+	): Promise<CollectionEntry<C>[]>;
+
+	export function render<C extends keyof AnyEntryMap>(
+		entry: AnyEntryMap[C][string],
+	): Promise<RenderResult>;
+
+	export function reference<C extends keyof AnyEntryMap>(
+		collection: C,
+	): import('astro/zod').ZodEffects<
+		import('astro/zod').ZodString,
+		C extends keyof ContentEntryMap
+			? {
+					collection: C;
+					slug: ValidContentEntrySlug<C>;
+				}
+			: {
+					collection: C;
+					id: keyof DataEntryMap[C];
+				}
+	>;
+	// Allow generic `string` to avoid excessive type errors in the config
+	// if `dev` is not running to update as you edit.
+	// Invalid collection names will be caught at build time.
+	export function reference<C extends string>(
+		collection: C,
+	): import('astro/zod').ZodEffects<import('astro/zod').ZodString, never>;
+
+	type ReturnTypeOrOriginal<T> = T extends (...args: any[]) => infer R ? R : T;
+	type InferEntrySchema<C extends keyof AnyEntryMap> = import('astro/zod').infer<
+		ReturnTypeOrOriginal<Required<ContentConfig['collections'][C]>['schema']>
+	>;
+
+	type ContentEntryMap = {
+		"blog": {
+"anniversaire-gourmet-comment-surprendre-vos-invites.md": {
+	id: "anniversaire-gourmet-comment-surprendre-vos-invites.md";
+  slug: "anniversaire-gourmet-comment-surprendre-vos-invites";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"avantages-cuisine-domicile.md": {
+	id: "avantages-cuisine-domicile.md";
+  slug: "avantages-cuisine-domicile";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"bapteme-et-communion-idees-repas-avec-un-chef-a-domicile.md": {
+	id: "bapteme-et-communion-idees-repas-avec-un-chef-a-domicile.md";
+  slug: "bapteme-et-communion-idees-repas-avec-un-chef-a-domicile";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"chef-prive-vs-traiteur-quelle-option-choisir.md": {
+	id: "chef-prive-vs-traiteur-quelle-option-choisir.md";
+  slug: "chef-prive-vs-traiteur-quelle-option-choisir";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-choisir-chef-prive.md": {
+	id: "comment-choisir-chef-prive.md";
+  slug: "comment-choisir-chef-prive";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-choisir-le-bon-chef-prive-pour-votre-evenement.md": {
+	id: "comment-choisir-le-bon-chef-prive-pour-votre-evenement.md";
+  slug: "comment-choisir-le-bon-chef-prive-pour-votre-evenement";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-devenir-chef-prive-parcours-et-conseils.md": {
+	id: "comment-devenir-chef-prive-parcours-et-conseils.md";
+  slug: "comment-devenir-chef-prive-parcours-et-conseils";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-evaluer-un-chef-prive-criteres-et-questions-a-poser.md": {
+	id: "comment-evaluer-un-chef-prive-criteres-et-questions-a-poser.md";
+  slug: "comment-evaluer-un-chef-prive-criteres-et-questions-a-poser";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs.md": {
+	id: "cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs.md";
+  slug: "cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-japonaise-a-domicile-les-essentiels-a-connaitre.md": {
+	id: "cuisine-japonaise-a-domicile-les-essentiels-a-connaitre.md";
+  slug: "cuisine-japonaise-a-domicile-les-essentiels-a-connaitre";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens.md": {
+	id: "cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens.md";
+  slug: "cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"diner-romantique-a-domicile-idees-et-inspiration.md": {
+	id: "diner-romantique-a-domicile-idees-et-inspiration.md";
+  slug: "diner-romantique-a-domicile-idees-et-inspiration";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette.md": {
+	id: "la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette.md";
+  slug: "la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste.md": {
+	id: "les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste.md";
+  slug: "les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive.md": {
+	id: "les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive.md";
+  slug: "les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-tendances-culinaires-2026-a-decouvrir-chez-vous.md": {
+	id: "les-tendances-culinaires-2026-a-decouvrir-chez-vous.md";
+  slug: "les-tendances-culinaires-2026-a-decouvrir-chez-vous";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"lessor-du-chef-prive-en-france-chiffres-et-tendances.md": {
+	id: "lessor-du-chef-prive-en-france-chiffres-et-tendances.md";
+  slug: "lessor-du-chef-prive-en-france-chiffres-et-tendances";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"menus-de-saison-printemps-2026-ce-que-proposent-les-chefs.md": {
+	id: "menus-de-saison-printemps-2026-ce-que-proposent-les-chefs.md";
+  slug: "menus-de-saison-printemps-2026-ce-que-proposent-les-chefs";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"organiser-un-repas-de-fete-inoubliable-sans-stress.md": {
+	id: "organiser-un-repas-de-fete-inoubliable-sans-stress.md";
+  slug: "organiser-un-repas-de-fete-inoubliable-sans-stress";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"repas-de-famille-reussi-lapport-dun-chef-a-domicile.md": {
+	id: "repas-de-famille-reussi-lapport-dun-chef-a-domicile.md";
+  slug: "repas-de-famille-reussi-lapport-dun-chef-a-domicile";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"soiree-entre-amis-idees-de-menus-originaux-avec-un-chef.md": {
+	id: "soiree-entre-amis-idees-de-menus-originaux-avec-un-chef.md";
+  slug: "soiree-entre-amis-idees-de-menus-originaux-avec-un-chef";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+};
+
+	};
+
+	type DataEntryMap = {
+		
+	};
+
+	type AnyEntryMap = ContentEntryMap & DataEntryMap;
+
+	export type ContentConfig = typeof import("../../src/content/config.js");
+}

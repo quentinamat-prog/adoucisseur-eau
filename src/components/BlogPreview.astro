@@ -32,7 +32,7 @@ const formatDate = (date: Date) =>
           <!-- Image or placeholder -->
           <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
             {post.data.image
-              ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+              ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="800" height="450" loading="lazy" sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px" />
               : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
             }
             <div class="absolute top-3 left-3">
