@@ -7,6 +7,9 @@ const config = {
   // Identité
   name: 'Gustichef',
   url: 'https://gustichef.com',
+  // Logo : partie principale + partie colorée (en terracotta)
+  logoPrefix: 'Gusti',
+  logoSuffix: 'chef',
   description: "Gustichef – La plateforme qui connecte chefs privés et particuliers pour des expériences culinaires uniques à domicile.",
 
   // Réseaux sociaux (laisser vide '' si inexistant)

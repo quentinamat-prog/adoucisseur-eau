@@ -16,7 +16,7 @@ const { transparent = false } = Astro.props;
 >
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="logo font-display text-2xl" aria-label={`${siteConfig.name} – accueil`}>
-      <span class="logo-primary">Gusti</span><span class="text-terracotta">chef</span>
+      <span class="logo-primary">{siteConfig.logoPrefix}</span><span class="text-terracotta">{siteConfig.logoSuffix}</span>
     </a>
 
     <!-- Desktop nav -->
