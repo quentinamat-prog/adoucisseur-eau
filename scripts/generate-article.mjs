@@ -309,7 +309,7 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
   const headings = extractH2Headings(rawContent);
 
   // Image de couverture
-  const coverData = await fetchUnsplashImage(meta.kw, `${slug}.jpg`);
+  let coverData = await fetchUnsplashImage(meta.kw, `${slug}.jpg`);
   let coverSeo = null;
   if (coverData) {
     coverSeo = await generateImageSeo(title, meta.kw, 'couverture', client);
@@ -321,8 +321,15 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
   let img1Seo = null;
   if (img1Data) {
     img1Seo = await generateImageSeo(title, meta.kw, headings[0] ?? 'section 1', client);
-    const img1Html = buildImageHtml(`/images/blog/${img1Data.filename}`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl, 900);
-    rawContent = injectAfterSection(rawContent, 1, img1Html);
+    // Si la couverture a échoué, utilise img1 comme couverture (évite la duplication inline)
+    if (!coverData) {
+      coverData = { ...img1Data, filename: img1Data.filename };
+      coverSeo = { alt: img1Seo.alt, title: img1Seo.title };
+      console.log('⚠ Couverture manquante — utilisation de img1 comme couverture.');
+    } else {
+      const img1Html = buildImageHtml(`/images/blog/${img1Data.filename}`, img1Seo.alt, img1Seo.title, img1Data.photographer, img1Data.photographerUrl, 900);
+      rawContent = injectAfterSection(rawContent, 1, img1Html);
+    }
   }
 
   // Image contenu 2 — après la 3ème section H2 (900px)
