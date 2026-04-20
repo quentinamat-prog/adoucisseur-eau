@@ -22,11 +22,11 @@ const SITE_URL = siteConfig.url;
 const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'Blog Gustichef',
+  name: `Blog ${siteConfig.name}`,
   description: "Articles sur la cuisine à domicile, les chefs privés, les conseils gastronomiques et les tendances culinaires.",
   url: `${SITE_URL}/blog`,
   inLanguage: 'fr-FR',
-  isPartOf: { '@type': 'WebSite', name: 'Gustichef', url: SITE_URL },
+  isPartOf: { '@type': 'WebSite', name: siteConfig.name, url: SITE_URL },
   hasPart: posts.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.data.title,
@@ -46,7 +46,7 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title="Blog Gustichef – Conseils & inspirations culinaires"
+  title={`Blog ${siteConfig.name} – Conseils & inspirations culinaires`}
   description="Découvrez nos articles sur la cuisine à domicile, les chefs privés, les conseils gastronomiques et les tendances culinaires."
   jsonLd={[collectionSchema, breadcrumbSchema]}
 >
@@ -65,7 +65,7 @@ const breadcrumbSchema = {
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
     <!-- Page header -->
     <div class="text-center mb-14">
-      <span class="tag tag-beige mb-4">Le blog Gustichef</span>
+      <span class="tag tag-beige mb-4">Le blog {siteConfig.name}</span>
       <h1 class="section-title mt-4 mb-4">
         Conseils & inspirations<br />
         <span class="text-terracotta">culinaires</span>

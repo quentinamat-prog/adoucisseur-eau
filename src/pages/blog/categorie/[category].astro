@@ -9,7 +9,7 @@ export function catToSlug(cat: string) {
   return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
 }
 
-const CATEGORIES = ['Conseils', 'Chefs', 'Recettes', 'Nutrition', 'Événements'] as const;
+const CATEGORIES = siteConfig.categories as unknown as string[];
 
 export async function getStaticPaths() {
   const CATS = siteConfig.categories as unknown as string[];
@@ -35,8 +35,8 @@ const catSlug = catToSlug(cat);
 ---
 
 <BaseLayout
-  title={`${cat} — Blog Gustichef`}
-  description={`Tous les articles Gustichef dans la catégorie ${cat} : conseils, inspirations et guides pratiques.`}
+  title={`${cat} — Blog ${siteConfig.name}`}
+  description={`Tous les articles ${siteConfig.name} dans la catégorie ${cat} : conseils, inspirations et guides pratiques.`}
 >
   <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">

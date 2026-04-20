@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import siteConfig from '../../site.config.mjs';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Features from '../components/Features.astro';
@@ -18,11 +19,10 @@ const recentPosts = allPosts
 const appSchema = {
   '@context': 'https://schema.org',
   '@type': 'MobileApplication',
-  name: 'Gustichef',
+  name: siteConfig.name,
   operatingSystem: 'iOS, Android',
   applicationCategory: 'LifestyleApplication',
-  description:
-    "Gustichef connecte particuliers et chefs privés pour des expériences culinaires sur mesure à domicile.",
+  description: siteConfig.description,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -33,8 +33,8 @@ const appSchema = {
 ---
 
 <BaseLayout
-  title="Gustichef – Votre chef privé à domicile"
-  description="Gustichef connecte particuliers et chefs privés pour des expériences culinaires sur mesure. Découvrez des talents, réservez en quelques clics et savourez l'instant."
+  title={`${siteConfig.name} – Votre chef privé à domicile`}
+  description={siteConfig.description}
   jsonLd={appSchema}
 >
   <Header transparent />

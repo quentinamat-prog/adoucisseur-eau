@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
 import Icon from './Icon.astro';
+import siteConfig from '../../site.config.mjs';
 
 interface Props {
   headings: MarkdownHeading[];
@@ -183,7 +184,7 @@ const toc = headings.filter((h) => h.depth === 2);
       <div class="px-6 py-4 flex-shrink-0 border-t border-beige bg-cream rounded-t-none">
         <a href="/#download" class="flex items-center justify-center gap-2 bg-teal text-cream py-3 rounded-xl font-body font-semibold text-sm w-full mb-3 hover:bg-teal/90 transition-colors">
           <Icon name="chef-hat" size={18} strokeWidth={1.75} />
-          Télécharger Gustichef
+          {siteConfig.article.cta}
         </a>
         <div class="flex justify-center gap-3">
           <button data-share="twitter" aria-label="X" class="share-btn w-9 h-9 rounded-full bg-beige text-dark/60 hover:bg-terracotta hover:text-cream flex items-center justify-center transition-colors">

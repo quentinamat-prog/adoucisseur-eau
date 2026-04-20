@@ -152,6 +152,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"anniversaire-gourmet-comment-surprendre-vos-invites.md": {
+	id: "anniversaire-gourmet-comment-surprendre-vos-invites.md";
+  slug: "anniversaire-gourmet-comment-surprendre-vos-invites";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "avantages-cuisine-domicile.md": {
 	id: "avantages-cuisine-domicile.md";
   slug: "avantages-cuisine-domicile";
@@ -159,9 +166,128 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"chef-prive-vs-traiteur-quelle-option-choisir.md": {
+	id: "chef-prive-vs-traiteur-quelle-option-choisir.md";
+  slug: "chef-prive-vs-traiteur-quelle-option-choisir";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "comment-choisir-chef-prive.md": {
 	id: "comment-choisir-chef-prive.md";
   slug: "comment-choisir-chef-prive";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-choisir-le-bon-chef-prive-pour-votre-evenement.md": {
+	id: "comment-choisir-le-bon-chef-prive-pour-votre-evenement.md";
+  slug: "comment-choisir-le-bon-chef-prive-pour-votre-evenement";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-devenir-chef-prive-parcours-et-conseils.md": {
+	id: "comment-devenir-chef-prive-parcours-et-conseils.md";
+  slug: "comment-devenir-chef-prive-parcours-et-conseils";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-evaluer-un-chef-prive-criteres-et-questions-a-poser.md": {
+	id: "comment-evaluer-un-chef-prive-criteres-et-questions-a-poser.md";
+  slug: "comment-evaluer-un-chef-prive-criteres-et-questions-a-poser";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs.md": {
+	id: "cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs.md";
+  slug: "cuisine-italienne-authentique-a-domicile-les-secrets-des-chefs";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-japonaise-a-domicile-les-essentiels-a-connaitre.md": {
+	id: "cuisine-japonaise-a-domicile-les-essentiels-a-connaitre.md";
+  slug: "cuisine-japonaise-a-domicile-les-essentiels-a-connaitre";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens.md": {
+	id: "cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens.md";
+  slug: "cuisine-vegetarienne-gastronomique-les-meilleurs-chefs-parisiens";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"diner-romantique-a-domicile-idees-et-inspiration.md": {
+	id: "diner-romantique-a-domicile-idees-et-inspiration.md";
+  slug: "diner-romantique-a-domicile-idees-et-inspiration";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette.md": {
+	id: "la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette.md";
+  slug: "la-cuisine-fusion-quand-les-cultures-se-rencontrent-dans-votre-assiette";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste.md": {
+	id: "les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste.md";
+  slug: "les-bienfaits-dune-alimentation-personnalisee-par-un-chef-nutritionniste";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive.md": {
+	id: "les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive.md";
+  slug: "les-cuisines-du-monde-a-portee-de-main-avec-un-chef-prive";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"les-tendances-culinaires-2026-a-decouvrir-chez-vous.md": {
+	id: "les-tendances-culinaires-2026-a-decouvrir-chez-vous.md";
+  slug: "les-tendances-culinaires-2026-a-decouvrir-chez-vous";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"lessor-du-chef-prive-en-france-chiffres-et-tendances.md": {
+	id: "lessor-du-chef-prive-en-france-chiffres-et-tendances.md";
+  slug: "lessor-du-chef-prive-en-france-chiffres-et-tendances";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"menus-de-saison-printemps-2026-ce-que-proposent-les-chefs.md": {
+	id: "menus-de-saison-printemps-2026-ce-que-proposent-les-chefs.md";
+  slug: "menus-de-saison-printemps-2026-ce-que-proposent-les-chefs";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"organiser-un-repas-de-fete-inoubliable-sans-stress.md": {
+	id: "organiser-un-repas-de-fete-inoubliable-sans-stress.md";
+  slug: "organiser-un-repas-de-fete-inoubliable-sans-stress";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"repas-de-famille-reussi-lapport-dun-chef-a-domicile.md": {
+	id: "repas-de-famille-reussi-lapport-dun-chef-a-domicile.md";
+  slug: "repas-de-famille-reussi-lapport-dun-chef-a-domicile";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"soiree-entre-amis-idees-de-menus-originaux-avec-un-chef.md": {
+	id: "soiree-entre-amis-idees-de-menus-originaux-avec-un-chef.md";
+  slug: "soiree-entre-amis-idees-de-menus-originaux-avec-un-chef";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

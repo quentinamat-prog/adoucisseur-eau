@@ -120,9 +120,10 @@ function injectAfterSection(content, sectionIndex, imageHtml) {
 
 function buildImageHtml(webPath, alt, title, photographer, photographerUrl, width = 1200) {
   const height = Math.round(width * 2 / 3); // ratio 3:2 landscape
+  const utmSource = siteConfig.name.toLowerCase().replace(/\s+/g, '');
   return `<figure>
 <img src="${webPath}" alt="${alt}" title="${title}" width="${width}" height="${height}" loading="lazy" />
-<figcaption>Photo de <a href="${photographerUrl}?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">${photographer}</a> sur <a href="https://unsplash.com?utm_source=gustichef&utm_medium=referral" rel="nofollow" target="_blank">Unsplash</a></figcaption>
+<figcaption>Photo de <a href="${photographerUrl}?utm_source=${utmSource}&utm_medium=referral" rel="nofollow" target="_blank">${photographer}</a> sur <a href="https://unsplash.com?utm_source=${utmSource}&utm_medium=referral" rel="nofollow" target="_blank">Unsplash</a></figcaption>
 </figure>`;
 }
 
@@ -213,7 +214,7 @@ Réponds en JSON uniquement, sans markdown :
     })
     .filter(Boolean);
 
-  let internalLinks = `- [Gustichef](/) — page d'accueil de l'application\n- [notre blog culinaire](/blog/) — tous nos articles`;
+  let internalLinks = `- [${siteConfig.name}](/) — page d'accueil du site\n- [notre blog](/blog/) — tous nos articles`;
 
   if (existingArticles.length > 0) {
     const articleList = existingArticles.map(a => `"${a.title}" -> /blog/${a.slug}/`).join('\n');
@@ -265,7 +266,7 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 
 ## RÈGLES E-E-A-T
 - **Expertise** : chiffres concrets, vocabulaire professionnel culinaire
-- **Experience** : "chez Gustichef, nous avons constaté...", retour d'expérience réel
+- **Experience** : "chez ${siteConfig.name}, nous avons constaté...", retour d'expérience réel
 - **Autorité** : structure claire, contenu actionnable et non générique
 - **Confiance** : ton honnête, nuances quand pertinent
 

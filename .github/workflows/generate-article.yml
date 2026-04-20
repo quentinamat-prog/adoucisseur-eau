@@ -36,8 +36,9 @@ jobs:
       - name: Commit new article
         if: steps.check.outputs.created == 'true'
         run: |
-          git config user.name "Gustichef Bot"
-          git config user.email "bot@gustichef.com"
+          SITE_NAME=$(node -e "import('./site.config.mjs').then(m=>process.stdout.write(m.default.name))")
+          git config user.name "${SITE_NAME} Bot"
+          git config user.email "bot@${GITHUB_REPOSITORY#*/}.com"
           git commit -m "chore: auto-generate article"
           git push
 

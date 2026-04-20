@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import siteConfig from '../../site.config.mjs';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -9,7 +10,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand -->
       <div class="md:col-span-2">
         <a href="/" class="font-display text-3xl text-cream">
-          Gusti<span class="text-terracotta">chef</span>
+          {siteConfig.name}
         </a>
         <p class="font-body text-sm leading-relaxed mt-4 max-w-xs">
           La plateforme qui connecte particuliers et chefs privés pour des expériences culinaires uniques à domicile.
@@ -47,7 +48,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 font-body text-xs">
-      <p>© {currentYear} Gustichef. Tous droits réservés.</p>
+      <p>© {currentYear} {siteConfig.name}. Tous droits réservés.</p>
       <p class="inline-flex items-center gap-1.5">Fait avec <Icon name="heart" size={14} fill class="text-terracotta" /> en France</p>
     </div>
   </div>
