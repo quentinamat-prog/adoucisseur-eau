@@ -27,6 +27,22 @@ jobs:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: node scripts/generate-article.mjs
 
+      - name: Compress new images
+        run: |
+          node -e "
+          const sharp = require('sharp');
+          const fs = require('fs');
+          const path = require('path');
+          const dir = './public/images/blog';
+          if (!fs.existsSync(dir)) process.exit(0);
+          const files = fs.readdirSync(dir).filter(f => f.endsWith('.webp'));
+          Promise.all(files.map(async f => {
+            const fp = path.join(dir, f);
+            const buf = await sharp(fp).webp({ quality: 65 }).toBuffer();
+            if (buf.length < fs.statSync(fp).size) fs.writeFileSync(fp, buf);
+          })).then(() => console.log('Images compressed'));
+          "
+
       - name: Check if article was created
         id: check
         run: |
