@@ -239,8 +239,20 @@ Réponds en JSON sans markdown : [{"title": "...", "path": "/blog/slug/", "ancho
     try {
       const raw = linkMsg.content[0].text.replace(/```json\n?|\n?```/g, '').trim();
       const picks = JSON.parse(raw);
-      const dynamicLinks = picks.map(p => `- [${p.anchor}](${p.path}) — ${p.title}`).join('\n');
-      internalLinks += '\n' + dynamicLinks;
+      const validated = picks.map(p => {
+        const match = existingArticles.find(a =>
+          p.path?.includes(a.slug) || p.title === a.title
+        );
+        if (!match) {
+          console.warn(`Lien rejeté (slug introuvable) : ${p.path ?? p.title}`);
+          return null;
+        }
+        return { anchor: p.anchor, path: `/blog/${match.slug}/`, title: match.title };
+      }).filter(Boolean);
+      if (validated.length > 0) {
+        const dynamicLinks = validated.map(p => `- [${p.anchor}](${p.path}) — ${p.title}`).join('\n');
+        internalLinks += '\n' + dynamicLinks;
+      }
       console.log(`Liens internes construits :\n${internalLinks}`);
     } catch (e) {
       console.warn(`Maillage dynamique échoué (${e.message}), réponse : ${linkMsg.content[0].text.slice(0, 200)}`);
@@ -296,6 +308,21 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
   });
 
   let rawContent = articleMsg.content[0].text.replace(/—/g, '-');
+
+  // Valide les liens internes /blog/*/ : corrige les typos vers le slug canonique le plus proche
+  const validSlugs = new Set(existingArticles.map(a => a.slug));
+  rawContent = rawContent.replace(/\]\(\/blog\/([a-z0-9-]+)\/?\)/g, (fullMatch, slug) => {
+    if (validSlugs.has(slug)) return fullMatch;
+    const best = existingArticles
+      .map(a => ({ slug: a.slug, score: [...slug].filter((c, i) => a.slug[i] === c).length / Math.max(slug.length, a.slug.length) }))
+      .sort((a, b) => b.score - a.score)[0];
+    if (best && best.score > 0.7) {
+      console.log(`🔗 Lien corrigé : /blog/${slug}/ → /blog/${best.slug}/`);
+      return `](/blog/${best.slug}/)`;
+    }
+    console.warn(`⚠ Lien cassé non corrigé : /blog/${slug}/`);
+    return `](/blog/)`;
+  });
 
   // Extraire les Q&A pour le schema FAQ
   const faqItems = [];
