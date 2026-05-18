@@ -2,7 +2,6 @@
 import type { MarkdownHeading } from 'astro';
 import Icon from './Icon.astro';
 import siteConfig from '../../site.config.mjs';
-import { getCollection } from 'astro:content';
 
 interface Props {
   headings: MarkdownHeading[];
@@ -11,14 +10,18 @@ interface Props {
 const { headings, currentSlug } = Astro.props;
 const toc = headings.filter((h) => h.depth === 2);
 
-const allPosts = await getCollection('blog');
-const recentPosts = allPosts
-  .filter(p => p.slug !== currentSlug)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
+const categories = siteConfig.categories;
+function catToSlug(cat: string) {
+  return cat.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-');
+}
 
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }).format(date);
+const categoryIcons: Record<string, string> = {
+  "Guide d'achat": '🛒',
+  'Installation': '🔧',
+  'Entretien': '⚙️',
+  'Eau & Santé': '💧',
+  'Comparatif': '📊',
+};
 ---
 
 <!-- ── Desktop sidebar (lg+) ── -->
@@ -44,30 +47,27 @@ const formatDate = (date: Date) =>
     </nav>
   )}
 
-  <!-- Articles récents -->
-  {recentPosts.length > 0 && (
-    <div class="bg-white rounded-2xl p-6 shadow-sm border border-beige">
-      <p class="font-body text-xs font-bold uppercase tracking-widest text-dark/50 mb-4">Articles récents</p>
-      <ul class="space-y-4">
-        {recentPosts.map(post => (
-          <li>
-            <a href={`/blog/${post.slug}`} class="group block">
-              <span class="tag tag-beige mb-1 text-[10px]">{post.data.category}</span>
-              <h4 class="font-body text-sm font-semibold text-dark group-hover:text-terracotta transition-colors leading-snug mt-1">
-                {post.data.title}
-              </h4>
-              <time class="font-body text-xs text-dark/40 mt-0.5 block">
-                {formatDate(post.data.pubDate)}
-              </time>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a href="/blog" class="block text-center font-body text-xs font-semibold text-teal hover:text-terracotta transition-colors mt-5 pt-4 border-t border-beige">
-        Voir tous les articles →
-      </a>
-    </div>
-  )}
+  <!-- Catégories -->
+  <div class="bg-white rounded-2xl p-6 shadow-sm border border-beige">
+    <p class="font-body text-xs font-bold uppercase tracking-widest text-dark/50 mb-4">Catégories</p>
+    <ul class="space-y-2">
+      {categories.map((cat: string) => (
+        <li>
+          <a
+            href={`/blog/categorie/${catToSlug(cat)}`}
+            class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-beige transition-colors group"
+          >
+            <span class="text-lg leading-none">{categoryIcons[cat] ?? '📄'}</span>
+            <span class="font-body text-sm font-medium text-dark/70 group-hover:text-teal transition-colors">{cat}</span>
+            <svg class="w-4 h-4 text-dark/30 group-hover:text-teal ml-auto transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a href="/blog" class="block text-center font-body text-xs font-semibold text-teal hover:text-terracotta transition-colors mt-4 pt-4 border-t border-beige">
+      Voir tous les articles →
+    </a>
+  </div>
 
   <!-- Share -->
   <div class="bg-white rounded-2xl p-6 shadow-sm border border-beige">

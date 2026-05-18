@@ -174,23 +174,30 @@ const breadcrumbSchema = {
           </div>
         )}
 
-        <!-- À lire aussi -->
+        <!-- Articles recommandés (même catégorie) -->
         {related.length > 0 && (
           <section class="mt-14 pt-10 border-t border-beige">
-            <h2 class="font-display text-2xl text-dark mb-6">À lire aussi</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-display text-2xl text-dark">Articles recommandés</h2>
+              <a href={`/blog/categorie/${catToSlug(category)}`} class="font-body text-sm font-semibold text-teal hover:text-terracotta transition-colors shrink-0">
+                Voir tout →
+              </a>
+            </div>
+            <div class="flex gap-5 overflow-x-auto pb-3 -mx-1 px-1 snap-x snap-mandatory scrollbar-hide">
               {related.map(p => (
-                <a href={`/blog/${p.slug}`} class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                  <div class="aspect-video bg-beige overflow-hidden">
+                <a href={`/blog/${p.slug}`} class="group flex-none w-64 sm:w-72 snap-start block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+                  <div class="aspect-video bg-beige overflow-hidden relative">
                     {p.data.image
                       ? <img src={p.data.image} alt={p.data.imageAlt ?? p.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-                      : <div class="w-full h-full flex items-center justify-center text-terracotta/30 text-4xl">🍽</div>
+                      : <div class="w-full h-full flex items-center justify-center text-terracotta/30 text-4xl">💧</div>
                     }
+                    <div class="absolute top-3 left-3">
+                      <span class="tag tag-teal">{p.data.category}</span>
+                    </div>
                   </div>
                   <div class="p-4">
-                    <span class="font-body text-xs text-terracotta font-semibold uppercase tracking-wide">{p.data.category}</span>
-                    <h3 class="font-display text-base text-dark mt-1 leading-snug group-hover:text-teal transition-colors line-clamp-2">{p.data.title}</h3>
-                    <time class="font-body text-xs text-dark/50 mt-2 block">{formatDate(p.data.pubDate)}</time>
+                    <h3 class="font-body font-semibold text-sm text-dark leading-snug group-hover:text-teal transition-colors line-clamp-2">{p.data.title}</h3>
+                    <time class="font-body text-xs text-dark/40 mt-2 block">{formatDate(p.data.pubDate)}</time>
                   </div>
                 </a>
               ))}
