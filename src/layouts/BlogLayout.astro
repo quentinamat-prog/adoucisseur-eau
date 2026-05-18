@@ -16,6 +16,10 @@ interface Props {
 const { post, headings, related = [] } = Astro.props;
 const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, imageTitle, faq } = post.data;
 
+// Unsplash responsive image helper — strips existing params and rebuilds with WebP + srcset
+const imageBase = image ? image.split('?')[0] : null;
+function unsplashSrc(base: string, w: number) { return `${base}?w=${w}&q=80&fm=webp&fit=crop`; }
+
 function catToSlug(cat: string) {
   return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
 }
@@ -146,9 +150,20 @@ const breadcrumbSchema = {
         </div>
 
         <!-- Cover image -->
-        {image && (
+        {imageBase && (
           <figure class="rounded-2xl overflow-hidden mb-10 aspect-video bg-beige">
-            <img src={image} alt={imageAlt ?? title} title={imageTitle ?? title} class="w-full h-full object-cover" width="1200" height="675" fetchpriority="high" loading="eager" />
+            <img
+              src={unsplashSrc(imageBase, 800)}
+              srcset={`${unsplashSrc(imageBase, 400)} 400w, ${unsplashSrc(imageBase, 800)} 800w, ${unsplashSrc(imageBase, 1200)} 1200w`}
+              sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(66vw - 48px), 800px"
+              alt={imageAlt ?? title}
+              title={imageTitle ?? title}
+              class="w-full h-full object-cover"
+              width="1200"
+              height="675"
+              fetchpriority="high"
+              loading="eager"
+            />
           </figure>
         )}
 

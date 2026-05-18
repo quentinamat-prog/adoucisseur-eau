@@ -1,8 +1,13 @@
-@import '@fontsource/dosis/300.css';
 @import '@fontsource/dosis/400.css';
 @import '@fontsource/dosis/500.css';
 @import '@fontsource/dosis/600.css';
 @import '@fontsource/dosis/700.css';
+
+/* Prevent FOIT — swap fallback font while Dosis loads */
+@font-face { font-family: 'Dosis'; font-display: swap; font-weight: 400; src: local(''); unicode-range: U+0000; }
+@font-face { font-family: 'Dosis'; font-display: swap; font-weight: 500; src: local(''); unicode-range: U+0000; }
+@font-face { font-family: 'Dosis'; font-display: swap; font-weight: 600; src: local(''); unicode-range: U+0000; }
+@font-face { font-family: 'Dosis'; font-display: swap; font-weight: 700; src: local(''); unicode-range: U+0000; }
 
 @tailwind base;
 @tailwind components;

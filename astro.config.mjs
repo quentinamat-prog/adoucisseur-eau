@@ -19,4 +19,7 @@ export default defineConfig({
     defaultStrategy: 'hover',
   },
   compressHTML: true,
+  build: {
+    inlineStylesheets: 'always',
+  },
 });
