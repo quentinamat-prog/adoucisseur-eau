@@ -13,6 +13,15 @@ L'eau est partout chez vous. Elle se glisse dans vos tuyaux, coule sur votre pea
 
 Ce que beaucoup ignorent encore, c'est que la **dureté de l'eau** joue un rôle décisif. Et qu'il existe une solution simple pour l'adoucir : **l'adoucisseur d'eau**.
 
+<div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
+  <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
+  <div style="flex: 1;">
+    <p style="color: #F5FBFD; font-weight: 700; font-size: 1.1rem; margin: 0 0 8px 0;">Vous êtes concerné ?</p>
+    <p style="color: rgba(245,251,253,0.85); margin: 0 0 16px 0; font-size: 0.95rem; line-height: 1.6;">Découvrez quel adoucisseur correspond à votre foyer en moins de 2 minutes.</p>
+    <a href="https://aqua2000.fr/estimer-votre-besoin?utm_source=blog&utm_medium=https://www.adoucisseur-eau.fr/&utm_campaign=backlinks" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #F5FBFD; color: #0D5E77; font-weight: 700; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">→ Obtenir mon devis adoucisseur gratuit</a>
+  </div>
+</div>
+
 ## L'eau dure : invisible, mais bien présente
 
 En France, selon les régions, l'eau peut être plus ou moins « dure ». En clair, elle contient plus ou moins de **calcium** et de **magnésium**, deux minéraux qui, à fortes doses, forment du tartre.
