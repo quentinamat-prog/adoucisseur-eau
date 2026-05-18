@@ -1,4 +1,4 @@
-name: Build & Deploy to Hostinger
+name: Build & Deploy to o2switch
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: hostinger-ftp
+  group: o2switch-ftp
   cancel-in-progress: true
 
 jobs:
@@ -34,6 +34,7 @@ jobs:
           FTP_HOST: ${{ secrets.FTP_SERVER }}
           FTP_USER: ${{ secrets.FTP_USERNAME }}
           FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
         run: |
           python3 - <<'EOF'
           import os, subprocess, tempfile, time
@@ -48,7 +49,7 @@ jobs:
             "set ftp:ssl-allow yes",
             f"open ftp://{os.environ['FTP_HOST']}",
             f"user {os.environ['FTP_USER']} {os.environ['FTP_PASS']}",
-            "mirror --reverse --delete --verbose dist/ /public_html/",
+            f"mirror --reverse --delete --verbose dist/ {os.environ['FTP_PATH']}",
             "quit",
           ])
 
