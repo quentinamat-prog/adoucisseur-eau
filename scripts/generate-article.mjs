@@ -313,8 +313,23 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
 - **Gras** : termes clés, chiffres importants, conseils actionnables (3-5 fois par section)
 - *Italique* : termes techniques ou étrangers
 - Listes : quand 3+ éléments énumérés
-- > Citations : pour un conseil fort ou une stat marquante
+- Tableaux markdown : pour comparer des prix, capacités, options
 - Interdiction absolue d'utiliser le caractère "—" (tiret cadratin), utilise "-" à la place
+
+## CALLOUTS (à utiliser 2-3 fois dans l'article, syntaxe GitHub blockquote alerts)
+Place ces blocs aux moments clés pour aérer la lecture :
+
+\`> [!TIP]\` → conseil actionnable, recommandation pratique
+\`> [!NOTE]\` → information à retenir, nuance importante
+\`> [!IMPORTANT]\` → règle critique, mention réglementaire
+\`> [!WARNING]\` → piège à éviter, erreur fréquente
+\`> [!CAUTION]\` → danger réel, liste d'erreurs à ne pas commettre
+
+Exemple :
+\`\`\`
+> [!TIP]
+> Choisissez toujours un sel à pureté > 99,5 %.
+\`\`\`
 
 ## LONGUEUR
 800 à 1000 mots. Pas de titre H1. Commencer directement par l'introduction.`;

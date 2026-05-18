@@ -55,6 +55,7 @@ La règle générale :
 - **5 à 6 personnes** : 35 à 45 litres
 - **Maison > 6 personnes ou eau très dure** : 50 litres et plus
 
+> [!WARNING]
 > Un adoucisseur sous-dimensionné régénère trop souvent (consomme plus de sel et d'eau), tandis qu'un modèle surdimensionné stagne inutilement entre les cycles.
 
 ![Cuves et filtres d'adoucisseurs d'eau alignés dans une installation professionnelle](https://plus.unsplash.com/premium_photo-1661962539511-27704c1821cf?w=900&q=80)
@@ -77,7 +78,8 @@ L'adoucisseur se régénère automatiquement en fonction du **volume d'eau réel
 ### Régénération temporelle
 Programmée à intervalles fixes (ex : tous les 3 jours). Moins précise, elle peut entraîner une surconsommation de sel ou, à l'inverse, laisser de l'eau non traitée en cas de forte consommation.
 
-**Notre conseil** : choisissez systématiquement un modèle à **régénération volumétrique**.
+> [!TIP]
+> Choisissez systématiquement un modèle à **régénération volumétrique** — plus économique en sel et en eau, c'est aujourd'hui le standard.
 
 ## Étape 5 : les marques à connaître
 

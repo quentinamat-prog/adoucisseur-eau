@@ -52,7 +52,8 @@ Ouvrez le couvercle du bac à sel et regardez. La règle simple : ne laissez jam
 
 Évitez le sel de cuisine ou le gros sel alimentaire — leur pureté insuffisante peut encrasser la vanne de régénération.
 
-**Conseil pratique** : achetez toujours du sel spécifique pour adoucisseur, avec une pureté supérieure à 99,5 %. Les marques AquaSoft, Esco ou Monarch sont fiables et disponibles en supermarché ou chez les distributeurs spécialisés.
+> [!TIP]
+> Achetez toujours du sel spécifique pour adoucisseur avec une pureté supérieure à 99,5 %. Les marques AquaSoft, Esco ou Monarch sont fiables et disponibles en supermarché ou chez les distributeurs spécialisés.
 
 ## 2. Le pont de sel : l'ennemi discret
 
@@ -108,11 +109,12 @@ Le remplacement de résine coûte entre 150 et 300 € (main-d'œuvre incluse) c
 
 ## Les erreurs à ne pas commettre
 
-- **Laisser le bac à sel vide** : l'adoucisseur continue à fonctionner mais ne régénère plus, et l'eau redevient calcaire
-- **Mélanger différents types de sel** : peut provoquer des cristallisations et des blocages
-- **Ignorer les alarmes** : chaque alerte de votre adoucisseur a une raison — consultez le manuel
-- **Omettre la désinfection** : un adoucisseur non désinfecté peut être un foyer bactérien
-- **Couper l'eau sans mode bypass** : avant toute intervention de plomberie, mettez l'adoucisseur en bypass pour protéger la résine
+> [!CAUTION]
+> - **Laisser le bac à sel vide** : l'adoucisseur continue à fonctionner mais ne régénère plus, et l'eau redevient calcaire
+> - **Mélanger différents types de sel** : peut provoquer des cristallisations et des blocages
+> - **Ignorer les alarmes** : chaque alerte de votre adoucisseur a une raison — consultez le manuel
+> - **Omettre la désinfection** : un adoucisseur non désinfecté peut être un foyer bactérien
+> - **Couper l'eau sans mode bypass** : avant toute intervention de plomberie, mettez l'adoucisseur en bypass pour protéger la résine
 
 ## En résumé
 

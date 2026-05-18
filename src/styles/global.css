@@ -122,3 +122,99 @@
 
 .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ───────── Callouts / GitHub-style alerts ───────── */
+.prose .markdown-alert {
+  border-left: 4px solid;
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  margin: 28px 0;
+  font-family: inherit;
+}
+.prose .markdown-alert > :first-child { margin-top: 0; }
+.prose .markdown-alert > :last-child { margin-bottom: 0; }
+.prose .markdown-alert .markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.prose .markdown-alert .markdown-alert-title svg { display: none; }
+.prose .markdown-alert .markdown-alert-title::before {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.prose .markdown-alert p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* TIP — Astuce (teal) */
+.prose .markdown-alert-tip {
+  background: rgba(13, 94, 119, 0.06);
+  border-color: #0D5E77;
+}
+.prose .markdown-alert-tip .markdown-alert-title { color: #0D5E77; }
+.prose .markdown-alert-tip .markdown-alert-title::before { content: "💡"; }
+.prose .markdown-alert-tip .markdown-alert-title { font-size: 0; }
+.prose .markdown-alert-tip .markdown-alert-title::after {
+  content: "Astuce";
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* NOTE — À retenir (sage blue) */
+.prose .markdown-alert-note {
+  background: rgba(123, 175, 194, 0.10);
+  border-color: #1A96B4;
+}
+.prose .markdown-alert-note .markdown-alert-title { color: #0D5E77; font-size: 0; }
+.prose .markdown-alert-note .markdown-alert-title::before { content: "✓"; font-size: 1.3rem; font-weight: 700; }
+.prose .markdown-alert-note .markdown-alert-title::after {
+  content: "À retenir";
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* IMPORTANT — Important (terracotta blue / accent) */
+.prose .markdown-alert-important {
+  background: rgba(26, 150, 180, 0.08);
+  border-color: #1A96B4;
+}
+.prose .markdown-alert-important .markdown-alert-title { color: #1A96B4; font-size: 0; }
+.prose .markdown-alert-important .markdown-alert-title::before { content: "⭐"; }
+.prose .markdown-alert-important .markdown-alert-title::after {
+  content: "Important";
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* WARNING — Attention (amber) */
+.prose .markdown-alert-warning {
+  background: rgba(245, 158, 11, 0.10);
+  border-color: #F59E0B;
+}
+.prose .markdown-alert-warning .markdown-alert-title { color: #92400E; font-size: 0; }
+.prose .markdown-alert-warning .markdown-alert-title::before { content: "⚠️"; }
+.prose .markdown-alert-warning .markdown-alert-title::after {
+  content: "Attention";
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* CAUTION — Danger (red) */
+.prose .markdown-alert-caution {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: #DC2626;
+}
+.prose .markdown-alert-caution .markdown-alert-title { color: #B91C1C; font-size: 0; }
+.prose .markdown-alert-caution .markdown-alert-title::before { content: "🛑"; }
+.prose .markdown-alert-caution .markdown-alert-title::after {
+  content: "À éviter";
+  font-size: 0.95rem;
+  font-weight: 700;
+}

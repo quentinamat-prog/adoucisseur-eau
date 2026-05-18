@@ -84,12 +84,8 @@ Sans contrat de maintenance, un adoucisseur de qualité ne demande pratiquement 
 
 Certains fabricants proposent des formules de location avec maintenance incluse, autour de **25 à 50 €/mois**. Sur 5 ans, vous aurez payé entre 1 500 € et 3 000 € — souvent plus cher qu'un achat, sans rien posséder.
 
-**La location n'est intéressante que si :**
-- Vous ne souhaitez pas vous occuper de la maintenance
-- Vous êtes locataire de votre logement
-- Vous avez un budget initial très serré
-
-Dans tous les autres cas, **l'achat est plus rentable à moyen terme**.
+> [!TIP]
+> **La location n'est intéressante que si :** vous ne souhaitez pas vous occuper de la maintenance, vous êtes locataire de votre logement, ou vous avez un budget initial très serré. Dans tous les autres cas, **l'achat est plus rentable à moyen terme**.
 
 ## Le retour sur investissement
 

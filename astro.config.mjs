@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { remarkAlert } from 'remark-github-blockquote-alert';
 import siteConfig from './site.config.mjs';
 
 export default defineConfig({
@@ -21,5 +22,8 @@ export default defineConfig({
   compressHTML: true,
   build: {
     inlineStylesheets: 'always',
+  },
+  markdown: {
+    remarkPlugins: [remarkAlert],
   },
 });

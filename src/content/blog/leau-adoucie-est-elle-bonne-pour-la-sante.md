@@ -65,11 +65,13 @@ Si vous suivez un régime pauvre en sel pour raisons médicales (hypertension, i
 
 Dans ce cas, la solution la plus simple est d'installer un **robinet distinct non adouci** pour l'eau de boisson et la cuisine. C'est une pratique courante et peu coûteuse (50 à 100 € de robinetterie supplémentaire lors de l'installation).
 
-**Il ne s'agit pas d'une contre-indication formelle à l'adoucisseur**, mais d'une précaution pratique pour les profils médicalement sensibles.
+> [!NOTE]
+> Il ne s'agit pas d'une contre-indication formelle à l'adoucisseur, mais d'une précaution pratique pour les profils médicalement sensibles.
 
 ## Et pour les bébés et nourrissons ?
 
-Par prudence, les autorités sanitaires recommandent de **ne pas utiliser d'eau adoucie pour préparer les biberons** des nourrissons de moins de 1 an. Les reins des bébés étant plus fragiles, toute source de sodium supplémentaire est à limiter.
+> [!IMPORTANT]
+> Par prudence, les autorités sanitaires recommandent de **ne pas utiliser d'eau adoucie pour préparer les biberons** des nourrissons de moins de 1 an. Les reins des bébés étant plus fragiles, toute source de sodium supplémentaire est à limiter.
 
 Solutions pratiques :
 - Conserver un robinet d'eau non adoucie dans la cuisine
