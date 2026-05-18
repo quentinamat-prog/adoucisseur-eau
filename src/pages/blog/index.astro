@@ -23,7 +23,7 @@ const collectionSchema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: `Blog ${siteConfig.name}`,
-  description: "Articles sur la cuisine à domicile, les chefs privés, les conseils gastronomiques et les tendances culinaires.",
+  description: "Guides, comparatifs et conseils sur les adoucisseurs d'eau pour les particuliers.",
   url: `${SITE_URL}/blog`,
   inLanguage: 'fr-FR',
   isPartOf: { '@type': 'WebSite', name: siteConfig.name, url: SITE_URL },
@@ -46,8 +46,8 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`Blog ${siteConfig.name} – Conseils & inspirations culinaires`}
-  description="Découvrez nos articles sur la cuisine à domicile, les chefs privés, les conseils gastronomiques et les tendances culinaires."
+  title={`Blog ${siteConfig.name} – Guides & conseils adoucisseur d'eau`}
+  description="Guides d'achat, conseils d'installation, entretien et comparatifs pour tout savoir sur les adoucisseurs d'eau."
   jsonLd={[collectionSchema, breadcrumbSchema]}
 >
   <!-- Header -->
@@ -57,7 +57,6 @@ const breadcrumbSchema = {
       <nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium text-dark/70">
         <a href="/" class="hover:text-teal transition-colors">Accueil</a>
         <a href="/blog" class="text-teal font-semibold">Blog</a>
-        <a href="/#download" class="btn-primary text-xs px-4 py-2">Télécharger</a>
       </nav>
     </div>
   </header>
@@ -67,11 +66,11 @@ const breadcrumbSchema = {
     <div class="text-center mb-14">
       <span class="tag tag-beige mb-4">Le blog {siteConfig.name}</span>
       <h1 class="section-title mt-4 mb-4">
-        Conseils & inspirations<br />
-        <span class="text-terracotta">culinaires</span>
+        Guides & conseils<br />
+        <span class="text-terracotta">adoucisseur d'eau</span>
       </h1>
       <p class="section-subtitle max-w-xl mx-auto">
-        Chefs, gourmets, recettes et tendances : tout ce qui vous inspire pour vivre la cuisine autrement.
+        Tout ce qu'il faut savoir pour choisir, installer et entretenir votre adoucisseur d'eau.
       </p>
     </div>
 
@@ -82,7 +81,7 @@ const breadcrumbSchema = {
           <div class="md:col-span-3 aspect-video bg-teal/80 flex items-center justify-center">
             {featured.data.image
               ? <img src={featured.data.image} alt={featured.data.imageAlt ?? featured.data.title} class="w-full h-full object-cover" width="1200" height="676" fetchpriority="high" decoding="async" />
-              : <div class="text-cream/20"><Icon name="fork-knife" size={96} strokeWidth={1.25} /></div>
+              : <div class="text-cream/20"><Icon name="droplet" size={96} strokeWidth={1.25} /></div>
             }
           </div>
           <div class="md:col-span-2 p-6 md:p-10 flex flex-col justify-center">
@@ -129,7 +128,7 @@ const breadcrumbSchema = {
             <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
               {post.data.image
                 ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="800" height="450" loading="lazy" sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 48px), 380px" />
-                : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
+                : <div class="text-terracotta/40"><Icon name="droplet" size={64} strokeWidth={1.25} /></div>
               }
               <div class="absolute top-3 left-3">
                 <span class="tag tag-teal">{post.data.category}</span>

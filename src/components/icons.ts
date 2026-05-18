@@ -1,4 +1,5 @@
 export type IconName =
+  | 'droplet'
   | 'chef-hat'
   | 'calendar'
   | 'chat'
