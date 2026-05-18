@@ -1,9 +1,11 @@
 ---
 import siteConfig from '../../site.config.mjs';
+
 interface Props {
   transparent?: boolean;
+  activePage?: 'home' | 'blog';
 }
-const { transparent = false } = Astro.props;
+const { transparent = false, activePage } = Astro.props;
 ---
 
 <header
@@ -21,8 +23,18 @@ const { transparent = false } = Astro.props;
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8 font-body text-sm font-medium">
-      <a href="/" class="nav-link transition-colors">Accueil</a>
-      <a href="/blog" class="nav-link transition-colors">Blog</a>
+      <a
+        href="/"
+        class:list={["nav-link transition-colors", activePage === 'home' && "nav-active"]}
+      >
+        Accueil
+      </a>
+      <a
+        href="/blog"
+        class:list={["nav-link transition-colors", activePage === 'blog' && "nav-active"]}
+      >
+        Blog
+      </a>
       <a href="/blog/adoucisseur-deau-un-confort-discret-qui-change-tout" class="btn-primary text-xs px-5 py-2.5">
         Guide débutant
       </a>
@@ -56,14 +68,18 @@ const { transparent = false } = Astro.props;
 </header>
 
 <style>
+  /* Solid header (default) */
   #site-header .logo-primary { color: #0D5E77; }
-  #site-header .nav-link { color: rgba(10, 30, 44, 0.7); }
+  #site-header .nav-link { color: rgba(10, 30, 44, 0.65); }
   #site-header .nav-link:hover { color: #0D5E77; }
+  #site-header .nav-active { color: #0D5E77; font-weight: 700; }
   #site-header .menu-icon { color: #0A1E2C; }
 
+  /* Transparent hero (homepage only) */
   #site-header[data-transparent="true"]:not(.scrolled) .logo-primary { color: #F5FBFD; }
-  #site-header[data-transparent="true"]:not(.scrolled) .nav-link { color: rgba(245, 251, 253, 0.85); }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-link { color: rgba(245, 251, 253, 0.80); }
   #site-header[data-transparent="true"]:not(.scrolled) .nav-link:hover { color: #F5FBFD; }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-active { color: #F5FBFD; }
   #site-header[data-transparent="true"]:not(.scrolled) .menu-icon { color: #F5FBFD; }
 </style>
 

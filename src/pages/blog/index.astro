@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
 import Icon from '../../components/Icon.astro';
 import { getCollection } from 'astro:content';
 import siteConfig from '../../../site.config.mjs';
@@ -50,16 +51,7 @@ const breadcrumbSchema = {
   description="Guides d'achat, conseils d'installation, entretien et comparatifs pour tout savoir sur les adoucisseurs d'eau."
   jsonLd={[collectionSchema, breadcrumbSchema]}
 >
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-beige">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-display text-xl text-teal">{siteConfig.logoPrefix}<span class="text-terracotta">{siteConfig.logoSuffix}</span></a>
-      <nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium text-dark/70">
-        <a href="/" class="hover:text-teal transition-colors">Accueil</a>
-        <a href="/blog" class="text-teal font-semibold">Blog</a>
-      </nav>
-    </div>
-  </header>
+  <Header activePage="blog" />
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
     <!-- Page header -->
