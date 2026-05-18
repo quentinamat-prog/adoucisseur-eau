@@ -215,7 +215,7 @@ Réponds en JSON uniquement, sans markdown :
     }]
   });
 
-  let meta = { category: 'Conseils', tags: ['chef privé', 'domicile'], kw: title };
+  let meta = { category: "Guide d'achat", tags: ['adoucisseur', 'eau'], kw: title };
   try {
     const raw = metaMsg.content[0].text.replace(/```json\n?|\n?```/g, '').trim();
     meta = JSON.parse(raw);

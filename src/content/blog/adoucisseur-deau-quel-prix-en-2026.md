@@ -32,7 +32,7 @@ Voici une décomposition complète et honnête des coûts réels d'un adoucisseu
   <div style="flex: 1;">
     <p style="color: #F5FBFD; font-weight: 700; font-size: 1.1rem; margin: 0 0 8px 0;">Vous voulez un chiffre précis pour votre foyer ?</p>
     <p style="color: rgba(245,251,253,0.85); margin: 0 0 16px 0; font-size: 0.95rem; line-height: 1.6;">Obtenez un devis personnalisé et gratuit en fonction de votre situation.</p>
-    <a href="https://aqua2000.fr/estimer-votre-besoin?utm_source=blog&utm_medium=https://www.adoucisseur-eau.fr/&utm_campaign=backlinks" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #F5FBFD; color: #0D5E77; font-weight: 700; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">→ Obtenir mon devis adoucisseur gratuit</a>
+    <a href="https://aqua2000.fr/estimer-votre-besoin?utm_source=blog&utm_medium=https://www.adoucisseur-eau.fr/&utm_campaign=backlinks" target="_blank" rel="sponsored noopener" style="display: inline-block; background: #F5FBFD; color: #0D5E77; font-weight: 700; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">→ Obtenir mon devis adoucisseur gratuit</a>
   </div>
 </div>
 
