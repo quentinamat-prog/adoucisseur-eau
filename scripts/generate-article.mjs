@@ -108,6 +108,24 @@ async function generateImageSeo(title, kw, context, client) {
   catch { return { alt: `${kw} - ${context}`, title: title }; }
 }
 
+const CTA_BLOCK = `
+<div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: center; gap: 20px; box-shadow: 0 4px 24px rgba(13,94,119,0.18);">
+  <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
+  <div style="flex: 1;">
+    <p style="color: rgba(255,255,255,0.85); font-size: 0.85rem; margin: 0 0 6px 0; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;">Vous êtes concerné ?</p>
+    <p style="color: white; font-size: 1.05rem; font-weight: 700; margin: 0 0 14px 0; line-height: 1.4;">Découvrez quel adoucisseur correspond à votre foyer en moins de 2 minutes.</p>
+    <a href="https://aqua2000.fr/estimer-votre-besoin?utm_source=blog&utm_medium=https://www.adoucisseur-eau.fr/&utm_campaign=backlinks" target="_blank" rel="sponsored noopener" style="display: inline-block; background: white; color: #0D5E77; font-weight: 700; font-size: 0.9rem; padding: 10px 22px; border-radius: 50px; text-decoration: none; transition: opacity 0.2s;">→ Obtenir mon devis adoucisseur gratuit</a>
+  </div>
+</div>
+`;
+
+function injectCtaAfterIntro(content) {
+  // Injecte après le premier paragraphe (avant le premier ## )
+  const firstH2 = content.indexOf('\n## ');
+  if (firstH2 === -1) return content + CTA_BLOCK;
+  return content.slice(0, firstH2) + CTA_BLOCK + content.slice(firstH2);
+}
+
 function extractH2Headings(content) {
   return [...content.matchAll(/^## (.+)$/gm)].map(m => m[1]);
 }
@@ -398,6 +416,7 @@ ${imageFrontmatter}${faqYaml}---
 
 `;
 
+  rawContent = injectCtaAfterIntro(rawContent);
   fs.writeFileSync(filePath, frontmatter + rawContent, 'utf8');
   markAsDone(title, today);
 
