@@ -3,10 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import siteConfig from '../../site.config.mjs';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import Features from '../components/Features.astro';
-import ForClients from '../components/ForClients.astro';
-import ForChefs from '../components/ForChefs.astro';
-import Download from '../components/Download.astro';
 import BlogPreview from '../components/BlogPreview.astro';
 import Footer from '../components/Footer.astro';
 import { getCollection } from 'astro:content';
@@ -14,37 +10,27 @@ import { getCollection } from 'astro:content';
 const allPosts = await getCollection('blog');
 const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 6);
 
-const appSchema = {
+const websiteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'MobileApplication',
+  '@type': 'WebSite',
   name: siteConfig.name,
-  operatingSystem: 'iOS, Android',
-  applicationCategory: 'LifestyleApplication',
+  url: siteConfig.url,
   description: siteConfig.description,
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    ratingCount: '500',
-  },
+  inLanguage: 'fr-FR',
 };
 ---
 
 <BaseLayout
-  title={`${siteConfig.name} – Votre chef privé à domicile`}
+  title={`${siteConfig.name} – Guides & Conseils sur les adoucisseurs d'eau`}
   description={siteConfig.description}
-  jsonLd={appSchema}
+  jsonLd={websiteSchema}
 >
   <Header transparent />
   <main>
     <Hero />
-    <Features />
-    <ForClients />
-    <ForChefs />
     {recentPosts.length > 0 && <BlogPreview posts={recentPosts} />}
-    <Download />
   </main>
   <Footer />
 </BaseLayout>

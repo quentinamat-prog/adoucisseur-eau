@@ -15,17 +15,17 @@ const { transparent = false } = Astro.props;
   ]}
 >
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="logo font-display text-2xl" aria-label={`${siteConfig.name} – accueil`}>
+    <a href="/" class="logo font-display font-bold text-xl" aria-label={`${siteConfig.name} – accueil`}>
       <span class="logo-primary">{siteConfig.logoPrefix}</span><span class="text-terracotta">{siteConfig.logoSuffix}</span>
     </a>
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8 font-body text-sm font-medium">
-      <a href="/#features" class="nav-link transition-colors">Fonctionnalités</a>
-      <a href="/#chefs" class="nav-link transition-colors">Pour les chefs</a>
-      <a href="/#particuliers" class="nav-link transition-colors">Pour les particuliers</a>
+      <a href="/" class="nav-link transition-colors">Accueil</a>
       <a href="/blog" class="nav-link transition-colors">Blog</a>
-      <a href="/#download" class="btn-primary">Télécharger l'app</a>
+      <a href="/blog/adoucisseur-deau-un-confort-discret-qui-change-tout" class="btn-primary text-xs px-5 py-2.5">
+        Guide débutant
+      </a>
     </nav>
 
     <!-- Mobile menu button -->
@@ -49,26 +49,22 @@ const { transparent = false } = Astro.props;
     id="mobile-nav"
     class="hidden md:hidden bg-cream border-t border-beige px-6 py-4 flex-col gap-4 font-body text-sm font-medium"
   >
-    <a href="/#features" class="block py-2 text-dark/70 hover:text-teal transition-colors">Fonctionnalités</a>
-    <a href="/#chefs" class="block py-2 text-dark/70 hover:text-teal transition-colors">Pour les chefs</a>
-    <a href="/#particuliers" class="block py-2 text-dark/70 hover:text-teal transition-colors">Pour les particuliers</a>
+    <a href="/" class="block py-2 text-dark/70 hover:text-teal transition-colors">Accueil</a>
     <a href="/blog" class="block py-2 text-dark/70 hover:text-teal transition-colors">Blog</a>
-    <a href="/#download" class="btn-primary mt-2 justify-center">Télécharger l'app</a>
+    <a href="/blog/adoucisseur-deau-un-confort-discret-qui-change-tout" class="btn-primary mt-2 justify-center">Guide débutant</a>
   </nav>
 </header>
 
 <style>
-  /* Default (solid) state: dark text on cream */
-  #site-header .logo-primary { color: #114550; }
-  #site-header .nav-link { color: rgba(6, 30, 35, 0.7); }
-  #site-header .nav-link:hover { color: #114550; }
-  #site-header .menu-icon { color: #061E23; }
+  #site-header .logo-primary { color: #0D5E77; }
+  #site-header .nav-link { color: rgba(10, 30, 44, 0.7); }
+  #site-header .nav-link:hover { color: #0D5E77; }
+  #site-header .menu-icon { color: #0A1E2C; }
 
-  /* Transparent state: light text on dark hero */
-  #site-header[data-transparent="true"]:not(.scrolled) .logo-primary { color: #FDF8F5; }
-  #site-header[data-transparent="true"]:not(.scrolled) .nav-link { color: rgba(253, 248, 245, 0.85); }
-  #site-header[data-transparent="true"]:not(.scrolled) .nav-link:hover { color: #FDF8F5; }
-  #site-header[data-transparent="true"]:not(.scrolled) .menu-icon { color: #FDF8F5; }
+  #site-header[data-transparent="true"]:not(.scrolled) .logo-primary { color: #F5FBFD; }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-link { color: rgba(245, 251, 253, 0.85); }
+  #site-header[data-transparent="true"]:not(.scrolled) .nav-link:hover { color: #F5FBFD; }
+  #site-header[data-transparent="true"]:not(.scrolled) .menu-icon { color: #F5FBFD; }
 </style>
 
 <script>
@@ -86,7 +82,6 @@ const { transparent = false } = Astro.props;
     btn.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  // Scroll effect: swap transparent -> opaque
   const header = document.getElementById('site-header');
   const updateHeader = () => {
     if (!header) return;

@@ -6,16 +6,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        terracotta: '#934215',
-        beige: '#F0E8D9',
-        sage: '#A9B199',
-        teal: '#114550',
-        dark: '#061E23',
-        cream: '#FDF8F5',
+        terracotta: '#1A96B4',
+        beige: '#E6F3F7',
+        sage: '#7BAFC2',
+        teal: '#0D5E77',
+        dark: '#0A1E2C',
+        cream: '#F5FBFD',
       },
       fontFamily: {
-        display: ['Ciguatera', 'Georgia', 'serif'],
-        script: ['Brittany Signature', 'Dancing Script', 'cursive'],
+        display: ['Dosis', 'system-ui', 'sans-serif'],
         body: ['Dosis', 'system-ui', 'sans-serif'],
       },
     },
