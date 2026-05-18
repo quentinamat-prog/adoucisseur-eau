@@ -43,6 +43,8 @@ jobs:
           git config user.name "Adoucisseur-eau Bot"
           git config user.email "bot@adoucisseur-eau.fr"
           git commit -m "chore: auto-generate article SEO"
+          # Récupère les changements distants avant push pour éviter conflit
+          git pull --rebase origin main || true
           git push
 
       - name: Build

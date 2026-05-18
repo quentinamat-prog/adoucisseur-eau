@@ -11,9 +11,11 @@ interface Props {
   post: CollectionEntry<'blog'>;
   headings: MarkdownHeading[];
   related?: CollectionEntry<'blog'>[];
+  newer?: CollectionEntry<'blog'> | null;
+  older?: CollectionEntry<'blog'> | null;
 }
 
-const { post, headings, related = [] } = Astro.props;
+const { post, headings, related = [], newer = null, older = null } = Astro.props;
 const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, imageTitle, faq, howto } = post.data;
 
 // Unsplash responsive image helper — strips existing params and rebuilds with WebP + srcset
@@ -36,7 +38,8 @@ const formattedUpdated = updatedDate
 
 const SITE_URL = siteConfig.url;
 const articleUrl = `${SITE_URL}/blog/${post.slug}/`;
-const imageUrl = image ? new URL(image, SITE_URL).toString() : `${SITE_URL}/og-image.jpg`;
+// URL d'image stable (sans query params Unsplash) pour Schema.org / OG
+const imageUrl = imageBase ? new URL(imageBase, SITE_URL).toString() : `${SITE_URL}/og-image.jpg`;
 
 // Article schema (schema.org/Article)
 const articleSchema = {
@@ -237,8 +240,26 @@ const breadcrumbSchema = {
           </section>
         )}
 
+        <!-- Navigation prev/next -->
+        {(newer || older) && (
+          <nav class="grid sm:grid-cols-2 gap-4 mt-12" aria-label="Navigation entre articles">
+            {older ? (
+              <a href={`/blog/${older.slug}`} class="group block bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all border border-beige">
+                <span class="font-body text-xs font-semibold uppercase tracking-wider text-dark/40 mb-1 flex items-center gap-1">← Article précédent</span>
+                <h3 class="font-body font-semibold text-sm text-dark group-hover:text-teal transition-colors leading-snug line-clamp-2">{older.data.title}</h3>
+              </a>
+            ) : <div></div>}
+            {newer ? (
+              <a href={`/blog/${newer.slug}`} class="group block bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-all border border-beige text-right">
+                <span class="font-body text-xs font-semibold uppercase tracking-wider text-dark/40 mb-1 flex items-center justify-end gap-1">Article suivant →</span>
+                <h3 class="font-body font-semibold text-sm text-dark group-hover:text-teal transition-colors leading-snug line-clamp-2">{newer.data.title}</h3>
+              </a>
+            ) : <div></div>}
+          </nav>
+        )}
+
         <!-- Back to blog -->
-        <div class="mt-12">
+        <div class="mt-8">
           <a href="/blog" class="inline-flex items-center gap-2 font-body text-sm font-semibold text-teal hover:text-terracotta transition-colors">
             ← Retour au blog
           </a>

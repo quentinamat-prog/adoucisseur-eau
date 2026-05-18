@@ -21,6 +21,19 @@ function todayISO() {
   return new Date().toISOString().split('T')[0];
 }
 
+// Retry avec exponential backoff pour API externes
+async function retryWithBackoff(fn, label = 'API', attempts = 3, baseDelay = 1500) {
+  for (let i = 0; i < attempts; i++) {
+    try { return await fn(); }
+    catch (e) {
+      if (i === attempts - 1) throw e;
+      const delay = baseDelay * Math.pow(2, i) + Math.random() * 500;
+      console.warn(`[${label}] Retry ${i + 1}/${attempts} après ${Math.round(delay)}ms : ${e.message}`);
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
+
 function parseTopics() {
   const raw = JSON.parse(fs.readFileSync(TOPICS_FILE, 'utf8'));
   // Accepte "titre simple" ou { title, publishedAt }
@@ -50,8 +63,13 @@ async function fetchUnsplashImage(query, filename, width = 1200, excludeIds = []
   console.log(`Unsplash search: "${query + ' ' + ctx}"${excludeIds.length ? ` (exclude ${excludeIds.length})` : ''}`);
 
   let searchRes;
-  try { searchRes = await fetch(url, { headers: { Authorization: `Client-ID ${accessKey}` } }); }
-  catch (e) { console.warn(`Unsplash fetch error: ${e.message}`); return null; }
+  try {
+    searchRes = await retryWithBackoff(async () => {
+      const r = await fetch(url, { headers: { Authorization: `Client-ID ${accessKey}` } });
+      if (r.status === 429 || r.status >= 500) throw new Error(`HTTP ${r.status}`);
+      return r;
+    }, 'Unsplash search');
+  } catch (e) { console.warn(`Unsplash fetch error: ${e.message}`); return null; }
 
   if (!searchRes.ok) {
     const body = await searchRes.text();
@@ -149,7 +167,7 @@ function buildImageHtml(webPath, alt, title, photographer, photographerUrl, widt
 }
 
 async function generateArticle() {
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 3 });
   let { todo } = parseTopics();
 
   if (todo.length === 0) {
@@ -161,6 +179,12 @@ async function generateArticle() {
       .map(t => `"${t.title}"`)
       .join(', ');
 
+    // Inclut aussi les articles présents dans /blog/ même non listés dans topics.json
+    const blogDir = path.join(__dirname, '..', 'src', 'content', 'blog');
+    const existingSlugs = fs.existsSync(blogDir)
+      ? fs.readdirSync(blogDir).filter(f => f.endsWith('.md')).map(f => f.replace('.md', ''))
+      : [];
+
     const topicMsg = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 200,
@@ -171,6 +195,7 @@ async function generateArticle() {
 Propose UN nouveau sujet d'article de blog original, en français, optimisé SEO, en lien avec ${siteConfig.article.theme}.
 
 Sujets déjà traités : ${doneTitles}
+Slugs déjà publiés (à éviter à tout prix pour ne pas cannibaliser le SEO) : ${existingSlugs.join(', ')}
 
 Retourne UNIQUEMENT le titre du sujet, sans guillemets ni ponctuation finale.`
       }]

@@ -18,6 +18,12 @@ const config = {
     tiktok: '',
   },
 
+  // Vérifications de propriété — coller le contenu de la balise meta fournie
+  verifications: {
+    google: '',   // ex: 'abc123...' depuis Google Search Console
+    bing: '',     // ex: 'XYZ...' depuis Bing Webmaster Tools
+  },
+
   // Catégories du blog (exactement 5 recommandé)
   categories: ['Guide d\'achat', 'Installation', 'Entretien', 'Eau & Santé', 'Comparatif'],
 

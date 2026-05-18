@@ -17,8 +17,14 @@ const related = allPosts
   .filter(p => p.slug !== post.slug && p.data.category === post.data.category)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+// Navigation prev/next dans l'ordre chronologique (plus récents → plus anciens)
+const sortedAll = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const idx = sortedAll.findIndex(p => p.slug === post.slug);
+const newer = idx > 0 ? sortedAll[idx - 1] : null;
+const older = idx < sortedAll.length - 1 ? sortedAll[idx + 1] : null;
 ---
 
-<BlogLayout post={post} headings={headings} related={related}>
+<BlogLayout post={post} headings={headings} related={related} newer={newer} older={older}>
   <Content />
 </BlogLayout>
