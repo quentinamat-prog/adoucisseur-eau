@@ -14,11 +14,49 @@ faq:
     a: "Utilisez un désinfectant spécifique pour adoucisseur (type Purosol ou produit de la marque), versez-le dans le bac à sel, puis lancez manuellement une régénération complète. À faire une fois par an."
   - q: "Mon adoucisseur ne consomme plus de sel : que faire ?"
     a: "Vérifiez d'abord si un pont de sel s'est formé (masse durcie bloquant l'accès à l'eau). Cassez-le doucement avec un bâton. Si le problème persiste, vérifiez le mécanisme de régénération ou appelez un technicien."
+howto:
+  name: "Comment entretenir son adoucisseur d'eau"
+  description: "Guide pratique pour entretenir efficacement votre adoucisseur d'eau et prolonger sa durée de vie."
+  totalTime: "PT30M"
+  steps:
+    - name: "Vérifier le niveau de sel"
+      text: "Ouvrez le couvercle du bac à sel toutes les 4 à 6 semaines. Ne laissez jamais descendre en dessous du tiers de la capacité. Rechargez avec du sel spécifique adoucisseur, pureté > 99,5%."
+    - name: "Contrôler la dureté de l'eau adoucie"
+      text: "Tous les 3 mois, testez l'eau avec une bandelette TH. L'eau adoucie doit afficher entre 3 et 8 °f. Si le TH est trop élevé, vérifiez le sel et le réglage."
+    - name: "Désinfecter une fois par an"
+      text: "Videz partiellement le bac à sel, versez un désinfectant spécifique (Purosol ou eau de Javel diluée), ajoutez du sel et lancez une régénération manuelle complète."
+    - name: "Briser les ponts de sel"
+      text: "Si le niveau de sel semble stable mais l'eau redevient calcaire, brisez doucement la croûte solidifiée à la surface du bac avec un manche en bois."
+    - name: "Remplacer la résine tous les 8-12 ans"
+      text: "Quand l'eau reste dure malgré des régénérations fréquentes, faites changer la résine par un technicien (150-300 € main d'œuvre incluse)."
 ---
 
-Un adoucisseur d'eau, ça travaille silencieusement 365 jours par an. Mais comme tout équipement, il a besoin d'un minimum d'attention pour rester efficace et éviter les mauvaises surprises. La bonne nouvelle : l'entretien est simple et ne prend que quelques minutes par mois.
+Un adoucisseur d'eau, ça travaille silencieusement 365 jours par an. Mais comme tout équipement, il a besoin d'un minimum d'attention pour rester efficace et éviter les mauvaises surprises. La bonne nouvelle : l'entretien est simple et ne prend que quelques minutes par mois — à condition d'avoir bien [choisi son adoucisseur](/blog/quel-adoucisseur-deau-choisir-en-2026-guide-complet) au départ.
 
-Voici tout ce que vous devez faire, et à quelle fréquence.
+Voici les 5 étapes clés pour un entretien efficace.
+
+<div class="steps">
+  <div class="step">
+    <h4>Vérifier le niveau de sel</h4>
+    <p>Toutes les 4-6 semaines. Ne descendez jamais sous le tiers du bac. Sel pureté > 99,5%.</p>
+  </div>
+  <div class="step">
+    <h4>Tester la dureté de l'eau adoucie</h4>
+    <p>Tous les 3 mois avec une bandelette TH. Cible : 3-8 °f. Au-delà, vérifiez le réglage.</p>
+  </div>
+  <div class="step">
+    <h4>Désinfecter une fois par an</h4>
+    <p>Désinfectant spécifique + régénération manuelle. 30 minutes, préserve la résine plusieurs années.</p>
+  </div>
+  <div class="step">
+    <h4>Briser les ponts de sel</h4>
+    <p>Si le sel ne descend plus, brisez la croûte avec un manche en bois.</p>
+  </div>
+  <div class="step">
+    <h4>Remplacer la résine tous les 8-12 ans</h4>
+    <p>Quand l'eau reste dure malgré tout, comptez 150-300 € avec main d'œuvre — voir notre <a href="/blog/adoucisseur-deau-quel-prix-en-2026">guide complet des coûts</a>.</p>
+  </div>
+</div>
 
 <div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
   <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
@@ -79,7 +117,7 @@ Si le TH est trop élevé :
 
 ## 4. La désinfection annuelle
 
-Avec le temps, des bactéries peuvent se développer dans la résine et le circuit d'eau. Une désinfection annuelle est recommandée, surtout si votre adoucisseur dessert de l'eau potable.
+Avec le temps, des bactéries peuvent se développer dans la résine et le circuit d'eau. Une désinfection annuelle est recommandée, surtout si votre adoucisseur dessert de l'eau de boisson — découvrez d'ailleurs ce que dit la science sur [l'eau adoucie et la santé](/blog/leau-adoucie-est-elle-bonne-pour-la-sante).
 
 **Comment procéder :**
 1. Videz presque entièrement le bac à sel

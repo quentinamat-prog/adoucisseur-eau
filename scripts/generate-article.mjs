@@ -304,10 +304,10 @@ Rédige un article de blog long-format, de haute qualité éditoriale, optimisé
 - **Confiance** : ton honnête, nuances quand pertinent
 
 ## MAILLAGE INTERNE — RÈGLE ABSOLUE
-Tu DOIS intégrer CHACUN de ces liens dans le corps du texte (pas en liste, de manière naturelle dans une phrase) :
+Tu DOIS intégrer CHACUN de ces liens dans le corps du texte (pas en liste, de manière naturelle dans une phrase). Minimum 2 à 3 liens vers d'AUTRES articles du blog (pas seulement l'accueil), maximum 6 liens au total.
 ${internalLinks}
 
-Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le texte rédigé.
+Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le texte rédigé, avec un ancrage descriptif de 3-6 mots (pas "cliquez ici" ni "ce lien"). Les liens doivent venir naturellement à la fin d'une phrase pour approfondir un point déjà évoqué.
 
 ## BALISAGE MARKDOWN
 - **Gras** : termes clés, chiffres importants, conseils actionnables (3-5 fois par section)
@@ -315,6 +315,60 @@ Aucun lien ne peut être omis. Chaque lien doit apparaître une fois dans le tex
 - Listes : quand 3+ éléments énumérés
 - Tableaux markdown : pour comparer des prix, capacités, options
 - Interdiction absolue d'utiliser le caractère "—" (tiret cadratin), utilise "-" à la place
+
+## COMPOSANTS VISUELS HTML (utilise au moins 1 dans l'article, choisi selon le sujet)
+
+### KeyNumbers — 3-4 chiffres clés (idéal en début d'article)
+\`\`\`html
+<div class="key-numbers">
+  <div class="kn"><span class="kn-value">50%</span><span class="kn-label">économies détergents</span></div>
+  <div class="kn"><span class="kn-value">15 ans</span><span class="kn-label">durée de vie</span></div>
+  <div class="kn"><span class="kn-value">3-6 ans</span><span class="kn-label">retour sur investissement</span></div>
+</div>
+\`\`\`
+
+### Steps — pour articles "Comment / Étapes" (installation, entretien, dépannage)
+\`\`\`html
+<div class="steps">
+  <div class="step">
+    <h4>Titre de l'étape</h4>
+    <p>Description courte et actionnable.</p>
+  </div>
+  <div class="step">
+    <h4>Étape suivante</h4>
+    <p>Description.</p>
+  </div>
+</div>
+\`\`\`
+
+### Pros/Cons — comparaison avantages/limites
+\`\`\`html
+<div class="pros-cons">
+  <div class="pros">
+    <h4>Avantages</h4>
+    <ul><li>Point fort 1</li><li>Point fort 2</li></ul>
+  </div>
+  <div class="cons">
+    <h4>Limites</h4>
+    <ul><li>Limite 1</li><li>Limite 2</li></ul>
+  </div>
+</div>
+\`\`\`
+
+## SCHEMA HOWTO (UNIQUEMENT si l'article est un guide "Comment...")
+Si le titre commence par "Comment", ajoute un champ \`howto\` dans le frontmatter YAML AVANT de rédiger :
+\`\`\`yaml
+howto:
+  name: "Titre de la procédure"
+  description: "Description courte"
+  totalTime: "PT30M"  # format ISO 8601 durée
+  steps:
+    - name: "Nom étape 1"
+      text: "Description complète de l'étape 1."
+    - name: "Nom étape 2"
+      text: "Description complète de l'étape 2."
+\`\`\`
+Cela active les rich snippets numérotés dans Google. À NE PAS faire pour les autres types d'articles.
 
 ## CALLOUTS (à utiliser 2-3 fois dans l'article, syntaxe GitHub blockquote alerts)
 Place ces blocs aux moments clés pour aérer la lecture :

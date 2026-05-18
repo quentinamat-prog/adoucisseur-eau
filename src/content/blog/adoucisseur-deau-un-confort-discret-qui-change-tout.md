@@ -11,7 +11,7 @@ image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80"
 
 L'eau est partout chez vous. Elle se glisse dans vos tuyaux, coule sur votre peau, imprègne vos vêtements, fait briller (ou ternir) votre vaisselle. Pourtant, on ne pense à sa qualité que lorsqu'un souci surgit : peau qui tiraille, appareils entartrés, robinet qui fuit, linge rêche, bouilloire en sursis…
 
-Ce que beaucoup ignorent encore, c'est que la **dureté de l'eau** joue un rôle décisif. Et qu'il existe une solution simple pour l'adoucir : **l'adoucisseur d'eau**.
+Ce que beaucoup ignorent encore, c'est que la **dureté de l'eau** joue un rôle décisif. Et qu'il existe une solution simple pour l'adoucir : **l'adoucisseur d'eau** — un équipement à choisir avec soin, comme l'explique notre [guide complet 2026](/blog/quel-adoucisseur-deau-choisir-en-2026-guide-complet).
 
 <div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
   <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
@@ -63,7 +63,7 @@ Un adoucisseur s'installe une fois… et travaille pour vous tous les jours.
 
 Il demande un peu d'entretien (ajout de sel, contrôle de la régénération), mais rien d'insurmontable. Et surtout : c'est un investissement **rentable dès les premières années**, si l'on additionne les économies d'énergie, de produits ménagers, et les réparations évitées.
 
-> Comptez entre 800 € et 1 500 € selon le modèle et l'installation. Mais la vraie valeur, c'est ce qu'il vous évite.
+> Comptez entre 800 € et 1 500 € selon le modèle et l'installation — pour le détail complet, voyez notre [analyse des prix en 2026](/blog/adoucisseur-deau-quel-prix-en-2026). Mais la vraie valeur, c'est ce qu'il vous évite.
 
 ## Conclusion : l'eau douce, une évidence qui s'ignore encore
 

@@ -16,9 +16,16 @@ faq:
     a: "Si vous souhaitez suivre votre consommation de sel, optimiser les régénérations et recevoir des alertes à distance, oui. Sinon, un modèle classique à volume suffira largement."
 ---
 
-Choisir un adoucisseur d'eau, ce n'est pas anodin. C'est un équipement que vous allez garder 10 à 15 ans, qui va traiter 100 % de l'eau de votre domicile, et qui représente un investissement entre 800 € et 2 500 €. Autant faire le bon choix dès le départ.
+Choisir un adoucisseur d'eau, ce n'est pas anodin. C'est un équipement que vous allez garder 10 à 15 ans, qui va traiter 100 % de l'eau de votre domicile, et qui représente un investissement entre 800 € et 2 500 € — voir notre [guide complet des prix en 2026](/blog/adoucisseur-deau-quel-prix-en-2026) pour le détail. Autant faire le bon choix dès le départ.
 
-Ce guide complet vous explique les critères essentiels, les pièges à éviter, et les questions à vous poser avant d'acheter.
+Ce guide vous explique les critères essentiels, les pièges à éviter, et les questions à vous poser avant d'acheter.
+
+<div class="key-numbers">
+  <div class="kn"><span class="kn-value">10-15</span><span class="kn-label">ans de durée de vie</span></div>
+  <div class="kn"><span class="kn-value">50%</span><span class="kn-label">détergents en moins</span></div>
+  <div class="kn"><span class="kn-value">3-6 ans</span><span class="kn-label">retour sur investissement</span></div>
+  <div class="kn"><span class="kn-value">100%</span><span class="kn-label">de l'eau traitée</span></div>
+</div>
 
 <div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
   <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
@@ -40,7 +47,7 @@ Avant tout, il vous faut savoir à quel niveau de calcaire vous êtes confronté
 | 25 – 35 °f | Eau dure | Recommandé |
 | > 35 °f | Eau très dure | Fortement conseillé |
 
-**Comment mesurer ?** Demandez l'analyse à votre mairie ou votre fournisseur d'eau, ou achetez des bandelettes de test (moins de 10 €) disponibles en pharmacie ou sur internet.
+**Comment mesurer ?** Demandez l'analyse à votre mairie ou votre fournisseur d'eau, ou achetez des bandelettes de test (moins de 10 €) disponibles en pharmacie ou sur internet. Pour comprendre les enjeux de la dureté, consultez aussi notre article sur [l'eau adoucie et la santé](/blog/leau-adoucie-est-elle-bonne-pour-la-sante).
 
 Plus votre eau est dure, plus il vous faudra un adoucisseur avec une capacité de résine élevée et une régénération fréquente.
 
@@ -100,6 +107,32 @@ Les adoucisseurs connectés permettent de :
 - Analyser les données de votre consommation
 
 Le surcoût est de **200 à 400 €** par rapport à un modèle classique équivalent. Si le suivi à distance vous intéresse, c'est un vrai plus. Sinon, un bon modèle classique volumétrique fait très bien le travail.
+
+## Avantages et limites à connaître
+
+<div class="pros-cons">
+  <div class="pros">
+    <h4>Avantages</h4>
+    <ul>
+      <li>Eau douce, peau et cheveux préservés</li>
+      <li>Jusqu'à 50% d'économie de détergents</li>
+      <li>Électroménager qui dure plus longtemps</li>
+      <li>Moins d'entartrage du chauffe-eau</li>
+      <li>Amorti en 3 à 6 ans</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>Limites</h4>
+    <ul>
+      <li>Investissement initial 800-2500 €</li>
+      <li>Léger ajout de sodium dans l'eau</li>
+      <li>Entretien régulier (sel, désinfection)</li>
+      <li>Espace au sol nécessaire (~50×30 cm)</li>
+    </ul>
+  </div>
+</div>
+
+Un [entretien régulier](/blog/comment-entretenir-son-adoucisseur-deau) reste essentiel pour profiter pleinement de ces avantages sur le long terme.
 
 ## Ce qu'il faut vérifier avant d'acheter
 

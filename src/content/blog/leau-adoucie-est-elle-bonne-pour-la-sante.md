@@ -18,7 +18,7 @@ faq:
 
 L'adoucisseur d'eau suscite parfois des interrogations sur la santé. Est-ce que l'eau adoucie est potable ? Le sodium qu'elle contient est-il dangereux ? Peut-on l'utiliser pour tout le monde, y compris les bébés et les personnes cardiaques ?
 
-Voici une réponse claire, fondée sur les données scientifiques disponibles et les recommandations officielles.
+Voici une réponse claire, fondée sur les données scientifiques disponibles et les recommandations officielles. Avant tout, si vous hésitez encore à vous équiper, consultez notre [guide pour choisir le bon adoucisseur](/blog/quel-adoucisseur-deau-choisir-en-2026-guide-complet).
 
 <div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
   <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
@@ -63,7 +63,7 @@ L'eau adoucie ne perd aucune de ses qualités microbiologiques : elle reste auss
 
 Si vous suivez un régime pauvre en sel pour raisons médicales (hypertension, insuffisance rénale, maladies cardiovasculaires), votre médecin vous a peut-être conseillé de surveiller votre apport en sodium.
 
-Dans ce cas, la solution la plus simple est d'installer un **robinet distinct non adouci** pour l'eau de boisson et la cuisine. C'est une pratique courante et peu coûteuse (50 à 100 € de robinetterie supplémentaire lors de l'installation).
+Dans ce cas, la solution la plus simple est d'installer un **robinet distinct non adouci** pour l'eau de boisson et la cuisine. C'est une pratique courante et peu coûteuse (50 à 100 € de robinetterie supplémentaire lors de l'installation — voir [tous les coûts détaillés](/blog/adoucisseur-deau-quel-prix-en-2026)).
 
 > [!NOTE]
 > Il ne s'agit pas d'une contre-indication formelle à l'adoucisseur, mais d'une précaution pratique pour les profils médicalement sensibles.
@@ -89,7 +89,7 @@ L'eau adoucie, à l'inverse :
 - Préserve mieux le film hydrolipidique naturel de la peau
 - Réduit les poussées d'eczéma chez les personnes sensibles (plusieurs études l'ont confirmé)
 
-C'est souvent l'un des premiers bénéfices que remarquent les familles qui s'équipent d'un adoucisseur.
+C'est souvent l'un des premiers bénéfices que remarquent les familles qui s'équipent d'un adoucisseur. Pour préserver ces bénéfices, un [entretien régulier de l'appareil](/blog/comment-entretenir-son-adoucisseur-deau) reste essentiel.
 
 ![Verre d'eau fraîche illustrant la qualité de l'eau adoucie](https://images.unsplash.com/photo-1624948465027-6f9b51067557?w=900&q=80)
 

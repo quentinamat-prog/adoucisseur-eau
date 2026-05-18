@@ -18,6 +18,15 @@ const blog = defineCollection({
     imageTitle: z.string().optional(),
     featured: z.boolean().default(false),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
+    howto: z.object({
+      name: z.string(),
+      description: z.string().optional(),
+      totalTime: z.string().optional(),
+      steps: z.array(z.object({
+        name: z.string(),
+        text: z.string(),
+      })),
+    }).optional(),
   }),
 });
 

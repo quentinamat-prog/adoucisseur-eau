@@ -16,9 +16,16 @@ faq:
     a: "Oui : moins d'entartrage des appareils (durée de vie +20%), économies de détergents (jusqu'à 50%), et réduction de la consommation énergétique du chauffe-eau. L'amortissement se fait généralement en 3 à 5 ans."
 ---
 
-L'adoucisseur d'eau, c'est un investissement — pas une dépense. Mais encore faut-il savoir exactement ce que ça coûte, de l'achat à l'entretien quotidien, pour prendre une décision éclairée.
+L'adoucisseur d'eau, c'est un investissement — pas une dépense. Mais encore faut-il savoir exactement ce que ça coûte, de l'achat à l'entretien quotidien, pour prendre une décision éclairée. Si vous hésitez encore sur le modèle, consultez d'abord notre [guide pour bien choisir son adoucisseur](/blog/quel-adoucisseur-deau-choisir-en-2026-guide-complet).
 
 Voici une décomposition complète et honnête des coûts réels d'un adoucisseur d'eau en 2026.
+
+<div class="key-numbers">
+  <div class="kn"><span class="kn-value">1 200€</span><span class="kn-label">budget moyen tout compris</span></div>
+  <div class="kn"><span class="kn-value">80€</span><span class="kn-label">coût annuel en sel</span></div>
+  <div class="kn"><span class="kn-value">3-6 ans</span><span class="kn-label">retour sur investissement</span></div>
+  <div class="kn"><span class="kn-value">15 ans</span><span class="kn-label">durée de vie moyenne</span></div>
+</div>
 
 <div style="background: linear-gradient(135deg, #0D5E77 0%, #1A96B4 100%); border-radius: 16px; padding: 24px 28px; margin: 32px 0; display: flex; align-items: flex-start; gap: 20px;">
   <div style="font-size: 2.5rem; flex-shrink: 0;">💧</div>
@@ -70,7 +77,7 @@ Le sel en pastilles ou granulés coûte entre **8 et 12 € les 25 kg** en grand
 
 ## L'entretien annuel
 
-Un adoucisseur bien entretenu dure 15 ans et plus. L'entretien comprend :
+Un adoucisseur bien entretenu dure 15 ans et plus — découvrez tous nos [conseils d'entretien complets](/blog/comment-entretenir-son-adoucisseur-deau). L'entretien comprend :
 
 - **Contrat de maintenance** (optionnel) : 80 – 150 €/an selon le prestataire
 - **Désinfection annuelle** : réalisable soi-même avec un kit à 15 – 25 €
