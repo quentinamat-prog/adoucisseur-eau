@@ -50,16 +50,16 @@ const categoryIcons: Record<string, string> = {
   <!-- Catégories -->
   <div class="bg-white rounded-2xl p-6 shadow-sm border border-beige">
     <p class="font-body text-xs font-bold uppercase tracking-widest text-dark/50 mb-4">Catégories</p>
-    <ul class="space-y-2">
+    <ul class="space-y-0.5">
       {categories.map((cat: string) => (
         <li>
           <a
             href={`/blog/categorie/${catToSlug(cat)}`}
-            class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-beige transition-colors group"
+            class="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-beige transition-colors group"
           >
-            <span class="text-lg leading-none">{categoryIcons[cat] ?? '📄'}</span>
-            <span class="font-body text-sm font-medium text-dark/70 group-hover:text-teal transition-colors">{cat}</span>
-            <svg class="w-4 h-4 text-dark/30 group-hover:text-teal ml-auto transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-base leading-none">{categoryIcons[cat] ?? '📄'}</span>
+            <span class="font-body text-sm text-dark/70 group-hover:text-teal transition-colors">{cat}</span>
+            <svg class="w-3.5 h-3.5 text-dark/25 group-hover:text-teal ml-auto transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </a>
         </li>
       ))}
