@@ -33,11 +33,31 @@ const formatDate = (date: Date) =>
 
 const SITE_URL = siteConfig.url;
 const catSlug = catToSlug(cat);
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+    { '@type': 'ListItem', position: 3, name: cat, item: `${SITE_URL}/blog/categorie/${catSlug}` },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${cat} — ${siteConfig.name}`,
+  description: `Tous les articles sur ${cat} : conseils pratiques et guides complets.`,
+  url: `${SITE_URL}/blog/categorie/${catSlug}`,
+  inLanguage: 'fr-FR',
+};
 ---
 
 <BaseLayout
   title={`${cat} — Blog ${siteConfig.name}`}
-  description={`Tous les articles ${siteConfig.name} dans la catégorie ${cat} : conseils, inspirations et guides pratiques.`}
+  description={`Tous nos articles sur ${cat} : conseils pratiques, guides complets et comparatifs pour bien choisir votre adoucisseur d'eau.`}
+  jsonLd={[breadcrumbSchema, collectionSchema]}
 >
   <Header activePage="blog" />
 
@@ -75,11 +95,11 @@ const catSlug = catToSlug(cat);
     {posts.length > 0 ? (
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map(post => (
-          <article class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
+          <a href={`/blog/${post.slug}`} class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1">
             <div class="aspect-video bg-beige flex items-center justify-center relative overflow-hidden">
               {post.data.image
-                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-                : <div class="text-terracotta/40"><Icon name="fork-knife" size={64} strokeWidth={1.25} /></div>
+                ? <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="800" height="450" loading="lazy" />
+                : <div class="text-terracotta/40"><Icon name="droplet" size={64} strokeWidth={1.25} /></div>
               }
               <div class="absolute top-3 left-3">
                 <span class="tag tag-teal">{post.data.category}</span>
@@ -89,12 +109,12 @@ const catSlug = catToSlug(cat);
               <time datetime={post.data.pubDate.toISOString()} class="font-body text-xs text-dark/50 mb-3 block">
                 {formatDate(post.data.pubDate)}
               </time>
-              <h2 class="font-display text-lg text-dark mb-2 leading-snug group-hover:text-teal transition-colors">
-                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+              <h2 class="font-body font-semibold text-lg text-dark mb-2 leading-snug group-hover:text-teal transition-colors">
+                {post.data.title}
               </h2>
               <p class="font-body text-sm text-dark/60 leading-relaxed line-clamp-3">{post.data.description}</p>
             </div>
-          </article>
+          </a>
         ))}
       </div>
     ) : (

@@ -148,7 +148,7 @@ const breadcrumbSchema = {
         <!-- Cover image -->
         {image && (
           <figure class="rounded-2xl overflow-hidden mb-10 aspect-video bg-beige">
-            <img src={image} alt={imageAlt ?? title} title={imageTitle ?? title} class="w-full h-full object-cover" loading="lazy" />
+            <img src={image} alt={imageAlt ?? title} title={imageTitle ?? title} class="w-full h-full object-cover" width="1200" height="675" fetchpriority="high" loading="eager" />
           </figure>
         )}
 

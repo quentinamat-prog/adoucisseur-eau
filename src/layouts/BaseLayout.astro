@@ -44,11 +44,6 @@ const websiteSchema = {
   name: SITE_NAME,
   url: SITE_URL,
   inLanguage: 'fr-FR',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE_URL}/blog?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 const baseSchemas = [organizationSchema, websiteSchema];
@@ -69,6 +64,13 @@ const allSchemas = [...baseSchemas, ...extraSchemas];
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#0D5E77" />
+
+    <!-- Preconnect pour Unsplash -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://plus.unsplash.com" />
+
+    <!-- Preload police critique -->
+    <link rel="preload" as="style" href="/fonts/dosis-latin-600-normal.woff2" crossorigin />
 
     <!-- Primary meta -->
     <title>{title}</title>

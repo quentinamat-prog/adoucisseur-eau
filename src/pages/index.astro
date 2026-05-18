@@ -12,20 +12,11 @@ const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 6);
 
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: siteConfig.name,
-  url: siteConfig.url,
-  description: siteConfig.description,
-  inLanguage: 'fr-FR',
-};
 ---
 
 <BaseLayout
   title={`${siteConfig.name} – Guides & Conseils sur les adoucisseurs d'eau`}
   description={siteConfig.description}
-  jsonLd={websiteSchema}
 >
   <Header transparent />
   <main>

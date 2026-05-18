@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import siteConfig from '../../site.config.mjs';
+---
+
+<BaseLayout
+  title={`Page introuvable — ${siteConfig.name}`}
+  description="Cette page n'existe pas ou a été déplacée."
+  noindex={true}
+>
+  <Header activePage="blog" />
+
+  <main class="max-w-2xl mx-auto px-4 sm:px-6 pt-40 pb-24 text-center">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-beige text-teal mb-8 text-4xl">
+      💧
+    </div>
+    <h1 class="font-display font-bold text-5xl text-dark mb-4">404</h1>
+    <p class="font-body text-xl text-dark/60 mb-2">Page introuvable</p>
+    <p class="font-body text-dark/50 mb-10">
+      Cette page n'existe pas ou a été déplacée. Revenez à l'accueil ou parcourez nos guides.
+    </p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/" class="btn-primary">← Retour à l'accueil</a>
+      <a href="/blog" class="btn-outline">Voir tous les articles</a>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
