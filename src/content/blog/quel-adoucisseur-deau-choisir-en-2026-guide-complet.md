@@ -4,8 +4,8 @@ description: "Volume de résine, type de régénération, connectivité... Tout 
 pubDate: 2026-05-10
 category: "Guide d'achat"
 author: "Équipe Adoucisseur-eau.fr"
-image: "https://images.unsplash.com/photo-1584464491033-f628b0085be4?w=1200&q=80"
-imageAlt: "Adoucisseur d'eau installé sous évier dans une cuisine moderne"
+image: "https://images.unsplash.com/photo-1653543362916-f7df09926982?w=1200&q=80"
+imageAlt: "Rangée de filtres et adoucisseurs d'eau industriels"
 featured: true
 faq:
   - q: "Quelle capacité d'adoucisseur choisir pour 4 personnes ?"
@@ -56,6 +56,8 @@ La règle générale :
 - **Maison > 6 personnes ou eau très dure** : 50 litres et plus
 
 > Un adoucisseur sous-dimensionné régénère trop souvent (consomme plus de sel et d'eau), tandis qu'un modèle surdimensionné stagne inutilement entre les cycles.
+
+![Cuves et filtres d'adoucisseurs d'eau alignés dans une installation professionnelle](https://plus.unsplash.com/premium_photo-1661962539511-27704c1821cf?w=900&q=80)
 
 ## Étape 3 : monobloc ou bi-bloc ?
 

@@ -4,8 +4,8 @@ description: "Matériel, installation, sel, entretien... Découvrez le coût ré
 pubDate: 2026-05-12
 category: "Guide d'achat"
 author: "Équipe Adoucisseur-eau.fr"
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80"
-imageAlt: "Calculatrice et carnet pour estimer le budget d'un adoucisseur d'eau"
+image: "https://plus.unsplash.com/premium_photo-1683141410787-c4dbd2220487?w=1200&q=80"
+imageAlt: "Installation de plomberie et tuyauterie pour adoucisseur d'eau"
 featured: false
 faq:
   - q: "Quel est le prix moyen d'un adoucisseur d'eau installé ?"
@@ -77,6 +77,8 @@ Un adoucisseur bien entretenu dure 15 ans et plus. L'entretien comprend :
 - **Recharge de résine** (tous les 8 à 12 ans) : 150 – 300 € en main-d'œuvre
 
 Sans contrat de maintenance, un adoucisseur de qualité ne demande pratiquement que du sel et un nettoyage annuel.
+
+![Technicien réparant des tuyaux lors d'une installation de plomberie](https://plus.unsplash.com/premium_photo-1663045495725-89f23b57cfc5?w=900&q=80)
 
 ## Achat ou location : que choisir ?
 

@@ -4,8 +4,8 @@ description: "Sel, résine, désinfection, contrôle de la régénération... To
 pubDate: 2026-05-14
 category: "Entretien"
 author: "Équipe Adoucisseur-eau.fr"
-image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1200&q=80"
-imageAlt: "Plombier entretenant un adoucisseur d'eau dans une buanderie"
+image: "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=1200&q=80"
+imageAlt: "Technicien effectuant l'entretien d'une installation de plomberie"
 featured: false
 faq:
   - q: "À quelle fréquence faut-il ajouter du sel dans un adoucisseur ?"
@@ -73,6 +73,8 @@ Si le TH est trop élevé :
 - Contrôlez la quantité de sel disponible
 - Vérifiez qu'aucun pont de sel n'est présent
 - Si le problème persiste, la résine peut être épuisée ou contaminée
+
+![Boîte à outils et clés pour l'entretien d'un adoucisseur d'eau](https://images.unsplash.com/photo-1454988501794-2992f706932e?w=900&q=80)
 
 ## 4. La désinfection annuelle
 

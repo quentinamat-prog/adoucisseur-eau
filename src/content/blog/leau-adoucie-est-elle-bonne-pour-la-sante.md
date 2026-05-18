@@ -4,8 +4,8 @@ description: "L'eau adoucie est-elle potable ? Que dit la science sur le sodium 
 pubDate: 2026-05-16
 category: "Eau & Santé"
 author: "Équipe Adoucisseur-eau.fr"
-image: "https://images.unsplash.com/photo-1502101872923-d48509bff386?w=1200&q=80"
-imageAlt: "Verre d'eau claire tenu à la main devant une fenêtre lumineuse"
+image: "https://plus.unsplash.com/premium_photo-1670426502021-a1d1b7b1aaed?w=1200&q=80"
+imageAlt: "Verre d'eau fraîche et propre pour illustrer la santé et l'eau adoucie"
 featured: false
 faq:
   - q: "L'eau adoucie est-elle potable ?"
@@ -88,6 +88,8 @@ L'eau adoucie, à l'inverse :
 - Réduit les poussées d'eczéma chez les personnes sensibles (plusieurs études l'ont confirmé)
 
 C'est souvent l'un des premiers bénéfices que remarquent les familles qui s'équipent d'un adoucisseur.
+
+![Verre d'eau fraîche illustrant la qualité de l'eau adoucie](https://images.unsplash.com/photo-1624948465027-6f9b51067557?w=900&q=80)
 
 ## Les minéraux perdus : mythe ou réalité ?
 
