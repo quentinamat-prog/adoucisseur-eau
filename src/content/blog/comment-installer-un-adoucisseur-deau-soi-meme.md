@@ -1,5 +1,6 @@
 ---
 title: "Comment installer un adoucisseur d'eau soi-même ? Guide étape par étape"
+metaTitle: "Comment installer un adoucisseur d'eau soi-même"
 description: "Installation d'un adoucisseur d'eau sans plombier : outils, étapes détaillées, raccordement bypass et mise en service. Guide complet pour bricoleurs."
 pubDate: 2026-06-08
 category: "Installation"

@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau ou filtre à eau : lequel convient à votre situation ?"
+metaTitle: "Adoucisseur d'eau ou filtre à eau : lequel choisir ?"
 description: "Adoucisseur d'eau ou filtre à eau : quelles différences, quels usages et lequel choisir selon votre eau, votre budget et vos besoins en 2026 ?"
 pubDate: 2026-07-15
 category: "Guide d'achat"

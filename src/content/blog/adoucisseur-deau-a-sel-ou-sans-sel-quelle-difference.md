@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau à sel ou sans sel : quelle différence et que choisir ?"
+metaTitle: "Adoucisseur d'eau à sel ou sans sel : quelle différence"
 description: "Adoucisseur à sel classique ou solution sans sel ? Comparatif complet : efficacité, coût, entretien et cas d'usage pour faire le bon choix en 2026."
 pubDate: 2026-06-08
 category: "Comparatif"

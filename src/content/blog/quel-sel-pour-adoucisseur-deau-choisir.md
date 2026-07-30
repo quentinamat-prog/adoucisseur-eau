@@ -1,5 +1,6 @@
 ---
 title: "Quel sel pour adoucisseur d'eau choisir ? Pastilles, cristaux ou blocs"
+metaTitle: "Quel sel pour adoucisseur d'eau : pastilles ou cristaux"
 description: "Pastilles, cristaux ou blocs de sel : quel sel pour adoucisseur d'eau choisir, à quel prix, en quelle quantité et quelles erreurs éviter au remplissage du bac."
 pubDate: 2026-07-30
 category: "Entretien"

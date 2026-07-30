@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau : achat ou location, que choisir en 2026 ?"
+metaTitle: "Adoucisseur d'eau : achat ou location en 2026 ?"
 description: "Acheter ou louer un adoucisseur d'eau : comparatif des coûts sur 10 ans, avantages, pièges des contrats et profils pour lesquels chaque formule est rentable."
 pubDate: 2026-07-30
 category: "Comparatif"

@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau qui ne consomme plus de sel : causes et solutions"
+metaTitle: "Adoucisseur d'eau qui ne consomme plus de sel : que faire"
 description: "Votre adoucisseur ne consomme plus de sel et l'eau redevient calcaire ? Pont de sel, crépine bouchée, vanne bloquée : diagnostic étape par étape et solutions."
 pubDate: 2026-07-30
 category: "Entretien"

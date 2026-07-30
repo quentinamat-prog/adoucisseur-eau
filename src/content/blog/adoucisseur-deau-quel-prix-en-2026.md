@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau : quel prix faut-il prévoir en 2026 ?"
+metaTitle: "Prix d'un adoucisseur d'eau en 2026"
 description: "Matériel, installation, sel, entretien... Découvrez le coût réel d'un adoucisseur d'eau en 2026 et comment calculer votre retour sur investissement."
 pubDate: 2026-05-12
 category: "Guide d'achat"

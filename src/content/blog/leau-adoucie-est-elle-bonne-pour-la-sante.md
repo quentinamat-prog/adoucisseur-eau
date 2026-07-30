@@ -1,5 +1,6 @@
 ---
 title: "L'eau adoucie est-elle bonne pour la santé ?"
+metaTitle: "L'eau adoucie est-elle bonne pour la santé ?"
 description: "L'eau adoucie est-elle potable ? Que dit la science sur le sodium ajouté par l'adoucisseur ? On fait le point sans tabou sur la santé et l'eau adoucie."
 pubDate: 2026-05-16
 category: "Eau & Santé"

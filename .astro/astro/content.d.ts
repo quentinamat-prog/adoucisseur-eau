@@ -152,9 +152,93 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"adoucisseur-deau-a-sel-ou-sans-sel-quelle-difference.md": {
+	id: "adoucisseur-deau-a-sel-ou-sans-sel-quelle-difference.md";
+  slug: "adoucisseur-deau-a-sel-ou-sans-sel-quelle-difference";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"adoucisseur-deau-achat-ou-location.md": {
+	id: "adoucisseur-deau-achat-ou-location.md";
+  slug: "adoucisseur-deau-achat-ou-location";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"adoucisseur-deau-ou-filtre-a-eau-lequel-choisir.md": {
+	id: "adoucisseur-deau-ou-filtre-a-eau-lequel-choisir.md";
+  slug: "adoucisseur-deau-ou-filtre-a-eau-lequel-choisir";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"adoucisseur-deau-quel-prix-en-2026.md": {
+	id: "adoucisseur-deau-quel-prix-en-2026.md";
+  slug: "adoucisseur-deau-quel-prix-en-2026";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"adoucisseur-deau-qui-ne-consomme-plus-de-sel.md": {
+	id: "adoucisseur-deau-qui-ne-consomme-plus-de-sel.md";
+  slug: "adoucisseur-deau-qui-ne-consomme-plus-de-sel";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "adoucisseur-deau-un-confort-discret-qui-change-tout.md": {
 	id: "adoucisseur-deau-un-confort-discret-qui-change-tout.md";
   slug: "adoucisseur-deau-un-confort-discret-qui-change-tout";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-entretenir-son-adoucisseur-deau.md": {
+	id: "comment-entretenir-son-adoucisseur-deau.md";
+  slug: "comment-entretenir-son-adoucisseur-deau";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"comment-installer-un-adoucisseur-deau-soi-meme.md": {
+	id: "comment-installer-un-adoucisseur-deau-soi-meme.md";
+  slug: "comment-installer-un-adoucisseur-deau-soi-meme";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"durete-de-leau-par-region-en-france.md": {
+	id: "durete-de-leau-par-region-en-france.md";
+  slug: "durete-de-leau-par-region-en-france";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"leau-adoucie-est-elle-bonne-pour-la-sante.md": {
+	id: "leau-adoucie-est-elle-bonne-pour-la-sante.md";
+  slug: "leau-adoucie-est-elle-bonne-pour-la-sante";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"quel-adoucisseur-deau-choisir-en-2026-guide-complet.md": {
+	id: "quel-adoucisseur-deau-choisir-en-2026-guide-complet.md";
+  slug: "quel-adoucisseur-deau-choisir-en-2026-guide-complet";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"quel-sel-pour-adoucisseur-deau-choisir.md": {
+	id: "quel-sel-pour-adoucisseur-deau-choisir.md";
+  slug: "quel-sel-pour-adoucisseur-deau-choisir";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"quel-volume-dadoucisseur-deau-choisir-selon-son-foyer.md": {
+	id: "quel-volume-dadoucisseur-deau-choisir-selon-son-foyer.md";
+  slug: "quel-volume-dadoucisseur-deau-choisir-selon-son-foyer";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

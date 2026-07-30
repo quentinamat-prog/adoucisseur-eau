@@ -3,6 +3,9 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Redirections 301 — consolidation de contenus dupliqués
+RewriteRule ^blog/quel-volume-dadoucisseur-deau-choisir-selon-la-taille-de-son-foyer/?$ /blog/quel-volume-dadoucisseur-deau-choisir-selon-son-foyer/ [R=301,L]
+
 # Security headers
 <IfModule mod_headers.c>
   # Clickjacking protection

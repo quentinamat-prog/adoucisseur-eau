@@ -7,6 +7,9 @@ const blog = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    // Titre court pour la balise <title> (SEO). Si absent, `title` est utilisé.
+    // Plafonné à 60 caractères pour éviter la troncature dans les SERP.
+    metaTitle: z.string().max(60).optional(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),

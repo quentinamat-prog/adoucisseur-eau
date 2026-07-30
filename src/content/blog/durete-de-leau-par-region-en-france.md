@@ -1,5 +1,6 @@
 ---
 title: "Dureté de l'eau par région en France : carte et valeurs complètes"
+metaTitle: "Dureté de l'eau par région en France : la carte"
 description: "Découvrez la dureté de l'eau dans votre région. Carte complète, valeurs en °f par département et conseils pour agir selon votre zone géographique."
 pubDate: 2026-06-08
 category: "Eau & Santé"

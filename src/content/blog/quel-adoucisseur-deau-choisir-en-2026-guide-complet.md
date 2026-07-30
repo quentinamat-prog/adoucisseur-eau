@@ -1,5 +1,6 @@
 ---
 title: "Quel adoucisseur d'eau choisir en 2026 ? Le guide complet"
+metaTitle: "Quel adoucisseur d'eau choisir en 2026 ?"
 description: "Volume de résine, type de régénération, connectivité... Tout ce qu'il faut savoir pour choisir le bon adoucisseur d'eau selon votre foyer et votre budget."
 pubDate: 2026-05-10
 category: "Guide d'achat"

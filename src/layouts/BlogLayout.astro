@@ -16,7 +16,14 @@ interface Props {
 }
 
 const { post, headings, related = [], newer = null, older = null } = Astro.props;
-const { title, description, pubDate, updatedDate, author, category, tags, image, imageAlt, imageTitle, faq, howto } = post.data;
+const { title, metaTitle, description, pubDate, updatedDate, author, category, tags, image, imageAlt, imageTitle, faq, howto } = post.data;
+
+// Balise <title> : on part de metaTitle si fourni, sinon du H1. La marque n'est
+// ajoutée que si le résultat tient dans la limite d'affichage des SERP (~60 car.).
+const SEO_TITLE_MAX = 60;
+const seoBase = metaTitle ?? title;
+const brandSuffix = ` | ${siteConfig.name}`;
+const seoTitle = (seoBase + brandSuffix).length <= SEO_TITLE_MAX ? seoBase + brandSuffix : seoBase;
 
 // Unsplash responsive image helper — strips existing params and rebuilds with WebP + srcset
 const imageBase = image ? image.split('?')[0] : null;
@@ -116,7 +123,7 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`${title} | Blog ${siteConfig.name}`}
+  title={seoTitle}
   description={description}
   type="article"
   image={image ?? '/og-image.jpg'}

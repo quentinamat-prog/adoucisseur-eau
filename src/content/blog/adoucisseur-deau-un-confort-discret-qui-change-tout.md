@@ -1,5 +1,6 @@
 ---
 title: "Adoucisseur d'eau : un confort discret qui change tout"
+metaTitle: "Adoucisseur d'eau : un confort qui change tout"
 description: "Et si le vrai luxe, c'était une eau douce ? Découvrez comment l'adoucisseur d'eau protège vos équipements, améliore votre confort et vous fait économiser."
 pubDate: 2025-08-04
 category: "Guide d'achat"

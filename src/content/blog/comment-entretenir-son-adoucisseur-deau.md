@@ -1,5 +1,6 @@
 ---
 title: "Comment entretenir son adoucisseur d'eau ? Guide complet"
+metaTitle: "Comment entretenir son adoucisseur d'eau"
 description: "Sel, résine, désinfection, contrôle de la régénération... Tout ce qu'il faut faire pour garder votre adoucisseur en parfait état et éviter les pannes."
 pubDate: 2026-05-14
 category: "Entretien"
