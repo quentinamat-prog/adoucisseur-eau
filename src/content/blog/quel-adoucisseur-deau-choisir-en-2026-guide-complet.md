@@ -143,6 +143,8 @@ Un [entretien régulier](/blog/comment-entretenir-son-adoucisseur-deau) reste es
 - **Le service après-vente** : préférez une marque avec un réseau de techniciens en France
 - **La taille physique** : mesurez votre espace avant de commander
 
+Deux questions à trancher avant de commander : votre problème est-il vraiment le calcaire ? Notre comparatif [adoucisseur d'eau ou filtre à eau](/blog/adoucisseur-deau-ou-filtre-a-eau-lequel-choisir) évite l'erreur d'équipement la plus fréquente. Et sur le financement, voyez [achat ou location](/blog/adoucisseur-deau-achat-ou-location).
+
 ## En résumé
 
 | Profil | Modèle recommandé |

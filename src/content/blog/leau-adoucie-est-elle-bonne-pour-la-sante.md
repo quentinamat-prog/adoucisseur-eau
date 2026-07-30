@@ -85,6 +85,8 @@ Sur ce point, la réponse est clairement **oui**. L'eau calcaire est connue pour
 - Rendre les cheveux ternes et cassants
 - Nécessiter plus de savon et de shampoing pour obtenir de la mousse
 
+C'est ce changement au quotidien — douche, linge, vaisselle — que nous décrivons dans [l'adoucisseur d'eau, un confort discret qui change tout](/blog/adoucisseur-deau-un-confort-discret-qui-change-tout).
+
 L'eau adoucie, à l'inverse :
 - Se rince plus facilement, laissant moins de résidu sur la peau
 - Préserve mieux le film hydrolipidique naturel de la peau
@@ -101,6 +103,8 @@ On entend parfois que l'adoucisseur "vole" les minéraux essentiels de l'eau. C'
 **La réalité :** l'eau du robinet n'est pas une source significative de calcium ou de magnésium dans notre alimentation. On en absorbe bien plus via les aliments. L'apport minéral de l'eau de boisson représente moins de 5 à 10 % des apports journaliers recommandés — et ce taux ne compense pas un régime alimentaire insuffisant.
 
 **Conclusion :** la suppression du calcium et du magnésium par l'adoucisseur n'a **pas d'impact nutritionnel significatif** pour une alimentation équilibrée.
+
+En revanche, l'adoucisseur ne traite ni le chlore ni le goût de l'eau : c'est le rôle d'un filtre, et les deux appareils sont complémentaires. Nous comparons leurs usages dans [adoucisseur d'eau ou filtre à eau](/blog/adoucisseur-deau-ou-filtre-a-eau-lequel-choisir).
 
 ## Ce qu'il faut retenir
 

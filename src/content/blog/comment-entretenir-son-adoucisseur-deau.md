@@ -81,6 +81,8 @@ Voici les 5 étapes clés pour un entretien efficace.
 
 Le sel est le consommable principal de votre adoucisseur. Sans sel, pas de régénération — et votre eau redevient calcaire.
 
+Tous les sels ne se valent pas : voyez [quel sel choisir pour votre adoucisseur](/blog/quel-sel-pour-adoucisseur-deau-choisir) avant votre prochain achat, un produit non conforme encrasse la résine.
+
 **Comment vérifier le niveau ?**
 Ouvrez le couvercle du bac à sel et regardez. La règle simple : ne laissez jamais le bac descendre en dessous du **tiers de sa capacité**. La plupart des adoucisseurs modernes émettent une alerte sonore ou lumineuse quand le niveau est bas.
 
@@ -103,6 +105,8 @@ Le pont de sel est une croûte compacte qui se forme à la surface du bac à sel
 **Solution** : enfoncez doucement un bâton en bois ou un manche à balai dans le bac pour briser la croûte. Remuez légèrement, puis lancez manuellement une régénération.
 
 **Prévention** : ne remplissez pas le bac à ras bord — laissez 10 à 15 cm d'espace en haut. Un bac trop plein favorise la formation du pont.
+
+Si le niveau ne bouge toujours pas après avoir cassé la croûte, le problème est ailleurs : notre diagnostic pas à pas d'[un adoucisseur qui ne consomme plus de sel](/blog/adoucisseur-deau-qui-ne-consomme-plus-de-sel) passe en revue la crépine, l'injecteur et la vanne.
 
 ## 3. Contrôler la dureté de l'eau adoucie
 

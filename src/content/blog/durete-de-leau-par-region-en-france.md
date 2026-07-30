@@ -155,6 +155,8 @@ Vous remarquez peut-être des traces blanches sur la robinetterie. Un adoucisseu
 - Moins de détartrage des appareils
 - Linge plus souple
 
+Ces changements se remarquent surtout à l'usage, semaine après semaine — c'est ce que nous racontons dans [un confort discret qui change tout](/blog/adoucisseur-deau-un-confort-discret-qui-change-tout).
+
 ### Eau dure à très dure (> 25 °f) — Adoucisseur recommandé
 
 Au-delà de 25 °f, le calcaire devient un problème concret et coûteux :

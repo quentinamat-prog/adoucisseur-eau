@@ -66,6 +66,8 @@ Certains installateurs proposent des **packs matériel + pose**, souvent plus av
 
 Le sel est la consommation courante de l'adoucisseur. Son coût dépend de votre consommation d'eau, de la dureté de votre eau, et de l'efficacité de votre appareil.
 
+Le format retenu joue aussi sur la facture : notre comparatif [pastilles, cristaux ou blocs](/blog/quel-sel-pour-adoucisseur-deau-choisir) détaille les écarts de prix au kilo et les normes à vérifier.
+
 Estimations pour une famille de 4 personnes :
 
 | Dureté de l'eau | Consommation sel/an | Coût approximatif |
@@ -91,6 +93,8 @@ Sans contrat de maintenance, un adoucisseur de qualité ne demande pratiquement 
 ## Achat ou location : que choisir ?
 
 Certains fabricants proposent des formules de location avec maintenance incluse, autour de **25 à 50 €/mois**. Sur 5 ans, vous aurez payé entre 1 500 € et 3 000 € — souvent plus cher qu'un achat, sans rien posséder.
+
+Nous avons chiffré les deux formules poste par poste sur 10 ans dans notre comparatif [achat ou location d'un adoucisseur](/blog/adoucisseur-deau-achat-ou-location), qui détaille aussi les clauses de contrat à lire avant de signer.
 
 > [!TIP]
 > **La location n'est intéressante que si :** vous ne souhaitez pas vous occuper de la maintenance, vous êtes locataire de votre logement, ou vous avez un budget initial très serré. Dans tous les autres cas, **l'achat est plus rentable à moyen terme**.
