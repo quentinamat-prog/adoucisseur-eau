@@ -5,10 +5,8 @@ import Footer from '../../../components/Footer.astro';
 import Header from '../../../components/Header.astro';
 import Icon from '../../../components/Icon.astro';
 import siteConfig from '../../../../site.config.mjs';
+import { catToSlug } from '../../../utils/slug';
 
-export function catToSlug(cat: string) {
-  return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
-}
 
 const CATEGORIES = siteConfig.categories as unknown as string[];
 

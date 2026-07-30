@@ -6,6 +6,7 @@ import Header from '../components/Header.astro';
 import type { CollectionEntry } from 'astro:content';
 import siteConfig from '../../site.config.mjs';
 import type { MarkdownHeading } from 'astro';
+import { catToSlug } from '../utils/slug';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -29,9 +30,6 @@ const seoTitle = (seoBase + brandSuffix).length <= SEO_TITLE_MAX ? seoBase + bra
 const imageBase = image ? image.split('?')[0] : null;
 function unsplashSrc(base: string, w: number) { return `${base}?w=${w}&q=80&fm=webp&fit=crop`; }
 
-function catToSlug(cat: string) {
-  return cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-');
-}
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'short', day: 'numeric' }).format(date);
 

@@ -1,5 +1,6 @@
 ---
 import siteConfig from '../../site.config.mjs';
+import { catToSlug } from '../utils/slug';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -22,7 +23,7 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-3 font-body text-sm">
           {siteConfig.categories.map((cat: string) => (
             <li>
-              <a href={`/blog/categorie/${cat.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/['']/g, '').replace(/\s+/g, '-')}`} class="hover:text-cream transition-colors">
+              <a href={`/blog/categorie/${catToSlug(cat)}`} class="hover:text-cream transition-colors">
                 {cat}
               </a>
             </li>

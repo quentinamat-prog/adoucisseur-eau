@@ -6,6 +6,15 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Redirections 301 — consolidation de contenus dupliqués
 RewriteRule ^blog/quel-volume-dadoucisseur-deau-choisir-selon-la-taille-de-son-foyer/?$ /blog/quel-volume-dadoucisseur-deau-choisir-selon-son-foyer/ [R=301,L]
 
+# Redirections 301 — anciens slugs de catégorie contenant & et '
+# mod_rewrite décode %XX avant de comparer, mais on garde les deux formes par sécurité
+RewriteRule ^blog/categorie/eau-&-sante/?$ /blog/categorie/eau-sante/ [R=301,L,NE]
+RewriteRule ^blog/categorie/eau-%26-sante/?$ /blog/categorie/eau-sante/ [R=301,L,NE]
+RewriteRule ^blog/categorie/guide-d'achat/?$ /blog/categorie/guide-d-achat/ [R=301,L,NE]
+RewriteRule ^blog/categorie/guide-d%27achat/?$ /blog/categorie/guide-d-achat/ [R=301,L,NE]
+# guide-dachat : URL 404 générée par l'ancien lien du footer, jamais existante
+RewriteRule ^blog/categorie/guide-dachat/?$ /blog/categorie/guide-d-achat/ [R=301,L,NE]
+
 # Security headers
 <IfModule mod_headers.c>
   # Clickjacking protection
